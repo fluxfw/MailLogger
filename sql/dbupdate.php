@@ -1,4 +1,4 @@
 <#1>
 <?php
-\srag\AVL\Plugins\AVLMailLogger\Config\Config::updateDB();
+\srag\AVL\Plugins\MailLogger\Config\Config::updateDB();
 ?>

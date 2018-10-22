@@ -1,22 +1,22 @@
 <?php
 
-namespace srag\AVL\Plugins\AVLMailLogger\Config;
+namespace srag\AVL\Plugins\MailLogger\Config;
 
-use ilAVLMailLoggerPlugin;
+use ilMailLoggerPlugin;
 use srag\ActiveRecordConfig\ActiveRecordConfigFormGUI;
-use srag\AVL\Plugins\AVLMailLogger\Utils\AVLMailLoggerTrait;
+use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
 
 /**
  * Class ConfigFormGUI
  *
- * @package srag\AVL\Plugins\AVLMailLogger\Config
+ * @package srag\AVL\Plugins\MailLogger\Config
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 class ConfigFormGUI extends ActiveRecordConfigFormGUI {
 
-	use AVLMailLoggerTrait;
-	const PLUGIN_CLASS_NAME = ilAVLMailLoggerPlugin::class;
+	use MailLoggerTrait;
+	const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
 
 
 	/**

@@ -1,31 +1,31 @@
 <?php
 
-namespace srag\AVL\Plugins\AVLMailLogger\Config;
+namespace srag\AVL\Plugins\MailLogger\Config;
 
-use AVLMailLoggerRemoveDataConfirm;
-use ilAVLMailLoggerPlugin;
+use MailLoggerRemoveDataConfirm;
+use ilMailLoggerPlugin;
 use srag\ActiveRecordConfig\ActiveRecordConfig;
-use srag\AVL\Plugins\AVLMailLogger\Utils\AVLMailLoggerTrait;
+use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
 
 /**
  * Class Config
  *
- * @package srag\AVL\Plugins\AVLMailLogger\Config
+ * @package srag\AVL\Plugins\MailLogger\Config
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 class Config extends ActiveRecordConfig {
 
-	use AVLMailLoggerTrait;
-	const TABLE_NAME = "avlmalo_config";
-	const PLUGIN_CLASS_NAME = ilAVLMailLoggerPlugin::class;
+	use MailLoggerTrait;
+	const TABLE_NAME = "maillog_config";
+	const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
 
 
 	/**
 	 * @return bool|null
 	 */
 	public static function getUninstallRemovesData()/*: ?bool*/ {
-		return self::getXValue(AVLMailLoggerRemoveDataConfirm::KEY_UNINSTALL_REMOVES_DATA, AVLMailLoggerRemoveDataConfirm::DEFAULT_UNINSTALL_REMOVES_DATA);
+		return self::getXValue(MailLoggerRemoveDataConfirm::KEY_UNINSTALL_REMOVES_DATA, MailLoggerRemoveDataConfirm::DEFAULT_UNINSTALL_REMOVES_DATA);
 	}
 
 
@@ -33,7 +33,7 @@ class Config extends ActiveRecordConfig {
 	 * @param bool $uninstall_removes_data
 	 */
 	public static function setUninstallRemovesData(bool $uninstall_removes_data)/*: void*/ {
-		self::setBooleanValue(AVLMailLoggerRemoveDataConfirm::KEY_UNINSTALL_REMOVES_DATA, $uninstall_removes_data);
+		self::setBooleanValue(MailLoggerRemoveDataConfirm::KEY_UNINSTALL_REMOVES_DATA, $uninstall_removes_data);
 	}
 
 
@@ -41,6 +41,6 @@ class Config extends ActiveRecordConfig {
 	 *
 	 */
 	public static function removeUninstallRemovesData()/*: void*/ {
-		self::removeName(AVLMailLoggerRemoveDataConfirm::KEY_UNINSTALL_REMOVES_DATA);
+		self::removeName(MailLoggerRemoveDataConfirm::KEY_UNINSTALL_REMOVES_DATA);
 	}
 }

@@ -1,40 +1,23 @@
 <?php
 
-namespace srag\AVL\Plugins\AVLMailLogger\Access;
+namespace srag\AVL\Plugins\MailLogger\Access;
 
-use AVLOrgUnitOverviewGUI;
-use ilAVLMailLoggerPlugin;
-use ilDate;
-use ilLPStatus;
-use ilMStListCourse;
-use ilObjectFactory;
-use ilObjOrgUnit;
-use ilObjUser;
-use ilOrgUnitPathStorage;
-use ilOrgUnitPosition;
-use ilOrgUnitUserAssignment;
-use ilRepUtil;
-use ilUserSearchOptions;
-use srag\ActiveRecordConfig\ActiveRecordConfig;
-use srag\AVL\Plugins\AVLMailLogger\Assistants\Assistant;
-use srag\AVL\Plugins\AVLMailLogger\Assistants\AssistantOrgUnit;
-use srag\AVL\Plugins\AVLMailLogger\Assistants\AssistantOrgUnitLetter;
-use srag\AVL\Plugins\AVLMailLogger\Config\Config;
-use srag\AVL\Plugins\AVLMailLogger\Utils\AVLMailLoggerTrait;
+use ilMailLoggerPlugin;
+use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\DIC\DICTrait;
 
 /**
  * Class Access
  *
- * @package srag\AVL\Plugins\AVLMailLogger\Access
+ * @package srag\AVL\Plugins\MailLogger\Access
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 final class Access {
 
 	use DICTrait;
-	use AVLMailLoggerTrait;
-	const PLUGIN_CLASS_NAME = ilAVLMailLoggerPlugin::class;
+	use MailLoggerTrait;
+	const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
 	/**
 	 * @var self
 	 */

@@ -1,11 +1,11 @@
 ## Installation
 
-### Install AVLMailLogger-Plugin
+### Install MailLogger-Plugin
 Start at your ILIAS root directory
 ```bash
 mkdir -p Customizing/global/plugins/Services/UIComponent/UserInterfaceHook
 cd Customizing/global/plugins/Services/UIComponent/UserInterfaceHook
-git clone git@git.studer-raimann.ch:ILIAS/Kunden/AVL/AVLMailLogger.git AVLMailLogger
+git clone git@git.studer-raimann.ch:ILIAS/Plugins/MailLogger.git MailLogger
 ```
 Update, activate and config the plugin in the ILIAS Plugin Administration
 
@@ -21,7 +21,7 @@ Update, activate and config the plugin in the ILIAS Plugin Administration
 Please use it for further development!
 
 ### Adjustment suggestions
-* Adjustment suggestions by pull requests on https://git.studer-raimann.ch/ILIAS/Kunden/AVL/AVLMailLogger/tree/develop
+* Adjustment suggestions by pull requests on https://git.studer-raimann.ch/ILIAS/Plugins/MailLogger/tree/develop
 * Adjustment suggestions which are not yet worked out in detail by Jira tasks under https://jira.studer-raimann.ch/projects/AVL
 * Bug reports under https://jira.studer-raimann.ch/projects/AVL
 * For external developers please send an email to support-custom1@studer-raimann.ch
@@ -33,5 +33,5 @@ Start at your ILIAS root directory
 ```bash
 mkdir -p Customizing/global/plugins/Services/UIComponent/UserInterfaceHook
 cd Customizing/global/plugins/Services/UIComponent/UserInterfaceHook
-git clone -b develop git@git.studer-raimann.ch:ILIAS/Kunden/AVL/AVLMailLogger.git AVLMailLogger
+git clone -b develop git@git.studer-raimann.ch:ILIAS/Plugins/MailLogger.git MailLogger
 ```

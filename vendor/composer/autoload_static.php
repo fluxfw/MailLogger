@@ -4,16 +4,15 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit95030ffe3b622a1dcd5ea17231826fd9
+class ComposerStaticInit61ec83675619dd8799f4d5846edc2efb
 {
     public static $prefixLengthsPsr4 = array (
         's' => 
         array (
             'srag\\RemovePluginDataConfirm\\' => 29,
             'srag\\DIC\\' => 9,
-            'srag\\CustomInputGUIs\\' => 21,
             'srag\\ActiveRecordConfig\\' => 24,
-            'srag\\AVL\\Plugins\\AVLMailLogger\\' => 31,
+            'srag\\AVL\\Plugins\\MailLogger\\' => 28,
         ),
     );
 
@@ -26,37 +25,29 @@ class ComposerStaticInit95030ffe3b622a1dcd5ea17231826fd9
         array (
             0 => __DIR__ . '/..' . '/srag/dic/src',
         ),
-        'srag\\CustomInputGUIs\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/srag/custominputguis/src',
-        ),
         'srag\\ActiveRecordConfig\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/activerecordconfig/src',
         ),
-        'srag\\AVL\\Plugins\\AVLMailLogger\\' => 
+        'srag\\AVL\\Plugins\\MailLogger\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
     );
 
     public static $classMap = array (
-        'AVLMailLoggerRemoveDataConfirm' => __DIR__ . '/../..' . '/classes/uninstall/class.AVLMailLoggerRemoveDataConfirm.php',
-        'ilAVLMailLoggerConfigGUI' => __DIR__ . '/../..' . '/classes/class.ilAVLOrgUnitAssistantConfigGUI.php',
-        'ilAVLMailLoggerPlugin' => __DIR__ . '/../..' . '/classes/class.ilAVLOrgUnitAssistantPlugin.php',
-        'ilAVLMailLoggerUIHookGUI' => __DIR__ . '/../..' . '/classes/class.ilAVLOrgUnitAssistantUIHookGUI.php',
-        'srag\\AVL\\Plugins\\AVLMailLogger\\Access\\Access' => __DIR__ . '/../..' . '/src/Access/Access.php',
-        'srag\\AVL\\Plugins\\AVLMailLogger\\Config\\Config' => __DIR__ . '/../..' . '/src/Config/Config.php',
-        'srag\\AVL\\Plugins\\AVLMailLogger\\Config\\ConfigFormGUI' => __DIR__ . '/../..' . '/src/Config/ConfigFormGUI.php',
-        'srag\\AVL\\Plugins\\AVLMailLogger\\Utils\\AVLMailLoggerTrait' => __DIR__ . '/../..' . '/src/Utils/AVLMailLoggerTrait.php',
+        'MailLoggerRemoveDataConfirm' => __DIR__ . '/../..' . '/classes/uninstall/class.MailLoggerRemoveDataConfirm.php',
+        'ilMailLoggerConfigGUI' => __DIR__ . '/../..' . '/classes/class.ilMailLoggerConfigGUI.php',
+        'ilMailLoggerPlugin' => __DIR__ . '/../..' . '/classes/class.ilMailLoggerPlugin.php',
+        'srag\\AVL\\Plugins\\MailLogger\\Access\\Access' => __DIR__ . '/../..' . '/src/Access/Access.php',
+        'srag\\AVL\\Plugins\\MailLogger\\Config\\Config' => __DIR__ . '/../..' . '/src/Config/Config.php',
+        'srag\\AVL\\Plugins\\MailLogger\\Config\\ConfigFormGUI' => __DIR__ . '/../..' . '/src/Config/ConfigFormGUI.php',
+        'srag\\AVL\\Plugins\\MailLogger\\Utils\\MailLoggerTrait' => __DIR__ . '/../..' . '/src/Utils/MailLoggerTrait.php',
         'srag\\ActiveRecordConfig\\ActiveRecordConfig' => __DIR__ . '/..' . '/srag/activerecordconfig/src/ActiveRecordConfig.php',
         'srag\\ActiveRecordConfig\\ActiveRecordConfigFormGUI' => __DIR__ . '/..' . '/srag/activerecordconfig/src/ActiveRecordConfigFormGUI.php',
         'srag\\ActiveRecordConfig\\ActiveRecordConfigGUI' => __DIR__ . '/..' . '/srag/activerecordconfig/src/ActiveRecordConfigGUI.php',
         'srag\\ActiveRecordConfig\\ActiveRecordConfigTableGUI' => __DIR__ . '/..' . '/srag/activerecordconfig/src/ActiveRecordConfigTableGUI.php',
         'srag\\ActiveRecordConfig\\Exception\\ActiveRecordConfigException' => __DIR__ . '/..' . '/srag/activerecordconfig/src/Exception/ActiveRecordConfigException.php',
-        'srag\\CustomInputGUIs\\MultiSelectSearchInput2GUI' => __DIR__ . '/..' . '/srag/custominputguis/src/MultiSelectSearchInput2GUI.php',
-        'srag\\CustomInputGUIs\\MultiSelectSearchInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/MultiSelectSearchInputGUI.php',
-        'srag\\CustomInputGUIs\\ScreenshotsInputGUI\\ScreenshotsInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/ScreenshotsInputGUI/ScreenshotsInputGUI.php',
         'srag\\DIC\\DICStatic' => __DIR__ . '/..' . '/srag/dic/src/DICStatic.php',
         'srag\\DIC\\DICStaticInterface' => __DIR__ . '/..' . '/srag/dic/src/DICStaticInterface.php',
         'srag\\DIC\\DICTrait' => __DIR__ . '/..' . '/srag/dic/src/DICTrait.php',
@@ -80,9 +71,9 @@ class ComposerStaticInit95030ffe3b622a1dcd5ea17231826fd9
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit95030ffe3b622a1dcd5ea17231826fd9::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit95030ffe3b622a1dcd5ea17231826fd9::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit95030ffe3b622a1dcd5ea17231826fd9::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit61ec83675619dd8799f4d5846edc2efb::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit61ec83675619dd8799f4d5846edc2efb::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit61ec83675619dd8799f4d5846edc2efb::$classMap;
 
         }, null, ClassLoader::class);
     }
