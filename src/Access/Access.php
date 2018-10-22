@@ -18,6 +18,7 @@ final class Access {
 	use DICTrait;
 	use MailLoggerTrait;
 	const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
+	const ADMIN_ROLE_ID = 2;
 	/**
 	 * @var self
 	 */
@@ -41,5 +42,31 @@ final class Access {
 	 */
 	public function __construct() {
 
+	}
+
+
+	/**
+	 * @return array
+	 */
+	public function getUsers(): array {
+		$result = self::dic()->database()->queryF('SELECT usr_id, login FROM usr_data WHERE active=%s', [
+			"integer"
+		], [ 1 ]);
+
+		$array = [];
+
+		while (($row = $result->fetchAssoc()) !== false) {
+			$array[$row["usr_id"]] = $row["login"];
+		}
+
+		return $array;
+	}
+
+
+	/**
+	 * @return bool
+	 */
+	public function hasLogAccess(): bool {
+		return self::dic()->rbacreview()->isAssigned(self::dic()->user()->getId(), self::ADMIN_ROLE_ID);
 	}
 }

@@ -2,8 +2,13 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
+use srag\AVL\Plugins\MailLogger\Access\Access;
 use srag\AVL\Plugins\MailLogger\Config\Config;
+use srag\AVL\Plugins\MailLogger\Log\Log;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
+use srag\Plugins\CtrlMainMenu\Entry\ctrlmmEntry;
+use srag\Plugins\CtrlMainMenu\EntryTypes\Ctrl\ctrlmmEntryCtrl;
+use srag\Plugins\CtrlMainMenu\Menu\ctrlmmMenu;
 use srag\RemovePluginDataConfirm\PluginUninstallTrait;
 
 /**
@@ -54,6 +59,22 @@ class ilMailLoggerPlugin extends ilEventHookPlugin {
 
 
 	/**
+	 *
+	 */
+	protected function afterActivation()/*: void*/ {
+		$this->addCtrlMainMenu();
+	}
+
+
+	/**
+	 *
+	 */
+	protected function afterDeactivation()/*: void*/ {
+		$this->removeCtrlMainMenu();
+	}
+
+
+	/**
 	 * @param string $a_component
 	 * @param string $a_event
 	 * @param array  $a_parameter
@@ -71,5 +92,59 @@ class ilMailLoggerPlugin extends ilEventHookPlugin {
 	 */
 	protected function deleteData()/*: void*/ {
 		self::dic()->database()->dropTable(Config::TABLE_NAME, false);
+		self::dic()->database()->dropTable(Log::TABLE_NAME, false);
+
+		$this->removeCtrlMainMenu();
+	}
+
+
+	/**
+	 *
+	 */
+	protected function addCtrlMainMenu()/*: void*/ {
+		try {
+			include_once __DIR__ . "/../../../../UIComponent/UserInterfaceHook/CtrlMainMenu/vendor/autoload.php";
+
+			if (class_exists(ctrlmmEntry::class)) {
+				if (count(ctrlmmEntry::getEntriesByCmdClass(MailLoggerLogGUI::class)) === 0) {
+					$entry = new ctrlmmEntryCtrl();
+					$entry->setTitle(self::PLUGIN_NAME);
+					$entry->setTranslations([
+						"en" => self::PLUGIN_NAME,
+						"de" => self::PLUGIN_NAME
+					]);
+					$entry->setGuiClass(implode(",", [ ilUIPluginRouterGUI::class, MailLoggerLogGUI::class ]));
+					$entry->setCmd(MailLoggerLogGUI::CMD_LOG);
+					$entry->setPermissionType(ctrlmmMenu::PERM_SCRIPT);
+					$entry->setPermission(json_encode([
+						__DIR__ . "/../vendor/autoload.php",
+						Access::class,
+						"hasLogAccess"
+					]));
+					$entry->store();
+				}
+			}
+		} catch (Throwable $ex) {
+		}
+	}
+
+
+	/**
+	 *
+	 */
+	protected function removeCtrlMainMenu()/*: void*/ {
+		try {
+			include_once __DIR__ . "/../../../../UIComponent/UserInterfaceHook/CtrlMainMenu/vendor/autoload.php";
+
+			if (class_exists(ctrlmmEntry::class)) {
+				foreach (ctrlmmEntry::getEntriesByCmdClass(MailLoggerLogGUI::class) as $entry) {
+					/**
+					 * @var ctrlmmEntry $entry
+					 */
+					$entry->delete();
+				}
+			}
+		} catch (Throwable $ex) {
+		}
 	}
 }

@@ -11,6 +11,7 @@ class ComposerStaticInit61ec83675619dd8799f4d5846edc2efb
         array (
             'srag\\RemovePluginDataConfirm\\' => 29,
             'srag\\DIC\\' => 9,
+            'srag\\CustomInputGUIs\\' => 21,
             'srag\\ActiveRecordConfig\\' => 24,
             'srag\\AVL\\Plugins\\MailLogger\\' => 28,
         ),
@@ -25,6 +26,10 @@ class ComposerStaticInit61ec83675619dd8799f4d5846edc2efb
         array (
             0 => __DIR__ . '/..' . '/srag/dic/src',
         ),
+        'srag\\CustomInputGUIs\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/srag/custominputguis/src',
+        ),
         'srag\\ActiveRecordConfig\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/activerecordconfig/src',
@@ -36,18 +41,24 @@ class ComposerStaticInit61ec83675619dd8799f4d5846edc2efb
     );
 
     public static $classMap = array (
+        'MailLoggerLogGUI' => __DIR__ . '/../..' . '/classes/Log/class.MailLoggerLogGUI.php',
         'MailLoggerRemoveDataConfirm' => __DIR__ . '/../..' . '/classes/uninstall/class.MailLoggerRemoveDataConfirm.php',
         'ilMailLoggerConfigGUI' => __DIR__ . '/../..' . '/classes/class.ilMailLoggerConfigGUI.php',
         'ilMailLoggerPlugin' => __DIR__ . '/../..' . '/classes/class.ilMailLoggerPlugin.php',
         'srag\\AVL\\Plugins\\MailLogger\\Access\\Access' => __DIR__ . '/../..' . '/src/Access/Access.php',
         'srag\\AVL\\Plugins\\MailLogger\\Config\\Config' => __DIR__ . '/../..' . '/src/Config/Config.php',
         'srag\\AVL\\Plugins\\MailLogger\\Config\\ConfigFormGUI' => __DIR__ . '/../..' . '/src/Config/ConfigFormGUI.php',
+        'srag\\AVL\\Plugins\\MailLogger\\Log\\Log' => __DIR__ . '/../..' . '/src/Log/Log.php',
+        'srag\\AVL\\Plugins\\MailLogger\\Log\\LogTableGUI' => __DIR__ . '/../..' . '/src/Log/LogTableGUI.php',
         'srag\\AVL\\Plugins\\MailLogger\\Utils\\MailLoggerTrait' => __DIR__ . '/../..' . '/src/Utils/MailLoggerTrait.php',
         'srag\\ActiveRecordConfig\\ActiveRecordConfig' => __DIR__ . '/..' . '/srag/activerecordconfig/src/ActiveRecordConfig.php',
         'srag\\ActiveRecordConfig\\ActiveRecordConfigFormGUI' => __DIR__ . '/..' . '/srag/activerecordconfig/src/ActiveRecordConfigFormGUI.php',
         'srag\\ActiveRecordConfig\\ActiveRecordConfigGUI' => __DIR__ . '/..' . '/srag/activerecordconfig/src/ActiveRecordConfigGUI.php',
         'srag\\ActiveRecordConfig\\ActiveRecordConfigTableGUI' => __DIR__ . '/..' . '/srag/activerecordconfig/src/ActiveRecordConfigTableGUI.php',
         'srag\\ActiveRecordConfig\\Exception\\ActiveRecordConfigException' => __DIR__ . '/..' . '/srag/activerecordconfig/src/Exception/ActiveRecordConfigException.php',
+        'srag\\CustomInputGUIs\\MultiSelectSearchInput2GUI' => __DIR__ . '/..' . '/srag/custominputguis/src/MultiSelectSearchInput2GUI.php',
+        'srag\\CustomInputGUIs\\MultiSelectSearchInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/MultiSelectSearchInputGUI.php',
+        'srag\\CustomInputGUIs\\ScreenshotsInputGUI\\ScreenshotsInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/ScreenshotsInputGUI/ScreenshotsInputGUI.php',
         'srag\\DIC\\DICStatic' => __DIR__ . '/..' . '/srag/dic/src/DICStatic.php',
         'srag\\DIC\\DICStaticInterface' => __DIR__ . '/..' . '/srag/dic/src/DICStaticInterface.php',
         'srag\\DIC\\DICTrait' => __DIR__ . '/..' . '/srag/dic/src/DICTrait.php',
