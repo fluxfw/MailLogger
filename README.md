@@ -5,7 +5,7 @@ Start at your ILIAS root directory
 ```bash
 mkdir -p Customizing/global/plugins/Services/UIComponent/UserInterfaceHook
 cd Customizing/global/plugins/Services/UIComponent/UserInterfaceHook
-git clone git@git.studer-raimann.ch:ILIAS/Plugins/MailLogger.git MailLogger
+git clone https://github.com/studer-raimann/MailLogger.git MailLogger
 ```
 Update, activate and config the plugin in the ILIAS Plugin Administration
 
@@ -13,7 +13,6 @@ Update, activate and config the plugin in the ILIAS Plugin Administration
 * ILIAS 5.3
 * PHP >=7.0
 * [composer](https://getcomposer.org)
-* [CtrlMainMenu](https://github.com/studer-raimann/CtrlMainMenu)
 * [srag/activerecordconfig](https://packagist.org/packages/srag/activerecordconfig)
 * [srag/dic](https://packagist.org/packages/srag/dic)
 * [srag/removeplugindataconfirm](https://packagist.org/packages/srag/removeplugindataconfirm)
