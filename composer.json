@@ -1,0 +1,43 @@
+{
+  "name": "srag/avl/plugins/avlassistantassignment",
+  "description": "",
+  "type": "project",
+  "keywords": [
+    "ILIAS",
+    "Plugin",
+    "AVL"
+  ],
+  "homepage": "https://git.studer-raimann.ch/ILIAS/Kunden/AVL/AVLMailLogger",
+  "license": "",
+  "authors": [
+    {
+      "name": "studer + raimann ag - Team Custom 1",
+      "email": "support-custom1@studer-raimann.ch",
+      "homepage": "https://studer-raimann.ch",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "support-custom1@studer-raimann.ch"
+  },
+  "require": {
+    "php": ">=7.0",
+    "srag/activerecordconfig": ">=0.1.0",
+    "srag/custominputguis": ">=0.1.0",
+    "srag/dic": ">=0.1.0",
+    "srag/removeplugindataconfirm": ">=0.1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "srag\\AVL\\Plugins\\AVLMailLogger\\": "src/"
+    },
+    "classmap": [
+      "classes/"
+    ]
+  },
+  "config": {
+    "classmap-authoritative": true,
+    "optimize-autoloader": true,
+    "sort-packages": true
+  }
+}
