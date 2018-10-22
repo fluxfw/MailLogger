@@ -59,7 +59,7 @@ class Log extends ActiveRecord {
 	 * @con_fieldtype   text
 	 * @con_is_notnull  true
 	 */
-	protected $subject;
+	protected $subject = "";
 	/**
 	 * @var string
 	 *
@@ -67,7 +67,16 @@ class Log extends ActiveRecord {
 	 * @con_fieldtype   text
 	 * @con_is_notnull  true
 	 */
-	protected $body;
+	protected $body = "";
+	/**
+	 * @var bool
+	 *
+	 * @con_has_field   true
+	 * @con_fieldtype   integer
+	 * @con_length      1
+	 * @con_is_notnull  true
+	 */
+	protected $is_system = false;
 	/**
 	 * @var string
 	 *
@@ -75,7 +84,7 @@ class Log extends ActiveRecord {
 	 * @con_fieldtype   text
 	 * @con_is_notnull  true
 	 */
-	protected $from_email;
+	protected $from_name = "";
 	/**
 	 * @var string
 	 *
@@ -83,15 +92,7 @@ class Log extends ActiveRecord {
 	 * @con_fieldtype   text
 	 * @con_is_notnull  true
 	 */
-	protected $from_firstname;
-	/**
-	 * @var string
-	 *
-	 * @con_has_field   true
-	 * @con_fieldtype   text
-	 * @con_is_notnull  true
-	 */
-	protected $from_lastname;
+	protected $from_email = "";
 	/**
 	 * @var int
 	 *
@@ -100,7 +101,7 @@ class Log extends ActiveRecord {
 	 * @con_length      8
 	 * @con_is_notnull  true
 	 */
-	protected $from_user_id;
+	protected $from_user_id = - 1;
 	/**
 	 * @var string
 	 *
@@ -108,7 +109,7 @@ class Log extends ActiveRecord {
 	 * @con_fieldtype   text
 	 * @con_is_notnull  true
 	 */
-	protected $to_email;
+	protected $to_name = "";
 	/**
 	 * @var string
 	 *
@@ -116,15 +117,7 @@ class Log extends ActiveRecord {
 	 * @con_fieldtype   text
 	 * @con_is_notnull  true
 	 */
-	protected $to_firstname;
-	/**
-	 * @var string
-	 *
-	 * @con_has_field   true
-	 * @con_fieldtype   text
-	 * @con_is_notnull  true
-	 */
-	protected $to_lastname;
+	protected $to_email = "";
 	/**
 	 * @var int
 	 *
@@ -133,15 +126,7 @@ class Log extends ActiveRecord {
 	 * @con_length      8
 	 * @con_is_notnull  true
 	 */
-	protected $to_user_id;
-	/**
-	 * @var string
-	 *
-	 * @con_has_field   true
-	 * @con_fieldtype   text
-	 * @con_is_notnull  true
-	 */
-	protected $context_title;
+	protected $to_user_id = - 1;
 	/**
 	 * @var int
 	 *
@@ -150,7 +135,7 @@ class Log extends ActiveRecord {
 	 * @con_length      8
 	 * @con_is_notnull  true
 	 */
-	protected $context_ref_id;
+	protected $context_ref_id = - 1;
 	/**
 	 * @var int
 	 *
@@ -159,7 +144,7 @@ class Log extends ActiveRecord {
 	 * @con_length      8
 	 * @con_is_notnull  true
 	 */
-	protected $timestamp;
+	protected $timestamp = - 1;
 
 
 	/**
@@ -185,6 +170,10 @@ class Log extends ActiveRecord {
 		$field_value = $this->{$field_name};
 
 		switch ($field_name) {
+			case "is_system":
+				return ($field_value ? 1 : 0);
+				break;
+
 			default:
 				return NULL;
 		}
@@ -201,11 +190,16 @@ class Log extends ActiveRecord {
 		$field_name, $field_value) {
 		switch ($field_name) {
 			case "id":
+			case "from_type":
 			case "from_user_id":
 			case "to_user_id":
 			case "context_ref_id":
 			case "timestamp":
 				return intval($field_value);
+				break;
+
+			case "is_system":
+				return boolval($field_value);
 				break;
 
 			default:
@@ -263,6 +257,38 @@ class Log extends ActiveRecord {
 
 
 	/**
+	 * @return bool
+	 */
+	public function isSystem(): bool {
+		return $this->is_system;
+	}
+
+
+	/**
+	 * @param bool $is_system
+	 */
+	public function setIsSystem(bool $is_system)/*: void*/ {
+		$this->is_system = $is_system;
+	}
+
+
+	/**
+	 * @return string
+	 */
+	public function getFromName(): string {
+		return $this->from_name;
+	}
+
+
+	/**
+	 * @param string $from_name
+	 */
+	public function setFromName(string $from_name)/*: void*/ {
+		$this->from_name = $from_name;
+	}
+
+
+	/**
 	 * @return string
 	 */
 	public function getFromEmail(): string {
@@ -275,38 +301,6 @@ class Log extends ActiveRecord {
 	 */
 	public function setFromEmail(string $from_email)/*: void*/ {
 		$this->from_email = $from_email;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getFromFirstname(): string {
-		return $this->from_firstname;
-	}
-
-
-	/**
-	 * @param string $from_firstname
-	 */
-	public function setFromFirstname(string $from_firstname)/*: void*/ {
-		$this->from_firstname = $from_firstname;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getFromLastname(): string {
-		return $this->from_lastname;
-	}
-
-
-	/**
-	 * @param string $from_lastname
-	 */
-	public function setFromLastname(string $from_lastname)/*: void*/ {
-		$this->from_lastname = $from_lastname;
 	}
 
 
@@ -329,6 +323,22 @@ class Log extends ActiveRecord {
 	/**
 	 * @return string
 	 */
+	public function getToName(): string {
+		return $this->to_name;
+	}
+
+
+	/**
+	 * @param string $to_name
+	 */
+	public function setToName(string $to_name)/*: void*/ {
+		$this->to_name = $to_name;
+	}
+
+
+	/**
+	 * @return string
+	 */
 	public function getToEmail(): string {
 		return $this->to_email;
 	}
@@ -339,38 +349,6 @@ class Log extends ActiveRecord {
 	 */
 	public function setToEmail(string $to_email)/*: void*/ {
 		$this->to_email = $to_email;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getToFirstname(): string {
-		return $this->to_firstname;
-	}
-
-
-	/**
-	 * @param string $to_firstname
-	 */
-	public function setToFirstname(string $to_firstname)/*: void*/ {
-		$this->to_firstname = $to_firstname;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getToLastname(): string {
-		return $this->to_lastname;
-	}
-
-
-	/**
-	 * @param string $to_lastname
-	 */
-	public function setToLastname(string $to_lastname)/*: void*/ {
-		$this->to_lastname = $to_lastname;
 	}
 
 
@@ -387,22 +365,6 @@ class Log extends ActiveRecord {
 	 */
 	public function setToUserId(int $to_user_id)/*: void*/ {
 		$this->to_user_id = $to_user_id;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getContextTitle(): string {
-		return $this->context_title;
-	}
-
-
-	/**
-	 * @param string $context_title
-	 */
-	public function setContextTitle(string $context_title)/*: void*/ {
-		$this->context_title = $context_title;
 	}
 
 
