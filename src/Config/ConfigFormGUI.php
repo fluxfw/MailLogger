@@ -6,7 +6,7 @@ use ilCheckboxInputGUI;
 use ilMailLoggerPlugin;
 use srag\ActiveRecordConfig\ActiveRecordConfigFormGUI;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
-use srag\CustomInputGUIs\MultiSelectSearchInputGUI;
+use srag\CustomInputGUIs\MultiSelectSearchInputGUI\MultiSelectSearchInputGUI;
 
 /**
  * Class ConfigFormGUI
