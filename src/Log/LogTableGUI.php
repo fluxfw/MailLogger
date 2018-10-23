@@ -8,7 +8,6 @@ use ilExcel;
 use ilMailLoggerPlugin;
 use ilTable2GUI;
 use MailLoggerLogGUI;
-use srag\AVL\Plugins\MailLogger\Log\Log;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\DIC\DICTrait;
 
@@ -30,7 +29,7 @@ class LogTableGUI extends ilTable2GUI {
 	 * LogTableGUI constructor
 	 *
 	 * @param MailLoggerLogGUI $parent
-	 * @param string                $parent_cmd
+	 * @param string           $parent_cmd
 	 */
 	public function __construct(MailLoggerLogGUI $parent, string $parent_cmd) {
 		$this->setId("maillogger_log");
@@ -79,7 +78,7 @@ class LogTableGUI extends ilTable2GUI {
 	 *
 	 */
 	protected function initData()/*: void*/ {
-		$this->setData(Log::getArray());
+		$this->setData(Log::getLogs());
 	}
 
 

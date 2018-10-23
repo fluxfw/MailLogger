@@ -3,12 +3,14 @@
 namespace srag\AVL\Plugins\MailLogger\Log;
 
 use ilMailLoggerPlugin;
+use ilMailMimeSenderSystem;
 use ilMimeMail;
+use ilObject;
+use ilObjectFactory;
 use ilObjUser;
 use srag\AVL\Plugins\MailLogger\Config\Config;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\DIC\DICTrait;
-use stdClass;
 
 /**
  * Class LogHandler
@@ -54,18 +56,7 @@ class LogHandler {
 		$from_user = new ilObjUser($mail["from_user_id"]);
 		$to_user = new ilObjUser($mail["to_user_id"]);
 
-		$this->log((object)[
-			"subject" => $mail["subject"],
-			"body" => $mail["body"],
-			"is_system" => $mail["is_system"],
-			"from_name" => $from_user->getFullname(),
-			"from_email" => $from_user->getEmail(),
-			"from_user_id" => intval($from_user->getId()),
-			"to_name" => $to_user->getFullname(),
-			"to_email" => $to_user->getEmail(),
-			"to_user_id" => intval($to_user->getId()),
-			"context_ref_id" => (!empty($mail["context_ref_id"]) ? $mail["context_ref_id"] : - 1)
-		]);
+		$this->log(strval($mail["subject"]), strval($mail["body"]), $mail["is_system"], $from_user, $to_user, (!empty($mail["context_ref_id"]) ? intval($mail["context_ref_id"]) : NULL));
 	}
 
 
@@ -73,49 +64,57 @@ class LogHandler {
 	 * @param ilMimeMail $mail
 	 */
 	public function handleSendExternalEmail(ilMimeMail $mail)/*: void*/ {
-		$from_user_id = ilObjUser::_lookupId(current(ilObjUser::_getUserIdsByEmail($mail->getFrom()->getFromAddress())));
+		$from_user = new ilObjUser(ilObjUser::_lookupId(current(ilObjUser::_getUserIdsByEmail($mail->getFrom()->getFromAddress()))));
 
 		foreach ($mail->getTo() as $to) {
-			$to_user_id = ilObjUser::_lookupId(current(ilObjUser::_getUserIdsByEmail($to[0])));
+			$to_user = new ilObjUser(ilObjUser::_lookupId(current(ilObjUser::_getUserIdsByEmail($to[0]))));
 
-			$this->log((object)[
-				"subject" => $mail->getSubject(),
-				"body" => $mail->getFinalBody(),
-				"is_system" => ($mail->getFrom() instanceof ilMailMimeSenderSystem),
-				"from_name" => $mail->getFrom()->getFromName(),
-				"from_email" => $mail->getFrom()->getFromAddress(),
-				"from_user_id" => (!empty($from_user_id) ? intval($from_user_id) : - 1),
-				"to_name" => $to[1],
-				"to_email" => $to[0],
-				"to_user_id" => (!empty($to_user_id) ? intval($to_user_id) : - 1),
-				"context_ref_id" => - 1
-			]);
+			$this->log(strval($mail->getSubject()), strval($mail->getFinalBody()), ($mail->getFrom() instanceof
+				ilMailMimeSenderSystem), $from_user, $to_user, NULL);
 		}
 	}
 
 
 	/**
-	 * @param stdClass $mail
+	 * @param string    $subject
+	 * @param string    $body
+	 * @param bool      $is_system
+	 * @param ilObjUser $from
+	 * @param ilObjUser $to
+	 * @param int|null  $context_ref_id
 	 */
-	protected function log(stdClass $mail)/*: void*/ {
-		if ($this->shouldLog($mail)) {
+	protected function log(string $subject, string $body, bool $is_system, ilObjUser $from, ilObjUser $to, /*?int*/
+		$context_ref_id)/*: void*/ {
+		if ($this->shouldLog($is_system, $from)) {
 			$log = new Log();
 
-			$log->setSubject($mail->subject);
+			$log->setSubject($subject);
 
-			$log->setBody($mail->body);
+			$log->setBody($body);
 
-			$log->setIsSystem($mail->is_system);
+			$log->setIsSystem($is_system);
 
-			$log->setFromName($mail->from_name);
-			$log->setFromEmail($mail->from_email);
-			$log->setFromUserId($mail->from_user_id);
+			$log->setFromEmail(strval($from->getEmail()));
+			$log->setFromFirstname(strval($from->getFirstname()));
+			$log->setFromLastname(strval($from->getLastname()));
+			$log->setFromUserId(intval($from->getId()));
 
-			$log->setToName($mail->to_name);
-			$log->setToEmail($mail->to_email);
-			$log->setToUserId($mail->to_user_id);
+			$log->setToEmail(strval($to->getEmail()));
+			$log->setToFirstname(strval($to->getFirstname()));
+			$log->setToLastname(strval($to->getLastname()));
+			$log->setToUserId(intval($to->getId()));
 
-			$log->setContextRefId($mail->context_ref_id);
+			/**
+			 * @var ilObject|false $context
+			 */
+			$context = ilObjectFactory::getInstanceByRefId($context_ref_id, false);
+			if ($context !== false) {
+				$context_title = $log->setContextTitle($context->getTitle());
+			} else {
+				$context_title = NULL;
+			}
+			$log->setContextTitle($context_title);
+			$log->setContextRefId($context_ref_id);
 
 			$time = time();
 			$log->setTimestamp($time);
@@ -126,17 +125,18 @@ class LogHandler {
 
 
 	/**
-	 * @param stdClass $mail
+	 * @param bool      $is_system
+	 * @param ilObjUser $from
 	 *
 	 * @return bool
 	 */
-	protected function shouldLog(stdClass $mail): bool {
-		if ($mail->is_system) {
+	protected function shouldLog(bool $is_system, ilObjUser $from): bool {
+		if ($is_system) {
 			return Config::getLogSystemEmails();
 		} else {
 			$log_email_of_users = Config::getLogEmailOfUsers();
 
-			return in_array($mail->from_user_id, $log_email_of_users);
+			return in_array($from->getId(), $log_email_of_users);
 		}
 	}
 }
