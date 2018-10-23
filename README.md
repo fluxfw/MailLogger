@@ -31,9 +31,9 @@ class ilMimeMail
 		$DIC->event()->raise("Services/Mail", "sendInternalEmail", [
 			"subject" => $a_m_subject,
 			"body" => $a_m_message,
-			"is_system" => ($a_m_type === "system"),
+			"is_system" => in_array("system", $a_m_type),
 			"from_user_id" => $a_sender_id,
-			"to_email" => $a_rcp_to,
+			"to_user_id" => $a_user_id,
 			"context_ref_id" => $a_tpl_context_id
 		]);
 		//PATCH MailLogger
