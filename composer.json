@@ -1,5 +1,5 @@
 {
-  "name": "srag/avl/plugins/maillogger",
+  "name": "srag/plugins/maillogger",
   "description": "",
   "type": "project",
   "keywords": [
@@ -8,7 +8,7 @@
     "AVL"
   ],
   "homepage": "https://github.com/studer-raimann/MailLogger",
-  "license": "",
+  "license": "GPL-3.0-only",
   "authors": [
     {
       "name": "studer + raimann ag - Team Custom 1",
