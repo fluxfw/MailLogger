@@ -184,7 +184,7 @@ class Log extends ActiveRecord {
 	 * @con_length      8
 	 * @con_is_notnull  true
 	 */
-	protected $from_user_id = - 1;
+	protected $from_user_id;
 	/**
 	 * @var string
 	 *
@@ -217,7 +217,7 @@ class Log extends ActiveRecord {
 	 * @con_length      8
 	 * @con_is_notnull  true
 	 */
-	protected $to_user_id = - 1;
+	protected $to_user_id;
 	/**
 	 * @var string|null
 	 *
@@ -243,7 +243,7 @@ class Log extends ActiveRecord {
 	 * @con_length      8
 	 * @con_is_notnull  true
 	 */
-	protected $timestamp = - 1;
+	protected $timestamp;
 
 
 	/**

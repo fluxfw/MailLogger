@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.7.4]
+- Fix ilDateInputGUI in MultiLineInputGUI
+
+## [0.7.3]
+- Fix ilDateInputGUI in MultiLineInputGUI
+
+## [0.7.2]
+- Fix ilDateInputGUI in MultiLineInputGUI
+
 ## [0.7.1]
 - Fix
 
