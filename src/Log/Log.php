@@ -42,6 +42,22 @@ class Log extends ActiveRecord {
 
 
 	/**
+	 * @param int $log_id
+	 *
+	 * @return Log
+	 */
+	public static function getLogById(int $log_id) {
+		/**
+		 * @var self $log
+		 */
+
+		$log = self::where([ "id" => $log_id ])->first();
+
+		return $log;
+	}
+
+
+	/**
 	 * @param string   $subject
 	 * @param string   $body
 	 * @param string   $from_email

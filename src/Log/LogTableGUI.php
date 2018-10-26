@@ -10,6 +10,7 @@ use ilExcel;
 use ilMailLoggerPlugin;
 use ilTable2GUI;
 use ilTextInputGUI;
+use ilUIPluginRouterGUI;
 use MailLoggerLogGUI;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\CustomInputGUIs\DateDurationInputGUI\DateDurationInputGUI;
@@ -329,23 +330,23 @@ class LogTableGUI extends ilTable2GUI {
 
 	/**
 	 * @param string $column
-	 * @param array  $course
+	 * @param array  $log
 	 * @param bool   $raw_export
 	 *
 	 * @return string
 	 */
-	protected function getColumnValue(string $column, array $mail, bool $raw_export = false): string {
+	protected function getColumnValue(string $column, array $log, bool $raw_export = false): string {
 		switch ($column) {
 			case "timestamp":
 				if ($raw_export) {
-					$column = $course[$column];
+					$column = $log[$column];
 				} else {
-					$column = ilDatePresentation::formatDate(new ilDateTime($course[$column], IL_CAL_UNIX));
+					$column = ilDatePresentation::formatDate(new ilDateTime($log[$column], IL_CAL_UNIX));
 				}
 				break;
 
 			default:
-				$column = $course[$column];
+				$column = $log[$column];
 				break;
 		}
 
@@ -358,17 +359,19 @@ class LogTableGUI extends ilTable2GUI {
 
 
 	/**
-	 * @param array $mail
+	 * @param array $log
 	 */
 	protected function fillRow(/*array*/
-		$mail)/*: void*/ {
+		$log)/*: void*/ {
+		$parent = $this->getParentObject();
+
+		self::dic()->ctrl()->setParameter($parent, "log_id", $log["id"]);
+
 		$this->tpl->setCurrentBlock("column");
-		
-		self::dic()->ctrl()->setParameter($parent, "mail_id", $mail["id"]);
 
 		foreach ($this->getSelectableColumns() as $column) {
 			if ($this->isColumnSelected($column["id"])) {
-				$column = $this->getColumnValue($column["id"], $mail);
+				$column = $this->getColumnValue($column["id"], $log);
 
 				if (!empty($column)) {
 					$this->tpl->setVariable("COLUMN", $column);
@@ -382,11 +385,12 @@ class LogTableGUI extends ilTable2GUI {
 
 		$actions = new ilAdvancedSelectionListGUI();
 		$actions->setListTitle(self::plugin()->translate("actions", MailLoggerLogGUI::LANG_MODULE_LOG));
-		$actions->addItem(self::plugin()->translate("show_email", MailLoggerLogGUI::LANG_MODULE_LOG),"",self::dic()->ctrl()->getLinkTargetByClass([ilUIPluginRouterGUI::class,MailLoggerLogGUI::class]),MailLoggerLogGUI::CMD_SHOW_EMAIL);
+		$actions->addItem(self::plugin()->translate("show_email", MailLoggerLogGUI::LANG_MODULE_LOG), "", self::dic()->ctrl()
+			->getLinkTargetByClass([ ilUIPluginRouterGUI::class, MailLoggerLogGUI::class ], MailLoggerLogGUI::CMD_SHOW_EMAIL));
 		$this->tpl->setVariable("COLUMN", $actions->getHTML());
 		$this->tpl->parseCurrentBlock();
-		
-		self::dic()->ctrl()->setParameter($parent, "mail_id", null);
+
+		self::dic()->ctrl()->setParameter($parent, "log_id", NULL);
 	}
 
 
@@ -405,14 +409,14 @@ class LogTableGUI extends ilTable2GUI {
 
 	/**
 	 * @param ilCSVWriter $csv
-	 * @param array       $course
+	 * @param array       $log
 	 */
 	protected function fillRowCSV(/*ilCSVWriter*/
 		$csv, /*array*/
-		$course)/*: void*/ {
+		$log)/*: void*/ {
 		foreach ($this->getSelectableColumns() as $column) {
 			if ($this->isColumnSelected($column["id"])) {
-				$csv->addColumn($this->getColumnValue($column["id"], $course, true));
+				$csv->addColumn($this->getColumnValue($column["id"], $log, true));
 			}
 		}
 
@@ -440,15 +444,15 @@ class LogTableGUI extends ilTable2GUI {
 	/**
 	 * @param ilExcel $excel
 	 * @param int     $row
-	 * @param array   $course
+	 * @param array   $log
 	 */
 	protected function fillRowExcel(ilExcel $excel, /*int*/
 		&$row, /*array*/
-		$course)/*: void*/ {
+		$log)/*: void*/ {
 		$col = 0;
 		foreach ($this->getSelectableColumns() as $column) {
 			if ($this->isColumnSelected($column["id"])) {
-				$excel->setCell($row, $col, $this->getColumnValue($column["id"], $course));
+				$excel->setCell($row, $col, $this->getColumnValue($column["id"], $log));
 				$col ++;
 			}
 		}

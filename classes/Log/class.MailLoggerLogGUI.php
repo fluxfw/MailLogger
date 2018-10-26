@@ -2,6 +2,7 @@
 
 require_once __DIR__ . "/../../vendor/autoload.php";
 
+use srag\AVL\Plugins\MailLogger\Log\Log;
 use srag\AVL\Plugins\MailLogger\Log\LogTableGUI;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\DIC\DICTrait;
@@ -90,10 +91,25 @@ class MailLoggerLogGUI {
 	 *
 	 */
 	protected function showEmail()/*: void*/ {
-	    $mail_id = filter_input(INPUT_GET,"mail_id");
-	    
-		self::plugin()->output("TODO");
+		self::dic()->tabs()->setBackTarget(self::plugin()->translate("back", self::LANG_MODULE_LOG), self::dic()->ctrl()
+			->getLinkTarget($this, self::CMD_LOG));
+
+		$log_id = filter_input(INPUT_GET, "log_id");
+
+		$log = Log::getLogById($log_id);
+
+		if ($log !== NULL) {
+			$tpl = self::plugin()->template("log.html");
+
+			$tpl->setVariable("SUBJECT", htmlspecialchars($log->getSubject()));
+			$tpl->setVariable("BODY", htmlspecialchars($log->getBody()));
+
+			self::plugin()->output($tpl);
+		} else {
+			self::plugin()->output("");
+		}
 	}
+
 
 	/**
 	 *
