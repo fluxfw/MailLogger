@@ -90,6 +90,8 @@ class MailLoggerLogGUI {
 	 *
 	 */
 	protected function showEmail()/*: void*/ {
+	    $mail_id = filter_input(INPUT_GET,"mail_id");
+	    
 		self::plugin()->output("TODO");
 	}
 
