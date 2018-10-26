@@ -68,9 +68,9 @@ class Log extends ActiveRecord {
 		$where = self::where([]);
 
 		if (!empty($subject)) {
-			$where = $where->where([ "subject" => '%' . $body . '%' ], "LIKE");
+			$where = $where->where([ "subject" => '%' . $subject . '%' ], "LIKE");
 		}
-		if (!empty($subject)) {
+		if (!empty($body)) {
 			$where = $where->where([ "body" => '%' . $body . '%' ], "LIKE");
 		}
 		if (!empty($from_email)) {
