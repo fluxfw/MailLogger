@@ -6,7 +6,6 @@ config_log_system_emails#:#System-E-Mails loggen
 config_log_system_emails_info#:#Wenn aktiviert, werden sämtliche System-E-Mails geloggt
 config_save#:#Speichern
 log_actions#:#Aktionen
-log_action_show#:#E-Mail anzeigen
 log_body#:#Inhalt der E-Mail
 log_context_title#:#Context-Titel
 log_context_ref_id#:#Context-Ref-ID
@@ -16,6 +15,7 @@ log_from_lastname#:#Absender Nachname
 log_from_user_id#:#Absender Benutzer-ID
 log_log#:#Log
 log_no_access#:#Kein Zugriff!
+log_show_email#:#E-Mail anzeigen
 log_subject#:#Betreff
 log_timestamp#:#Datum / Uhrzeit
 log_to_email#:#Empfänger E-Mail Adresse
