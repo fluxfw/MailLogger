@@ -6,7 +6,6 @@ config_log_system_emails#:#Log system emails
 config_log_system_emails_info#:#If activated, all system emails will be logged
 config_save#:#Save
 log_actions#:#Actions
-log_action_show#:#Show email
 log_body#:#Content of the email
 log_context_title#:#Context title
 log_context_ref_id#:#Context ref id
@@ -16,6 +15,7 @@ log_from_lastname#:#Sender last name
 log_from_user_id#:#Sender user id
 log_log#:#Log
 log_no_access#:#No access!
+log_show_email#:#Show email
 log_subject#:#Subject
 log_timestamp#:#Date / Time
 log_to_email#:#Recipient email address
