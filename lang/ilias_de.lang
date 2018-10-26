@@ -6,6 +6,7 @@ config_log_system_emails#:#System-E-Mails loggen
 config_log_system_emails_info#:#Wenn aktiviert, werden sämtliche System-E-Mails geloggt
 config_save#:#Speichern
 log_actions#:#Aktionen
+log_action_show#:#E-Mail anzeigen
 log_body#:#Inhalt der E-Mail
 log_context_title#:#Context-Titel
 log_context_ref_id#:#Context-Ref-ID
