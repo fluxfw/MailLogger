@@ -21,6 +21,7 @@ class MailLoggerLogGUI {
 	const CMD_APPLY_FILTER = "applyFilter";
 	const CMD_LOG = "log";
 	const CMD_RESET_FILTER = "resetFilter";
+	const CMD_SHOW_EMAIL = "showEmail";
 	const LANG_MODULE_LOG = "log";
 
 
@@ -51,6 +52,7 @@ class MailLoggerLogGUI {
 					case self::CMD_APPLY_FILTER:
 					case self::CMD_LOG:
 					case self::CMD_RESET_FILTER:
+					case self::CMD_SHOW_EMAIL:
 						$this->{$cmd}();
 						break;
 
@@ -83,6 +85,13 @@ class MailLoggerLogGUI {
 		self::plugin()->output($table);
 	}
 
+
+	/**
+	 *
+	 */
+	protected function showEmail()/*: void*/ {
+		self::plugin()->output("TODO");
+	}
 
 	/**
 	 *
