@@ -254,7 +254,7 @@ class LogTableGUI extends ilTable2GUI {
 		 * @var ilDateTime $timestamp_start
 		 */
 		$timestamp_start = $this->filter_timestamp->getStart();
-		if (!$timestamp_start->isNull()) {
+		if (is_object($timestamp_start) && !$timestamp_start->isNull()) {
 			$timestamp_start = $timestamp_start->get(IL_CAL_UNIX);
 		} else {
 			$timestamp_start = NULL;
@@ -263,7 +263,7 @@ class LogTableGUI extends ilTable2GUI {
 		 * @var ilDateTime $timestamp_end
 		 */
 		$timestamp_end = $this->filter_timestamp->getEnd();
-		if (!$timestamp_end->isNull()) {
+		if (is_object($timestamp_end) && !$timestamp_end->isNull()) {
 			$timestamp_end = $timestamp_end->get(IL_CAL_UNIX);
 		} else {
 			$timestamp_end = NULL;
@@ -334,7 +334,7 @@ class LogTableGUI extends ilTable2GUI {
 	 *
 	 * @return string
 	 */
-	protected function getColumnValue(string $column, array $course, bool $raw_export = false): string {
+	protected function getColumnValue(string $column, array $mail, bool $raw_export = false): string {
 		switch ($column) {
 			case "timestamp":
 				if ($raw_export) {
@@ -358,15 +358,17 @@ class LogTableGUI extends ilTable2GUI {
 
 
 	/**
-	 * @param array $course
+	 * @param array $mail
 	 */
 	protected function fillRow(/*array*/
-		$course)/*: void*/ {
+		$mail)/*: void*/ {
 		$this->tpl->setCurrentBlock("column");
+		
+		self::dic()->ctrl()->setParameter($parent, "mail_id", $mail["id"]);
 
 		foreach ($this->getSelectableColumns() as $column) {
 			if ($this->isColumnSelected($column["id"])) {
-				$column = $this->getColumnValue($column["id"], $course);
+				$column = $this->getColumnValue($column["id"], $mail);
 
 				if (!empty($column)) {
 					$this->tpl->setVariable("COLUMN", $column);
@@ -380,8 +382,11 @@ class LogTableGUI extends ilTable2GUI {
 
 		$actions = new ilAdvancedSelectionListGUI();
 		$actions->setListTitle(self::plugin()->translate("actions", MailLoggerLogGUI::LANG_MODULE_LOG));
+		$actions->addItem(self::plugin()->translate("show_email", MailLoggerLogGUI::LANG_MODULE_LOG),"",self::dic()->ctrl()->getLinkTargetByClass([ilUIPluginRouterGUI::class,MailLoggerLogGUI::class]),MailLoggerLogGUI::CMD_SHOW_EMAIL);
 		$this->tpl->setVariable("COLUMN", $actions->getHTML());
 		$this->tpl->parseCurrentBlock();
+		
+		self::dic()->ctrl()->setParameter($parent, "mail_id", null);
 	}
 
 
