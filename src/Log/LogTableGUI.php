@@ -380,7 +380,7 @@ class LogTableGUI extends ilTable2GUI {
 
 		$actions = new ilAdvancedSelectionListGUI();
 		$actions->setListTitle(self::plugin()->translate("actions", MailLoggerLogGUI::LANG_MODULE_LOG));
-		$actions->addItem(self::plugin()->translate("log_action_show", MailLoggerLogGUI::LANG_MODULE_LOG),'show',self::dic()->ctrl()->getLinkTargetByClass(['ilUIPluginRouterGUI','MailLoggerLogGUI']),'show');
+		$actions->addItem(self::plugin()->translate("show_log", MailLoggerLogGUI::LANG_MODULE_LOG),'show',self::dic()->ctrl()->getLinkTargetByClass([ilUIPluginRouterGUI::class,MailLoggerLogGUI::class]),MailLoggerLogGUI::CMD_SHOW);
 		$this->tpl->setVariable("COLUMN", $actions->getHTML());
 		$this->tpl->parseCurrentBlock();
 	}
