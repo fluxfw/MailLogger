@@ -254,7 +254,7 @@ class LogTableGUI extends ilTable2GUI {
 		 * @var ilDateTime $timestamp_start
 		 */
 		$timestamp_start = $this->filter_timestamp->getStart();
-		if (!$timestamp_start->isNull()) {
+		if (is_object($timestamp_start) && !$timestamp_start->isNull()) {
 			$timestamp_start = $timestamp_start->get(IL_CAL_UNIX);
 		} else {
 			$timestamp_start = NULL;
@@ -263,7 +263,7 @@ class LogTableGUI extends ilTable2GUI {
 		 * @var ilDateTime $timestamp_end
 		 */
 		$timestamp_end = $this->filter_timestamp->getEnd();
-		if (!$timestamp_end->isNull()) {
+		if (is_object($timestamp_end) && !$timestamp_end->isNull()) {
 			$timestamp_end = $timestamp_end->get(IL_CAL_UNIX);
 		} else {
 			$timestamp_end = NULL;
