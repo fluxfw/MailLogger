@@ -263,11 +263,19 @@ class LogTableGUI extends ilTable2GUI {
 			"context_ref_id" => "context_ref_id",
 			"timestamp" => "timestamp"
 		];
-		$columns = array_map(function (string $key): array {
+		$default = [
+			"subject",
+			"from_email",
+			"to_email",
+			"context_title",
+			"timestamp"
+		];
+
+		$columns = array_map(function (string $key) use (&$default): array {
 			return [
 				"id" => $key,
 				"txt" => self::plugin()->translate($key, MailLoggerLogGUI::LANG_MODULE_LOG),
-				"default" => true,
+				"default" => in_array($key, $default),
 				"sort" => true
 			];
 		}, $columns);
