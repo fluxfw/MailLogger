@@ -4,6 +4,7 @@ namespace srag\AVL\Plugins\MailLogger\Log;
 
 use ActiveRecord;
 use arConnector;
+use ilDateTime;
 use ilMailLoggerPlugin;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\DIC\DICTrait;
@@ -245,8 +246,7 @@ class Log extends ActiveRecord {
 	 * @var int
 	 *
 	 * @con_has_field   true
-	 * @con_fieldtype   integer
-	 * @con_length      8
+	 * @con_fieldtype   timestamp
 	 * @con_is_notnull  true
 	 */
 	protected $timestamp;
@@ -279,6 +279,10 @@ class Log extends ActiveRecord {
 				return ($field_value ? 1 : 0);
 				break;
 
+			case "timestamp":
+				return (new ilDateTime($field_value, IL_CAL_UNIX))->get(IL_CAL_DATETIME);
+				break;
+
 			default:
 				return NULL;
 		}
@@ -298,7 +302,6 @@ class Log extends ActiveRecord {
 			case "from_type":
 			case "from_user_id":
 			case "to_user_id":
-			case "timestamp":
 				return intval($field_value);
 				break;
 
@@ -312,6 +315,10 @@ class Log extends ActiveRecord {
 				} else {
 					return NULL;
 				}
+				break;
+
+			case "timestamp":
+				return (new ilDateTime($field_value, IL_CAL_DATETIME))->getUnixTime();
 				break;
 
 			default:

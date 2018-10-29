@@ -64,12 +64,12 @@ class LogTableGUI extends ilTable2GUI {
 	protected $filter_to_lastname;
 	/**
 	 * @var ilTextInputGUI
-	 */
-	protected $filter_context_title;
-	/**
+	 * /
+	 * protected $filter_context_title;
+	 * /**
 	 * @var NumberInputGUI
-	 */
-	protected $filter_context_ref_id;
+	 * /
+	 * protected $filter_context_ref_id;*/
 	/**
 	 * @var DateDurationInputGUI
 	 */
@@ -155,7 +155,7 @@ class LogTableGUI extends ilTable2GUI {
 		$this->addFilterItem($this->filter_to_lastname);
 		$this->filter_to_lastname->readFromSession();
 
-		$this->filter_context_title = new ilTextInputGUI(self::plugin()
+		/*$this->filter_context_title = new ilTextInputGUI(self::plugin()
 			->translate("context_title", MailLoggerLogGUI::LANG_MODULE_LOG), "context_title");
 		$this->addFilterItem($this->filter_context_title);
 		$this->filter_context_title->readFromSession();
@@ -164,7 +164,7 @@ class LogTableGUI extends ilTable2GUI {
 			->translate("context_ref_id", MailLoggerLogGUI::LANG_MODULE_LOG), "context_ref_id");
 		$this->filter_context_ref_id->setMinValue(1);
 		$this->addFilterItem($this->filter_context_ref_id);
-		$this->filter_context_ref_id->readFromSession();
+		$this->filter_context_ref_id->readFromSession();*/
 
 		self::dic()->language()->loadLanguageModule("form");
 		$this->filter_timestamp = new DateDurationInputGUI(self::plugin()->translate("timestamp", MailLoggerLogGUI::LANG_MODULE_LOG), "timestamp");
@@ -212,7 +212,7 @@ class LogTableGUI extends ilTable2GUI {
 		if ($to_email === false) {
 			$to_email = "";
 		}
-		$context_title = $this->filter_context_title->getValue();
+		/*$context_title = $this->filter_context_title->getValue();
 		if ($context_title === false) {
 			$context_title = "";
 		}
@@ -221,7 +221,9 @@ class LogTableGUI extends ilTable2GUI {
 			$context_ref_id = intval($context_ref_id);
 		} else {
 			$context_ref_id = NULL;
-		}
+		}*/
+		$context_title = "";
+		$context_ref_id = NULL;
 		/**
 		 * @var ilDateTime $timestamp_start
 		 */
@@ -260,15 +262,15 @@ class LogTableGUI extends ilTable2GUI {
 			"to_firstname" => "to_firstname",
 			"to_lastname" => "to_lastname",
 			"to_user_id" => "to_user_id",
-			"context_title" => "context_title",
-			"context_ref_id" => "context_ref_id",
+			/*"context_title" => "context_title",
+			"context_ref_id" => "context_ref_id",*/
 			"timestamp" => "timestamp"
 		];
 		$default = [
 			"subject",
 			"from_email",
 			"to_email",
-			"context_title",
+			//"context_title",
 			"timestamp"
 		];
 
