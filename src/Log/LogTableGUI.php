@@ -295,6 +295,9 @@ class LogTableGUI extends ilTable2GUI {
 		}
 
 		$this->addColumn(self::plugin()->translate("actions", MailLoggerLogGUI::LANG_MODULE_LOG));
+
+		$this->setDefaultOrderField("timestamp");
+		$this->setDefaultOrderDirection("desc");
 	}
 
 
