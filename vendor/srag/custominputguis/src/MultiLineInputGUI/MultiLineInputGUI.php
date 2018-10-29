@@ -504,7 +504,7 @@ class MultiLineInputGUI extends ilFormPropertyGUI implements ilTableFilterItem, 
 	 */
 	public function initCSSandJS()/*: void*/ {
 		$dir = substr(__DIR__, strlen(ILIAS_ABSOLUTE_PATH) + 1);
-		self::dic()->mainTemplate()->addCss($dir . '/css/multi_line_input.css');
+		self::dic()->mainTemplate()->addCss($dir . '/css/multi_line_input.min.css');
 		self::dic()->mainTemplate()->addJavascript($dir . '/js/multi_line_input.min.js');
 	}
 
