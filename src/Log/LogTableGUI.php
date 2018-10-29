@@ -42,10 +42,6 @@ class LogTableGUI extends ilTable2GUI {
 	 */
 	protected $filter_from_email;
 	/**
-	 * @var NumberInputGUI
-	 */
-	protected $filter_from_user_id;
-	/**
 	 * @var ilTextInputGUI
 	 */
 	protected $filter_from_firstname;
@@ -57,10 +53,6 @@ class LogTableGUI extends ilTable2GUI {
 	 * @var ilTextInputGUI
 	 */
 	protected $filter_to_email;
-	/**
-	 * @var NumberInputGUI
-	 */
-	protected $filter_to_user_id;
 	/**
 	 * @var ilTextInputGUI
 	 */
@@ -140,11 +132,6 @@ class LogTableGUI extends ilTable2GUI {
 		$this->addFilterItem($this->filter_from_email);
 		$this->filter_from_email->readFromSession();
 
-		$this->filter_from_user_id = new NumberInputGUI(self::plugin()->translate("from_user_id", MailLoggerLogGUI::LANG_MODULE_LOG), "from_user_id");
-		$this->filter_from_user_id->setMinValue(1);
-		$this->addFilterItem($this->filter_from_user_id);
-		$this->filter_from_user_id->readFromSession();
-
 		$this->filter_from_firstname = new ilTextInputGUI(self::plugin()
 			->translate("from_firstname", MailLoggerLogGUI::LANG_MODULE_LOG), "from_firstname");
 		$this->addFilterItem($this->filter_from_firstname);
@@ -158,11 +145,6 @@ class LogTableGUI extends ilTable2GUI {
 		$this->filter_to_email = new ilTextInputGUI(self::plugin()->translate("to_email", MailLoggerLogGUI::LANG_MODULE_LOG), "to_email");
 		$this->addFilterItem($this->filter_to_email);
 		$this->filter_to_email->readFromSession();
-
-		$this->filter_to_user_id = new NumberInputGUI(self::plugin()->translate("to_user_id", MailLoggerLogGUI::LANG_MODULE_LOG), "to_user_id");
-		$this->filter_to_user_id->setMinValue(1);
-		$this->addFilterItem($this->filter_to_user_id);
-		$this->filter_to_user_id->readFromSession();
 
 		$this->filter_to_firstname = new ilTextInputGUI(self::plugin()->translate("to_firstname", MailLoggerLogGUI::LANG_MODULE_LOG), "to_firstname");
 		$this->addFilterItem($this->filter_to_firstname);
@@ -209,12 +191,6 @@ class LogTableGUI extends ilTable2GUI {
 		if ($from_email === false) {
 			$from_email = "";
 		}
-		$from_user_id = $this->filter_from_user_id->getValue();
-		if ($from_user_id !== false) {
-			$from_user_id = intval($from_user_id);
-		} else {
-			$from_user_id = NULL;
-		}
 		$from_firstname = $this->filter_from_firstname->getValue();
 		if ($from_email === false) {
 			$from_email = "";
@@ -226,12 +202,6 @@ class LogTableGUI extends ilTable2GUI {
 		$to_email = $this->filter_to_email->getValue();
 		if ($to_email === false) {
 			$to_email = "";
-		}
-		$to_user_id = $this->filter_to_user_id->getValue();
-		if ($to_user_id !== false) {
-			$to_user_id = intval($to_user_id);
-		} else {
-			$to_user_id = NULL;
 		}
 		$to_firstname = $this->filter_to_firstname->getValue();
 		if ($to_email === false) {
@@ -270,7 +240,7 @@ class LogTableGUI extends ilTable2GUI {
 			$timestamp_end = NULL;
 		}
 
-		$this->setData(Log::getLogs($subject, $body, $from_email, $from_user_id, $from_firstname, $from_lastname, $to_email, $to_user_id, $to_firstname, $to_lastname, $context_title, $context_ref_id, $timestamp_start, $timestamp_end));
+		$this->setData(Log::getLogs($subject, $body, $from_email, $from_firstname, $from_lastname, $to_email, $to_firstname, $to_lastname, $context_title, $context_ref_id, $timestamp_start, $timestamp_end));
 	}
 
 

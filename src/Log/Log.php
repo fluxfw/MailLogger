@@ -61,11 +61,9 @@ class Log extends ActiveRecord {
 	 * @param string   $subject
 	 * @param string   $body
 	 * @param string   $from_email
-	 * @param int|null $from_user_id
 	 * @param string   $from_firstname
 	 * @param string   $from_lastname
 	 * @param string   $to_email
-	 * @param int|null $to_user_id
 	 * @param string   $to_firstname
 	 * @param string   $to_lastname
 	 * @param string   $context_title
@@ -75,9 +73,7 @@ class Log extends ActiveRecord {
 	 *
 	 * @return array
 	 */
-	public static function getLogs(string $subject = "", string $body = "", string $from_email = "", /*?*/
-		int $from_user_id = NULL, string $from_firstname = "", string $from_lastname = "", string $to_email = "", /*?*/
-		int $to_user_id = NULL, string $to_firstname = "", string $to_lastname = "", string $context_title = "", /*?*/
+	public static function getLogs(string $subject = "", string $body = "", string $from_email = "", string $from_firstname = "", string $from_lastname = "", string $to_email = "", string $to_firstname = "", string $to_lastname = "", string $context_title = "", /*?*/
 		int $context_ref_id = NULL, /*?*/
 		int $timestamp_start = NULL, /*?*/
 		int $timestamp_end = NULL): array {
@@ -92,9 +88,6 @@ class Log extends ActiveRecord {
 		if (!empty($from_email)) {
 			$where = $where->where([ "from_email" => '%' . $from_email . '%' ], "LIKE");
 		}
-		if (!empty($from_user_id)) {
-			$where = $where->where([ "from_user_id" => $from_user_id ]);
-		}
 		if (!empty($from_firstname)) {
 			$where = $where->where([ "from_firstname" => '%' . $from_firstname . '%' ], "LIKE");
 		}
@@ -103,9 +96,6 @@ class Log extends ActiveRecord {
 		}
 		if (!empty($to_email)) {
 			$where = $where->where([ "to_email" => '%' . $to_email . '%' ], "LIKE");
-		}
-		if (!empty($to_user_id)) {
-			$where = $where->where([ "to_user_id" => $to_user_id ]);
 		}
 		if (!empty($to_firstname)) {
 			$where = $where->where([ "to_firstname" => '%' . $to_firstname . '%' ], "LIKE");

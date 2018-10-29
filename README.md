@@ -83,7 +83,6 @@ abstract class ilMailMimeTransportBase implements ilMailMimeTransport
 * [srag/custominputguis](https://packagist.org/packages/srag/custominputguis)
 * [srag/dic](https://packagist.org/packages/srag/dic)
 * [srag/removeplugindataconfirm](https://packagist.org/packages/srag/removeplugindataconfirm)
-* [babel-minify -g](https://www.npmjs.com/package/babel-minify)
 
 Please use it for further development!
 
