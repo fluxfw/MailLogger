@@ -3,6 +3,7 @@
 require_once __DIR__ . "/../../vendor/autoload.php";
 
 use srag\AVL\Plugins\MailLogger\Log\Log;
+use srag\AVL\Plugins\MailLogger\Log\LogDetailsFormGUI;
 use srag\AVL\Plugins\MailLogger\Log\LogTableGUI;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\DIC\DICTrait;
@@ -88,6 +89,18 @@ class MailLoggerLogGUI {
 
 
 	/**
+	 * @param Log $log
+	 *
+	 * @return LogDetailsFormGUI
+	 */
+	protected function getLogDetailsForm(Log $log): LogDetailsFormGUI {
+		$form = new LogDetailsFormGUI($this, $log);
+
+		return $form;
+	}
+
+
+	/**
 	 *
 	 */
 	protected function showEmail()/*: void*/ {
@@ -99,12 +112,9 @@ class MailLoggerLogGUI {
 		$log = Log::getLogById($log_id);
 
 		if ($log !== NULL) {
-			$tpl = self::plugin()->template("log.html");
+			$form = $this->getLogDetailsForm($log);
 
-			$tpl->setVariable("SUBJECT", htmlspecialchars($log->getSubject()));
-			$tpl->setVariable("BODY", htmlspecialchars($log->getBody()));
-
-			self::plugin()->output($tpl);
+			self::plugin()->output($form);
 		} else {
 			self::plugin()->output("");
 		}

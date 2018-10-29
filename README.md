@@ -90,7 +90,7 @@ Please use it for further development!
 * Adjustment suggestions by pull requests on https://git.studer-raimann.ch/ILIAS/Plugins/MailLogger/tree/develop
 * Adjustment suggestions which are not yet worked out in detail by Jira tasks under https://jira.studer-raimann.ch/projects/AVL
 * Bug reports under https://jira.studer-raimann.ch/projects/AVL
-* For external developers please send an email to support-custom1@studer-raimann.ch
+* For external users please send an email to support-custom1@studer-raimann.ch
 
 ### Development
 If you want development in this plugin you should install this plugin like follow:

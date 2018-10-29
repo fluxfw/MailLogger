@@ -10,7 +10,8 @@ log_back#:#Back
 log_body#:#Content of the email
 log_context_title#:#Context title
 log_context_ref_id#:#Context ref id
-log_from_email#:#sender email address
+log_from#:#Sender
+log_from_email#:#Sender email address
 log_from_firstname#:#Sender first name
 log_from_lastname#:#Sender last name
 log_log#:#Log
@@ -18,6 +19,7 @@ log_no_access#:#No access!
 log_show_email#:#Show email
 log_subject#:#Subject
 log_timestamp#:#Date / Time
+log_to#:#Recipient
 log_to_email#:#Recipient email address
 log_to_firstname#:#Recipient first name
 log_to_lastname#:#Recipient last name
