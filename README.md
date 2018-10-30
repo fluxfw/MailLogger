@@ -74,6 +74,9 @@ abstract class ilMailMimeTransportBase implements ilMailMimeTransport
 }
 ```
 
+### Some screenshots
+TODO
+
 ### Dependencies
 * ILIAS 5.3
 * PHP >=7.0
