@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.9.4]
+- adopt container width to longest select option
+
 ## [0.9.3]
 - StaticHTMLPresentationInputGUI
 
