@@ -49,14 +49,14 @@ final class Access {
 	 * @return array
 	 */
 	public function getUsers(): array {
-		$result = self::dic()->database()->queryF('SELECT usr_id, login FROM usr_data WHERE active=%s', [
+		$result = self::dic()->database()->queryF('SELECT usr_id, firstname, lastname FROM usr_data WHERE active=%s', [
 			"integer"
 		], [ 1 ]);
 
 		$array = [];
 
 		while (($row = $result->fetchAssoc()) !== false) {
-			$array[$row["usr_id"]] = $row["login"];
+			$array[$row["usr_id"]] = $row["lastname"] . " " . $row["firstname"];
 		}
 
 		return $array;
