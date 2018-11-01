@@ -10,7 +10,6 @@ use ilExcel;
 use ilMailLoggerPlugin;
 use ilTable2GUI;
 use ilTextInputGUI;
-use ilUIPluginRouterGUI;
 use MailLoggerLogGUI;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\CustomInputGUIs\DateDurationInputGUI\DateDurationInputGUI;
@@ -378,7 +377,7 @@ class LogTableGUI extends ilTable2GUI {
 		$actions = new ilAdvancedSelectionListGUI();
 		$actions->setListTitle(self::plugin()->translate("actions", MailLoggerLogGUI::LANG_MODULE_LOG));
 		$actions->addItem(self::plugin()->translate("show_email", MailLoggerLogGUI::LANG_MODULE_LOG), "", self::dic()->ctrl()
-			->getLinkTargetByClass([ ilUIPluginRouterGUI::class, MailLoggerLogGUI::class ], MailLoggerLogGUI::CMD_SHOW_EMAIL));
+			->getLinkTarget($parent, MailLoggerLogGUI::CMD_SHOW_EMAIL));
 		$this->tpl->setVariable("COLUMN", $actions->getHTML());
 		$this->tpl->parseCurrentBlock();
 
