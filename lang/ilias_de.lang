@@ -11,6 +11,7 @@ log_body#:#Inhalt der E-Mail
 log_context_title#:#Context-Titel
 log_context_ref_id#:#Context-Ref-ID
 log_from#:#Absender
+log_from_user_id#:#Absender User-ID
 log_from_email#:#Absender E-Mail-Adresse
 log_from_firstname#:#Absender Vorname
 log_from_lastname#:#Absender Nachname
@@ -21,6 +22,7 @@ log_subject#:#Betreff
 log_timestamp#:#Datum / Uhrzeit
 log_to#:#Empfänger
 log_to_email#:#Empfänger E-Mail Adresse
+log_to_user_id#:#Empfänger User-ID
 log_to_firstname#:#Empfänger Vorname
 log_to_lastname#:#Empfänger Nachname
 removeplugindataconfirm_cancel#:#Abbrechen

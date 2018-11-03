@@ -252,7 +252,6 @@ class LogTableGUI extends ilTable2GUI {
 	public function getSelectableColumns(): array {
 		$columns = [
 			"subject" => "subject",
-			"body" => "body",
 			"from_email" => "from_email",
 			"from_firstname" => "from_firstname",
 			"from_lastname" => "from_lastname",
@@ -325,14 +324,6 @@ class LogTableGUI extends ilTable2GUI {
 					$column = $log[$column];
 				} else {
 					$column = ilDatePresentation::formatDate(new ilDateTime($log[$column], IL_CAL_UNIX));
-				}
-				break;
-
-			case "body":
-				if ($raw_export) {
-					$column = $log[$column];
-				} else {
-					$column = (new StaticHTMLPresentationInputGUI())->setHtml($log[$column])->render();
 				}
 				break;
 

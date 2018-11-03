@@ -27,15 +27,20 @@ class ilMimeMail
     	{
     	...
 		//PATCH MailLogger Event for send internal emails
-		global $DIC;
-		$DIC->event()->raise("Services/Mail", "sendInternalEmail", [
-			"subject" => $a_m_subject,
-			"body" => $a_m_message,
-			"is_system" => in_array("system", $a_m_type),
-			"from_user_id" => $a_sender_id,
-			"to_user_id" => $a_user_id,
-			"context_ref_id" => $a_tpl_context_id
-		]);
+		$mbox = new ilMailbox();
+        $mbox->setUserId($a_user_id);
+        //Only save outgoing mails not mails saved in sent folder
+        if($mbox->getSentFolder() != $a_folder_id) {
+			global $DIC;
+			$DIC->event()->raise("Services/Mail", "sendInternalEmail", [
+				"subject" => $a_m_subject,
+				"body" => $a_m_message,
+				"is_system" => in_array("system", $a_m_type),
+				"from_user_id" => $a_sender_id,
+				"to_user_id" => $a_user_id,
+				"context_ref_id" => $a_tpl_context_id
+			]);
+		}
 		//PATCH MailLogger
 
 		return $next_id;
