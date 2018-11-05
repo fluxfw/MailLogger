@@ -35,6 +35,10 @@ class LogTableGUI extends ilTable2GUI {
 	/**
 	 * @var ilTextInputGUI
 	 */
+	protected $filter_body;
+	/**
+	 * @var ilTextInputGUI
+	 */
 	protected $filter_from_email;
 	/**
 	 * @var ilTextInputGUI
@@ -119,6 +123,10 @@ class LogTableGUI extends ilTable2GUI {
 		$this->addFilterItem($this->filter_subject);
 		$this->filter_subject->readFromSession();
 
+		$this->filter_body = new ilTextInputGUI(self::plugin()->translate("body", MailLoggerLogGUI::LANG_MODULE_LOG), "body");
+		$this->addFilterItem($this->filter_body);
+		$this->filter_body->readFromSession();
+
 		$this->filter_from_email = new ilTextInputGUI(self::plugin()->translate("from_email", MailLoggerLogGUI::LANG_MODULE_LOG), "from_email");
 		$this->addFilterItem($this->filter_from_email);
 		$this->filter_from_email->readFromSession();
@@ -173,6 +181,10 @@ class LogTableGUI extends ilTable2GUI {
 		$subject = $this->filter_subject->getValue();
 		if ($subject === false) {
 			$subject = "";
+		}
+		$body = $this->filter_body->getValue();
+		if ($body === false) {
+			$body = "";
 		}
 		$from_email = $this->filter_from_email->getValue();
 		if ($from_email === false) {
@@ -229,7 +241,7 @@ class LogTableGUI extends ilTable2GUI {
 			$timestamp_end = NULL;
 		}
 
-		$this->setData(Log::getLogs($subject, $from_email, $from_firstname, $from_lastname, $to_email, $to_firstname, $to_lastname, $context_title, $context_ref_id, $timestamp_start, $timestamp_end));
+		$this->setData(Log::getLogs($subject, $body, $from_email, $from_firstname, $from_lastname, $to_email, $to_firstname, $to_lastname, $context_title, $context_ref_id, $timestamp_start, $timestamp_end));
 	}
 
 
