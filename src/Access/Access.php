@@ -18,7 +18,6 @@ final class Access {
 	use DICTrait;
 	use MailLoggerTrait;
 	const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
-	const ADMIN_ROLE_ID = 2;
 	/**
 	 * @var self
 	 */
