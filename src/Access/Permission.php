@@ -7,13 +7,13 @@ use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\DIC\DICTrait;
 
 /**
- * Class Access
+ * Class Permission
  *
  * @package srag\AVL\Plugins\MailLogger\Access
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-final class Access {
+final class Permission {
 
 	use DICTrait;
 	use MailLoggerTrait;
@@ -38,7 +38,7 @@ final class Access {
 
 
 	/**
-	 * Access constructor
+	 * Permission constructor
 	 */
 	public function __construct() {
 
@@ -46,19 +46,9 @@ final class Access {
 
 
 	/**
-	 * @return array
+	 * @return bool
 	 */
-	public function getUsers(): array {
-		$result = self::dic()->database()->queryF('SELECT usr_id, firstname, lastname FROM usr_data WHERE active=%s', [
-			"integer"
-		], [ 1 ]);
-
-		$array = [];
-
-		while (($row = $result->fetchAssoc()) !== false) {
-			$array[$row["usr_id"]] = $row["lastname"] . " " . $row["firstname"];
-		}
-
-		return $array;
+	public function hasLogPermission(): bool {
+		return self::dic()->rbacreview()->isAssigned(self::dic()->user()->getId(), self::ADMIN_ROLE_ID);
 	}
 }

@@ -11,6 +11,7 @@ return array(
     'ilMailLoggerConfigGUI' => $baseDir . '/classes/class.ilMailLoggerConfigGUI.php',
     'ilMailLoggerPlugin' => $baseDir . '/classes/class.ilMailLoggerPlugin.php',
     'srag\\AVL\\Plugins\\MailLogger\\Access\\Access' => $baseDir . '/src/Access/Access.php',
+    'srag\\AVL\\Plugins\\MailLogger\\Access\\Permission' => $baseDir . '/src/Access/Permission.php',
     'srag\\AVL\\Plugins\\MailLogger\\Config\\Config' => $baseDir . '/src/Config/Config.php',
     'srag\\AVL\\Plugins\\MailLogger\\Config\\ConfigFormGUI' => $baseDir . '/src/Config/ConfigFormGUI.php',
     'srag\\AVL\\Plugins\\MailLogger\\Log\\Log' => $baseDir . '/src/Log/Log.php',

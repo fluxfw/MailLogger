@@ -3,6 +3,7 @@
 namespace srag\AVL\Plugins\MailLogger\Utils;
 
 use srag\AVL\Plugins\MailLogger\Access\Access;
+use srag\AVL\Plugins\MailLogger\Access\Permission;
 use srag\AVL\Plugins\MailLogger\Log\LogHandler;
 
 /**
@@ -27,5 +28,13 @@ trait MailLoggerTrait {
 	 */
 	protected static function logHandler(): LogHandler {
 		return LogHandler::getInstance();
+	}
+
+
+	/**
+	 * @return Permission
+	 */
+	protected static function permission(): Permission {
+		return Permission::getInstance();
 	}
 }

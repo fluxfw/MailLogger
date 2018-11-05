@@ -43,7 +43,7 @@ class MailLoggerLogGUI {
 
 		switch (strtolower($next_class)) {
 			default:
-				if (!self::access()->hasLogAccess()) {
+				if (!self::permission()->hasLogPermission()) {
 					ilUtil::sendInfo(self::plugin()->translate("no_access", self:: LANG_MODULE_LOG), true);
 					self::dic()->ctrl()->redirectByClass(ilRepositoryGUI::class);
 				}
