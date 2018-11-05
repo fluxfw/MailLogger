@@ -14,6 +14,7 @@ log_from#:#Absender
 log_from_email#:#Absender E-Mail-Adresse
 log_from_firstname#:#Absender Vorname
 log_from_lastname#:#Absender Nachname
+log_from_user_id#:#Absender User-ID
 log_log#:#Log
 log_no_access#:#Kein Zugriff!
 log_show_email#:#E-Mail anzeigen
@@ -23,6 +24,7 @@ log_to#:#Empfänger
 log_to_email#:#Empfänger E-Mail Adresse
 log_to_firstname#:#Empfänger Vorname
 log_to_lastname#:#Empfänger Nachname
+log_to_user_id#:#Empfänger User-ID
 removeplugindataconfirm_cancel#:#Abbrechen
 removeplugindataconfirm_confirm_remove_data#:#Möchten Sie die %1$s-Daten auch entfernen? Allenfalls möchten Sie das %1$s-Plugin nur deaktivieren?
 removeplugindataconfirm_deactivate#:#%1$s-Plugin nur deaktivieren

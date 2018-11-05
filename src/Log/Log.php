@@ -60,7 +60,6 @@ class Log extends ActiveRecord {
 
 	/**
 	 * @param string   $subject
-	 * @param string   $body
 	 * @param string   $from_email
 	 * @param string   $from_firstname
 	 * @param string   $from_lastname
@@ -74,7 +73,7 @@ class Log extends ActiveRecord {
 	 *
 	 * @return array
 	 */
-	public static function getLogs(string $subject = "", string $body = "", string $from_email = "", string $from_firstname = "", string $from_lastname = "", string $to_email = "", string $to_firstname = "", string $to_lastname = "", string $context_title = "", /*?*/
+	public static function getLogs(string $subject = "", string $from_email = "", string $from_firstname = "", string $from_lastname = "", string $to_email = "", string $to_firstname = "", string $to_lastname = "", string $context_title = "", /*?*/
 		int $context_ref_id = NULL, /*?*/
 		int $timestamp_start = NULL, /*?*/
 		int $timestamp_end = NULL): array {
@@ -82,9 +81,6 @@ class Log extends ActiveRecord {
 
 		if (!empty($subject)) {
 			$where = $where->where([ "subject" => '%' . $subject . '%' ], "LIKE");
-		}
-		if (!empty($body)) {
-			$where = $where->where([ "body" => '%' . $body . '%' ], "LIKE");
 		}
 		if (!empty($from_email)) {
 			$where = $where->where([ "from_email" => '%' . $from_email . '%' ], "LIKE");

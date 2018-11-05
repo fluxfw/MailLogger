@@ -14,6 +14,7 @@ log_from#:#Sender
 log_from_email#:#Sender email address
 log_from_firstname#:#Sender first name
 log_from_lastname#:#Sender last name
+log_from_user_id#:#Sender user id
 log_log#:#Log
 log_no_access#:#No access!
 log_show_email#:#Show Email
@@ -23,6 +24,7 @@ log_to#:#Recipient
 log_to_email#:#Recipient email address
 log_to_firstname#:#Recipient first name
 log_to_lastname#:#Recipient last name
+log_to_user_id#:#Recipient User id
 removeplugindataconfirm_cancel#:#Cancel
 removeplugindataconfirm_confirm_remove_data#:#Do you want to remove the %1$s data as well? At most, you just want to disable the %1$s plugin?
 removeplugindataconfirm_deactivate#:#Just deactivate %1$s plugin

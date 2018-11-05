@@ -64,10 +64,16 @@ class LogHandler {
 	 * @param ilMimeMail $mail
 	 */
 	public function handleSendExternalEmail(ilMimeMail $mail)/*: void*/ {
-		$from_user = new ilObjUser(ilObjUser::_lookupId(current(ilObjUser::_getUserIdsByEmail($mail->getFrom()->getFromAddress()))));
+		$from_user = new ilObjUser(ilObjUser::_lookupId(current(ilObjUser::_getUserIdsByEmail($mail->getFrom()->getReplyToAddress()))));
 
 		foreach ($mail->getTo() as $to) {
-			$to_user = new ilObjUser(ilObjUser::_lookupId(current(ilObjUser::_getUserIdsByEmail($to[0]))));
+
+			if (count(ilObjUser::_getUserIdsByEmail($to)) > 0) {
+				ilObjUser::_getUserIdsByEmail(ilObjUser::_getUserIdsByEmail($to));
+			} else {
+				$to_user = new ilObjUser();
+				$to_user->setEmail($to);
+			}
 
 			$this->log(strval($mail->getSubject()), strval($mail->getFinalBody()), ($mail->getFrom() instanceof
 				ilMailMimeSenderSystem), $from_user, $to_user, NULL);
