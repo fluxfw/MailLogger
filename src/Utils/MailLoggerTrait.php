@@ -3,7 +3,7 @@
 namespace srag\AVL\Plugins\MailLogger\Utils;
 
 use srag\AVL\Plugins\MailLogger\Access\Access;
-use srag\AVL\Plugins\MailLogger\Access\Permission;
+use srag\AVL\Plugins\MailLogger\Access\Ilias;
 use srag\AVL\Plugins\MailLogger\Log\LogHandler;
 use srag\AVL\Plugins\MailLogger\Logs\Logs;
 
@@ -25,6 +25,14 @@ trait MailLoggerTrait {
 
 
 	/**
+	 * @return Ilias
+	 */
+	protected static function ilias(): Ilias {
+		return Ilias::getInstance();
+	}
+
+
+	/**
 	 * @return LogHandler
 	 */
 	protected static function logHandler(): LogHandler {
@@ -37,13 +45,5 @@ trait MailLoggerTrait {
 	 */
 	protected static function logs(): Logs {
 		return Logs::getInstance();
-	}
-
-
-	/**
-	 * @return Permission
-	 */
-	protected static function permission(): Permission {
-		return Permission::getInstance();
 	}
 }

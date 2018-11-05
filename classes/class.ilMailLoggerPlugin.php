@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use srag\AVL\Plugins\MailLogger\Access\Permission;
+use srag\AVL\Plugins\MailLogger\Access\Access;
 use srag\AVL\Plugins\MailLogger\Config\Config;
 use srag\AVL\Plugins\MailLogger\Log\Log;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
@@ -136,8 +136,8 @@ class ilMailLoggerPlugin extends ilEventHookPlugin {
 					$entry->setPermissionType(ctrlmmMenu::PERM_SCRIPT);
 					$entry->setPermission(json_encode([
 						__DIR__ . "/../vendor/autoload.php",
-						Permission::class,
-						"hasLogPermission"
+						Access::class,
+						"hasLogAccess"
 					]));
 					$entry->store();
 				}

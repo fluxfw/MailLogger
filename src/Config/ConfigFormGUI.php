@@ -27,7 +27,7 @@ class ConfigFormGUI extends ActiveRecordConfigFormGUI {
 	protected function initForm()/*: void*/ {
 		parent::initForm();
 
-		$users = self::access()->getUsers();
+		$users = self::ilias()->users()->getUsers();
 
 		$log_email_of_users = new MultiSelectSearchInputGUI($this->txt(Config::KEY_LOG_EMAIL_OF_USERS), Config::KEY_LOG_EMAIL_OF_USERS);
 		$log_email_of_users->setRequired(true);

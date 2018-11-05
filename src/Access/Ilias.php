@@ -7,18 +7,17 @@ use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\DIC\DICTrait;
 
 /**
- * Class Access
+ * Class Ilias
  *
  * @package srag\AVL\Plugins\MailLogger\Access
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-final class Access {
+final class Ilias {
 
 	use DICTrait;
 	use MailLoggerTrait;
 	const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
-	const ADMIN_ROLE_ID = 2;
 	/**
 	 * @var self
 	 */
@@ -38,17 +37,17 @@ final class Access {
 
 
 	/**
-	 * Access constructor
+	 * Ilias constructor
 	 */
-	public function __construct() {
+	private function __construct() {
 
 	}
 
 
 	/**
-	 * @return bool
+	 * @return Users
 	 */
-	public function hasLogAccess(): bool {
-		return self::dic()->rbacreview()->isAssigned(self::dic()->user()->getId(), self::ADMIN_ROLE_ID);
+	public function users(): Users {
+		return Users::getInstance();
 	}
 }
