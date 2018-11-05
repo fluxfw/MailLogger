@@ -14,7 +14,6 @@ use MailLoggerLogGUI;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\CustomInputGUIs\DateDurationInputGUI\DateDurationInputGUI;
 use srag\CustomInputGUIs\NumberInputGUI\NumberInputGUI;
-use srag\CustomInputGUIs\StaticHTMLPresentationInputGUI\StaticHTMLPresentationInputGUI;
 use srag\DIC\DICTrait;
 
 /**
