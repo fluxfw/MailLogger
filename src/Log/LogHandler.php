@@ -19,7 +19,7 @@ use srag\DIC\DICTrait;
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-class LogHandler {
+final class LogHandler {
 
 	use DICTrait;
 	use MailLoggerTrait;
@@ -45,7 +45,8 @@ class LogHandler {
 	/**
 	 * LogHandler constructor
 	 */
-	protected function __construct() {
+	private function __construct() {
+
 	}
 
 

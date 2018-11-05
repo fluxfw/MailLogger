@@ -109,7 +109,7 @@ class MailLoggerLogGUI {
 
 		$log_id = filter_input(INPUT_GET, "log_id");
 
-		$log = Log::getLogById($log_id);
+		$log = self::logs()->getLogById($log_id);
 
 		if ($log !== NULL) {
 			$form = $this->getLogDetailsForm($log);

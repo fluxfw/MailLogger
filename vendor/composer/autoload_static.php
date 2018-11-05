@@ -53,6 +53,7 @@ class ComposerStaticInit61ec83675619dd8799f4d5846edc2efb
         'srag\\AVL\\Plugins\\MailLogger\\Log\\LogDetailsFormGUI' => __DIR__ . '/../..' . '/src/Log/LogDetailsFormGUI.php',
         'srag\\AVL\\Plugins\\MailLogger\\Log\\LogHandler' => __DIR__ . '/../..' . '/src/Log/LogHandler.php',
         'srag\\AVL\\Plugins\\MailLogger\\Log\\LogTableGUI' => __DIR__ . '/../..' . '/src/Log/LogTableGUI.php',
+        'srag\\AVL\\Plugins\\MailLogger\\Logs\\Logs' => __DIR__ . '/../..' . '/src/Log/Logs.php',
         'srag\\AVL\\Plugins\\MailLogger\\Utils\\MailLoggerTrait' => __DIR__ . '/../..' . '/src/Utils/MailLoggerTrait.php',
         'srag\\ActiveRecordConfig\\ActiveRecordConfig' => __DIR__ . '/..' . '/srag/activerecordconfig/src/ActiveRecordConfig.php',
         'srag\\ActiveRecordConfig\\ActiveRecordConfigFormGUI' => __DIR__ . '/..' . '/srag/activerecordconfig/src/ActiveRecordConfigFormGUI.php',

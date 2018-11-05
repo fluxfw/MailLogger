@@ -241,7 +241,8 @@ class LogTableGUI extends ilTable2GUI {
 			$timestamp_end = NULL;
 		}
 
-		$this->setData(Log::getLogs($subject, $body, $from_email, $from_firstname, $from_lastname, $to_email, $to_firstname, $to_lastname, $context_title, $context_ref_id, $timestamp_start, $timestamp_end));
+		$this->setData(self::logs()
+			->getLogs($subject, $body, $from_email, $from_firstname, $from_lastname, $to_email, $to_firstname, $to_lastname, $context_title, $context_ref_id, $timestamp_start, $timestamp_end));
 	}
 
 

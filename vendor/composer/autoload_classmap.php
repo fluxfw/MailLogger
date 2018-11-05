@@ -18,6 +18,7 @@ return array(
     'srag\\AVL\\Plugins\\MailLogger\\Log\\LogDetailsFormGUI' => $baseDir . '/src/Log/LogDetailsFormGUI.php',
     'srag\\AVL\\Plugins\\MailLogger\\Log\\LogHandler' => $baseDir . '/src/Log/LogHandler.php',
     'srag\\AVL\\Plugins\\MailLogger\\Log\\LogTableGUI' => $baseDir . '/src/Log/LogTableGUI.php',
+    'srag\\AVL\\Plugins\\MailLogger\\Logs\\Logs' => $baseDir . '/src/Log/Logs.php',
     'srag\\AVL\\Plugins\\MailLogger\\Utils\\MailLoggerTrait' => $baseDir . '/src/Utils/MailLoggerTrait.php',
     'srag\\ActiveRecordConfig\\ActiveRecordConfig' => $vendorDir . '/srag/activerecordconfig/src/ActiveRecordConfig.php',
     'srag\\ActiveRecordConfig\\ActiveRecordConfigFormGUI' => $vendorDir . '/srag/activerecordconfig/src/ActiveRecordConfigFormGUI.php',
