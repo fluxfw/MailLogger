@@ -28,9 +28,9 @@ class ilMimeMail
     	...
 		//PATCH MailLogger Event for send internal emails
 		$mbox = new ilMailbox();
-        $mbox->setUserId($a_user_id);
-        //Only save outgoing mails not mails saved in sent folder
-        if($mbox->getSentFolder() != $a_folder_id) {
+		$mbox->setUserId($a_user_id);
+		//Only save outgoing mails not mails saved in sent folder
+		if ($mbox->getSentFolder() != $a_folder_id) {
 			global $DIC;
 			$DIC->event()->raise("Services/Mail", "sendInternalEmail", [
 				"subject" => $a_m_subject,
