@@ -55,6 +55,7 @@ class LogHandler {
 	public function handleSendInternalEmail(array $mail)/*: void*/ {
 		$from_user = new ilObjUser($mail["from_user_id"]);
 		$to_user = new ilObjUser($mail["to_user_id"]);
+
 		$this->log(strval($mail["subject"]), strval($mail["body"]), $mail["is_system"], $from_user, $to_user, (!empty($mail["context_ref_id"]) ? intval($mail["context_ref_id"]) : NULL));
 	}
 
@@ -63,12 +64,11 @@ class LogHandler {
 	 * @param ilMimeMail $mail
 	 */
 	public function handleSendExternalEmail(ilMimeMail $mail)/*: void*/ {
-		$from_user = new ilObjUser(ilObjUser::_lookupId(current(ilObjUser::_getUserIdsByEmail($mail->getfrom()->getReplyToAddress()))));
-
+		$from_user = new ilObjUser(ilObjUser::_lookupId(current(ilObjUser::_getUserIdsByEmail($mail->getFrom()->getReplyToAddress()))));
 
 		foreach ($mail->getTo() as $to) {
 
-			if(count(ilObjUser::_getUserIdsByEmail($to)) > 0) {
+			if (count(ilObjUser::_getUserIdsByEmail($to)) > 0) {
 				ilObjUser::_getUserIdsByEmail(ilObjUser::_getUserIdsByEmail($to));
 			} else {
 				$to_user = new ilObjUser();
