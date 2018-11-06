@@ -139,9 +139,9 @@ final class LogHandler {
 	 */
 	protected function shouldLog(bool $is_system, ilObjUser $from): bool {
 		if ($is_system) {
-			return Config::getLogSystemEmails();
+			return Config::getField(Config::KEY_LOG_SYSTEM_EMAILS);
 		} else {
-			$log_email_of_users = Config::getLogEmailOfUsers();
+			$log_email_of_users = Config::getField(Config::KEY_LOG_EMAIL_OF_USERS);
 
 			return in_array($from->getId(), $log_email_of_users);
 		}

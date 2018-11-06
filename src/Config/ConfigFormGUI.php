@@ -33,12 +33,12 @@ class ConfigFormGUI extends ActiveRecordConfigFormGUI {
 		$log_email_of_users->setRequired(true);
 		$log_email_of_users->setInfo($this->txt(Config::KEY_LOG_EMAIL_OF_USERS . "_info"));
 		$log_email_of_users->setOptions($users);
-		$log_email_of_users->setValue(Config::getLogEmailOfUsers());
+		$log_email_of_users->setValue(Config::getField(Config::KEY_LOG_EMAIL_OF_USERS));
 		$this->addItem($log_email_of_users);
 
 		$log_system_emails = new ilCheckboxInputGUI($this->txt(Config::KEY_LOG_SYSTEM_EMAILS), Config::KEY_LOG_SYSTEM_EMAILS);
 		$log_system_emails->setInfo($this->txt(Config::KEY_LOG_SYSTEM_EMAILS . "_info"));
-		$log_system_emails->setChecked(Config::getLogSystemEmails());
+		$log_system_emails->setChecked(Config::getField(Config::KEY_LOG_SYSTEM_EMAILS));
 		$this->addItem($log_system_emails);
 	}
 
