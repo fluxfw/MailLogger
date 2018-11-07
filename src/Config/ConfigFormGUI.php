@@ -51,9 +51,9 @@ class ConfigFormGUI extends ActiveRecordConfigFormGUI {
 		if (!is_array($log_email_of_users)) {
 			$log_email_of_users = [];
 		}
-		Config::setLogEmailOfUsers($log_email_of_users);
+		Config::setField(Config::KEY_LOG_EMAIL_OF_USERS, $log_email_of_users);
 
 		$log_system_emails = boolval($this->getInput(Config::KEY_LOG_SYSTEM_EMAILS));
-		Config::setLogSystemEmails($log_system_emails);
+		Config::setField(Config::KEY_LOG_SYSTEM_EMAILS, $log_system_emails);
 	}
 }
