@@ -196,11 +196,9 @@ class Log extends ActiveRecord {
 		switch ($field_name) {
 			case "is_system":
 				return ($field_value ? 1 : 0);
-				break;
 
 			case "timestamp":
 				return (new ilDateTime($field_value, IL_CAL_UNIX))->get(IL_CAL_DATETIME);
-				break;
 
 			default:
 				return NULL;
