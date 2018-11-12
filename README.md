@@ -3,8 +3,8 @@
 ### Install MailLogger-Plugin
 Start at your ILIAS root directory
 ```bash
-mkdir -p Customizing/global/plugins/Services/UIComponent/UserInterfaceHook
-cd Customizing/global/plugins/Services/UIComponent/UserInterfaceHook
+mkdir -p Customizing/global/plugins/Services/EventHandling/EventHook
+cd Customizing/global/plugins/Services/EventHandling/EventHook
 git clone https://github.com/studer-raimann/MailLogger.git MailLogger
 ```
 Update, activate and config the plugin in the ILIAS Plugin Administration
@@ -105,7 +105,7 @@ If you want development in this plugin you should install this plugin like follo
 
 Start at your ILIAS root directory
 ```bash
-mkdir -p Customizing/global/plugins/Services/UIComponent/UserInterfaceHook
-cd Customizing/global/plugins/Services/UIComponent/UserInterfaceHook
+mkdir -p Customizing/global/plugins/Services/EventHandling/EventHook
+cd Customizing/global/plugins/Services/EventHandling/EventHook
 git clone -b develop git@git.studer-raimann.ch:ILIAS/Plugins/MailLogger.git MailLogger
 ```
