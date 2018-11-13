@@ -12,9 +12,9 @@ use ilTable2GUI;
 use ilTextInputGUI;
 use MailLoggerLogGUI;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
-use srag\CustomInputGUIs\DateDurationInputGUI\DateDurationInputGUI;
-use srag\CustomInputGUIs\NumberInputGUI\NumberInputGUI;
-use srag\DIC\DICTrait;
+use srag\CustomInputGUIs\MailLogger\DateDurationInputGUI\DateDurationInputGUI;
+use srag\CustomInputGUIs\MailLogger\NumberInputGUI\NumberInputGUI;
+use srag\DIC\MailLogger\DICTrait;
 
 /**
  * Class LogTableGUI

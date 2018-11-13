@@ -1,11 +1,11 @@
 <?php
 
-namespace srag\DIC\Plugin;
+namespace srag\DIC\MailLogger\Plugin;
 
 /**
  * Interface Pluginable
  *
- * @package srag\DIC\Plugin
+ * @package srag\DIC\MailLogger\Plugin
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */

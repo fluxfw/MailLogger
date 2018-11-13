@@ -10,8 +10,8 @@ use ilNonEditableValueGUI;
 use ilPropertyFormGUI;
 use MailLoggerLogGUI;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
-use srag\CustomInputGUIs\StaticHTMLPresentationInputGUI\StaticHTMLPresentationInputGUI;
-use srag\DIC\DICTrait;
+use srag\CustomInputGUIs\MailLogger\StaticHTMLPresentationInputGUI\StaticHTMLPresentationInputGUI;
+use srag\DIC\MailLogger\DICTrait;
 
 /**
  * Class LogDetailsFormGUI

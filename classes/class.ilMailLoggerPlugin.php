@@ -9,7 +9,7 @@ use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\Plugins\CtrlMainMenu\Entry\ctrlmmEntry;
 use srag\Plugins\CtrlMainMenu\EntryTypes\Ctrl\ctrlmmEntryCtrl;
 use srag\Plugins\CtrlMainMenu\Menu\ctrlmmMenu;
-use srag\RemovePluginDataConfirm\PluginUninstallTrait;
+use srag\RemovePluginDataConfirm\MailLogger\PluginUninstallTrait;
 
 /**
  * Class ilMailLoggerPlugin

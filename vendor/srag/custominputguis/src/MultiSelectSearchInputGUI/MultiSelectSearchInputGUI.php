@@ -1,16 +1,16 @@
 <?php
 
-namespace srag\CustomInputGUIs\MultiSelectSearchInputGUI;
+namespace srag\CustomInputGUIs\MailLogger\MultiSelectSearchInputGUI;
 
 use ilMultiSelectInputGUI;
 use ilTemplate;
 use ilUtil;
-use srag\DIC\DICTrait;
+use srag\DIC\MailLogger\DICTrait;
 
 /**
  * Class MultiSelectSearchInputGUI
  *
- * @package srag\CustomInputGUIs\MultiSelectSearchInputGUI
+ * @package srag\CustomInputGUIs\MailLogger\MultiSelectSearchInputGUI
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  * @author  Oskar Truffer <ot@studer-raimann.ch>

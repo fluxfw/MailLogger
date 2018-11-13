@@ -1,13 +1,13 @@
 <?php
 
-namespace srag\CustomInputGUIs\Template;
+namespace srag\CustomInputGUIs\MailLogger\Template;
 
 use ilTemplate;
 
 /**
  * Class Template
  *
- * @package srag\CustomInputGUIs\Template
+ * @package srag\CustomInputGUIs\MailLogger\Template
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */

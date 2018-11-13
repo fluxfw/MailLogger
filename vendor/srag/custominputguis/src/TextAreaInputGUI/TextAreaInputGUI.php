@@ -1,15 +1,15 @@
 <?php
 
-namespace srag\CustomInputGUIs\TextAreaInputGUI;
+namespace srag\CustomInputGUIs\MailLogger\TextAreaInputGUI;
 
 use ilTemplate;
 use ilTextAreaInputGUI;
-use srag\DIC\DICTrait;
+use srag\DIC\MailLogger\DICTrait;
 
 /**
  * Class TextInputGUI
  *
- * @package srag\CustomInputGUIs\TextAreaInputGUI
+ * @package srag\CustomInputGUIs\MailLogger\TextAreaInputGUI
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  * @author  Fabian Schmid <fs@studer-raimann.ch>

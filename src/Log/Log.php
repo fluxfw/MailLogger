@@ -7,7 +7,7 @@ use arConnector;
 use ilDateTime;
 use ilMailLoggerPlugin;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
-use srag\DIC\DICTrait;
+use srag\DIC\MailLogger\DICTrait;
 
 /**
  * Class Log

@@ -1,13 +1,13 @@
 <?php
 
-namespace srag\CustomInputGUIs\Waiter;
+namespace srag\CustomInputGUIs\MailLogger\Waiter;
 
-use srag\DIC\DICTrait;
+use srag\DIC\MailLogger\DICTrait;
 
 /**
  * Class Waiter
  *
- * @package srag\CustomInputGUIs\Waiter
+ * @package srag\CustomInputGUIs\MailLogger\Waiter
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */

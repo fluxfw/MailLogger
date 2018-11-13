@@ -3,7 +3,7 @@
 namespace srag\AVL\Plugins\MailLogger\Config;
 
 use ilMailLoggerPlugin;
-use srag\ActiveRecordConfig\ActiveRecordConfig;
+use srag\ActiveRecordConfig\MailLogger\ActiveRecordConfig;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
 
 /**

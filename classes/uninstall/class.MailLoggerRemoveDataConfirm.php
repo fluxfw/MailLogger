@@ -3,7 +3,7 @@
 require_once __DIR__ . "/../../vendor/autoload.php";
 
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
-use srag\RemovePluginDataConfirm\AbstractRemovePluginDataConfirm;
+use srag\RemovePluginDataConfirm\MailLogger\AbstractRemovePluginDataConfirm;
 
 /**
  * Class MailLoggerRemoveDataConfirm

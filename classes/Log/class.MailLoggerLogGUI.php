@@ -6,7 +6,7 @@ use srag\AVL\Plugins\MailLogger\Log\Log;
 use srag\AVL\Plugins\MailLogger\Log\LogDetailsFormGUI;
 use srag\AVL\Plugins\MailLogger\Log\LogTableGUI;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
-use srag\DIC\DICTrait;
+use srag\DIC\MailLogger\DICTrait;
 
 /**
  * Class MailLoggerLogGUI

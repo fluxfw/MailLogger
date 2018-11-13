@@ -10,7 +10,7 @@ use ilObjectFactory;
 use ilObjUser;
 use srag\AVL\Plugins\MailLogger\Config\Config;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
-use srag\DIC\DICTrait;
+use srag\DIC\MailLogger\DICTrait;
 
 /**
  * Class LogHandler
