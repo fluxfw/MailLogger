@@ -7,9 +7,9 @@ use ilDateTime;
 use ilFormSectionHeaderGUI;
 use ilMailLoggerPlugin;
 use ilNonEditableValueGUI;
-use ilPropertyFormGUI;
 use MailLoggerLogGUI;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
+use srag\CustomInputGUIs\MailLogger\PropertyFormGUI\BasePropertyFormGUI;
 use srag\CustomInputGUIs\MailLogger\StaticHTMLPresentationInputGUI\StaticHTMLPresentationInputGUI;
 use srag\DIC\MailLogger\DICTrait;
 
@@ -20,15 +20,11 @@ use srag\DIC\MailLogger\DICTrait;
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-class LogDetailsFormGUI extends ilPropertyFormGUI {
+class LogDetailsFormGUI extends BasePropertyFormGUI {
 
 	use DICTrait;
 	use MailLoggerTrait;
 	const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
-	/**
-	 * @var MailLoggerLogGUI
-	 */
-	protected $parent;
 	/**
 	 * @var Log
 	 */
@@ -42,21 +38,24 @@ class LogDetailsFormGUI extends ilPropertyFormGUI {
 	 * @param Log              $log
 	 */
 	public function __construct(MailLoggerLogGUI $parent, Log $log) {
-		parent::__construct();
-
-		$this->parent = $parent;
 		$this->log = $log;
 
-		$this->initForm();
+		parent::__construct($parent);
 	}
 
 
 	/**
-	 *
+	 * @inheritdoc
 	 */
-	protected function initForm()/*: void*/ {
-		//$this->setTitle(self::plugin()->translate("infos", MailLoggerLogGUI::LANG_MODULE_LOG));
+	protected function initCommands()/*: void*/ {
 
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
+	protected function initItems()/*: void*/ {
 		$from_email = new ilNonEditableValueGUI(self::plugin()->translate("from", MailLoggerLogGUI::LANG_MODULE_LOG));
 		$from_email->setValue($this->log->getFromFirstname() . " " . $this->log->getFromLastname() . " <" . $this->log->getFromEmail() . ">");
 		$this->addItem($from_email);
@@ -80,5 +79,21 @@ class LogDetailsFormGUI extends ilPropertyFormGUI {
 		$body = new StaticHTMLPresentationInputGUI(self::plugin()->translate("body", MailLoggerLogGUI::LANG_MODULE_LOG));
 		$body->setHtml($this->log->getBody());
 		$this->addItem($body);
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
+	protected function initTitle()/*: void*/ {
+		//$this->setTitle(self::plugin()->translate("infos", MailLoggerLogGUI::LANG_MODULE_LOG));
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
+	public function updateForm()/*: void*/ {
+
 	}
 }
