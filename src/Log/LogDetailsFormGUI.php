@@ -53,6 +53,14 @@ class LogDetailsFormGUI extends BasePropertyFormGUI {
 	/**
 	 * @inheritdoc
 	 */
+	protected function initId()/*: void*/ {
+
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
 	protected function initItems()/*: void*/ {
 		$from_email = new ilNonEditableValueGUI(self::plugin()->translate("from", MailLoggerLogGUI::LANG_MODULE_LOG));
 		$from_email->setValue($this->log->getFromFirstname() . " " . $this->log->getFromLastname() . " <" . $this->log->getFromEmail() . ">");
