@@ -13,7 +13,7 @@ class ComposerStaticInitbc7b400c4e711f828557f7bd975f042c
             'srag\\LibrariesNamespaceChanger\\' => 31,
             'srag\\DIC\\MailLogger\\' => 20,
             'srag\\CustomInputGUIs\\' => 21,
-            'srag\\ActiveRecordConfig\\MailLogger\\' => 35,
+            'srag\\ActiveRecordConfig\\' => 24,
             'srag\\AVL\\Plugins\\MailLogger\\' => 28,
         ),
     );
@@ -35,7 +35,7 @@ class ComposerStaticInitbc7b400c4e711f828557f7bd975f042c
         array (
             0 => __DIR__ . '/..' . '/srag/custominputguis/src',
         ),
-        'srag\\ActiveRecordConfig\\MailLogger\\' => 
+        'srag\\ActiveRecordConfig\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/activerecordconfig/src',
         ),
@@ -77,6 +77,7 @@ class ComposerStaticInitbc7b400c4e711f828557f7bd975f042c
         'srag\\CustomInputGUIs\\MailLogger\\PropertyFormGUI\\PropertyFormGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/PropertyFormGUI/PropertyFormGUI.php',
         'srag\\CustomInputGUIs\\MailLogger\\ScreenshotsInputGUI\\ScreenshotsInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/ScreenshotsInputGUI/ScreenshotsInputGUI.php',
         'srag\\CustomInputGUIs\\MailLogger\\StaticHTMLPresentationInputGUI\\StaticHTMLPresentationInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/StaticHTMLPresentationInputGUI/StaticHTMLPresentationInputGUI.php',
+        'srag\\CustomInputGUIs\\MailLogger\\TableGUI\\BaseTableGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/TableGUI/BaseTableGUI.php',
         'srag\\CustomInputGUIs\\MailLogger\\Template\\Template' => __DIR__ . '/..' . '/srag/custominputguis/src/Template/Template.php',
         'srag\\CustomInputGUIs\\MailLogger\\TextAreaInputGUI\\TextAreaInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/TextAreaInputGUI/TextAreaInputGUI.php',
         'srag\\CustomInputGUIs\\MailLogger\\TextInputGUI\\TextInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/TextInputGUI/TextInputGUI.php',

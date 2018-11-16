@@ -37,6 +37,7 @@ return array(
     'srag\\CustomInputGUIs\\MailLogger\\PropertyFormGUI\\PropertyFormGUI' => $vendorDir . '/srag/custominputguis/src/PropertyFormGUI/PropertyFormGUI.php',
     'srag\\CustomInputGUIs\\MailLogger\\ScreenshotsInputGUI\\ScreenshotsInputGUI' => $vendorDir . '/srag/custominputguis/src/ScreenshotsInputGUI/ScreenshotsInputGUI.php',
     'srag\\CustomInputGUIs\\MailLogger\\StaticHTMLPresentationInputGUI\\StaticHTMLPresentationInputGUI' => $vendorDir . '/srag/custominputguis/src/StaticHTMLPresentationInputGUI/StaticHTMLPresentationInputGUI.php',
+    'srag\\CustomInputGUIs\\MailLogger\\TableGUI\\BaseTableGUI' => $vendorDir . '/srag/custominputguis/src/TableGUI/BaseTableGUI.php',
     'srag\\CustomInputGUIs\\MailLogger\\Template\\Template' => $vendorDir . '/srag/custominputguis/src/Template/Template.php',
     'srag\\CustomInputGUIs\\MailLogger\\TextAreaInputGUI\\TextAreaInputGUI' => $vendorDir . '/srag/custominputguis/src/TextAreaInputGUI/TextAreaInputGUI.php',
     'srag\\CustomInputGUIs\\MailLogger\\TextInputGUI\\TextInputGUI' => $vendorDir . '/srag/custominputguis/src/TextInputGUI/TextInputGUI.php',
