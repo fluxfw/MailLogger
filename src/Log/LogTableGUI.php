@@ -3,7 +3,6 @@
 namespace srag\AVL\Plugins\MailLogger\Log;
 
 use ilAdvancedSelectionListGUI;
-use ilCSVWriter;
 use ilDatePresentation;
 use ilDateTime;
 use ilExcel;
@@ -12,8 +11,8 @@ use ilTextInputGUI;
 use MailLoggerLogGUI;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\CustomInputGUIs\MailLogger\DateDurationInputGUI\DateDurationInputGUI;
-use srag\CustomInputGUIs\MailLogger\NumberInputGUI\NumberInputGUI;
-use srag\CustomInputGUIs\MailLogger\TableGUI\BaseTableGUI;
+use srag\CustomInputGUIs\MailLogger\PropertyFormGUI\PropertyFormGUI;
+use srag\CustomInputGUIs\MailLogger\TableGUI\TableGUI;
 
 /**
  * Class LogTableGUI
@@ -22,238 +21,45 @@ use srag\CustomInputGUIs\MailLogger\TableGUI\BaseTableGUI;
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-class LogTableGUI extends BaseTableGUI {
+class LogTableGUI extends TableGUI {
 
 	use MailLoggerTrait;
 	const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
-	/**
-	 * @var ilTextInputGUI
-	 */
-	protected $filter_subject;
-	/**
-	 * @var ilTextInputGUI
-	 */
-	protected $filter_body;
-	/**
-	 * @var ilTextInputGUI
-	 */
-	protected $filter_from_email;
-	/**
-	 * @var ilTextInputGUI
-	 */
-	protected $filter_from_firstname;
-	/**
-	 * @var ilTextInputGUI
-	 */
-	protected $filter_from_lastname;
-	/**
-	 * @var ilTextInputGUI
-	 */
-	protected $filter_to_email;
-	/**
-	 * @var ilTextInputGUI
-	 */
-	protected $filter_to_firstname;
-	/**
-	 * @var ilTextInputGUI
-	 */
-	protected $filter_to_lastname;
-	/**
-	 * @var ilTextInputGUI
-	 * /
-	 * protected $filter_context_title;
-	 * /**
-	 * @var NumberInputGUI
-	 * /
-	 * protected $filter_context_ref_id;*/
-	/**
-	 * @var DateDurationInputGUI
-	 */
-	protected $filter_timestamp;
+	const ROW_TEMPLATE = "log_table_row.html";
+	const LANG_MODULE = MailLoggerLogGUI::LANG_MODULE_LOG;
 
 
 	/**
 	 * @inheritdoc
 	 */
-	protected function initColumns()/*: void*/ {
-		foreach ($this->getSelectableColumns() as $column) {
-			if ($this->isColumnSelected($column["id"])) {
-				$this->addColumn($column["txt"], ($column["sort"] ? $column["id"] : NULL));
-			}
+	protected function getColumnValue(/*string*/
+		$column, /*array*/
+		$row, /*bool*/
+		$raw_export = false): string {
+		switch ($column) {
+			case "timestamp":
+				if ($raw_export) {
+					$column = $row[$column];
+				} else {
+					$column = ilDatePresentation::formatDate(new ilDateTime($row[$column], IL_CAL_UNIX));
+				}
+				break;
+
+			default:
+				$column = $row[$column];
+				break;
 		}
 
-		$this->addColumn(self::plugin()->translate("actions", MailLoggerLogGUI::LANG_MODULE_LOG));
-
-		$this->setDefaultOrderField("timestamp");
-		$this->setDefaultOrderDirection("desc");
-	}
-
-
-	/**
-	 * @inheritdoc
-	 */
-	protected function initData()/*: void*/ {
-		$subject = $this->filter_subject->getValue();
-		if ($subject === false) {
-			$subject = "";
-		}
-		$body = $this->filter_body->getValue();
-		if ($body === false) {
-			$body = "";
-		}
-		$from_email = $this->filter_from_email->getValue();
-		if ($from_email === false) {
-			$from_email = "";
-		}
-		$from_firstname = $this->filter_from_firstname->getValue();
-		if ($from_email === false) {
-			$from_email = "";
-		}
-		$from_lastname = $this->filter_from_lastname->getValue();
-		if ($from_email === false) {
-			$from_email = "";
-		}
-		$to_email = $this->filter_to_email->getValue();
-		if ($to_email === false) {
-			$to_email = "";
-		}
-		$to_firstname = $this->filter_to_firstname->getValue();
-		if ($to_email === false) {
-			$to_email = "";
-		}
-		$to_lastname = $this->filter_to_lastname->getValue();
-		if ($to_email === false) {
-			$to_email = "";
-		}
-		/*$context_title = $this->filter_context_title->getValue();
-		if ($context_title === false) {
-			$context_title = "";
-		}
-		$context_ref_id = $this->filter_context_ref_id->getValue();
-		if ($context_ref_id !== false) {
-			$context_ref_id = intval($context_ref_id);
+		if (!empty($column)) {
+			return $column;
 		} else {
-			$context_ref_id = NULL;
-		}*/
-		$context_title = "";
-		$context_ref_id = NULL;
-		/**
-		 * @var ilDateTime $timestamp_start
-		 */
-		$timestamp_start = $this->filter_timestamp->getStart();
-		if (is_object($timestamp_start) && !$timestamp_start->isNull()) {
-			$timestamp_start = $timestamp_start->get(IL_CAL_UNIX);
-		} else {
-			$timestamp_start = NULL;
+			return "";
 		}
-		/**
-		 * @var ilDateTime $timestamp_end
-		 */
-		$timestamp_end = $this->filter_timestamp->getEnd();
-		if (is_object($timestamp_end) && !$timestamp_end->isNull()) {
-			$timestamp_end = $timestamp_end->get(IL_CAL_UNIX);
-		} else {
-			$timestamp_end = NULL;
-		}
-
-		$this->setData(self::logs()
-			->getLogs($subject, $body, $from_email, $from_firstname, $from_lastname, $to_email, $to_firstname, $to_lastname, $context_title, $context_ref_id, $timestamp_start, $timestamp_end));
 	}
 
 
 	/**
 	 * @inheritdoc
-	 */
-	protected function initExport()/*: void*/ {
-		$this->setExportFormats([ self::EXPORT_CSV, self::EXPORT_EXCEL ]);
-	}
-
-
-	/**
-	 * @inheritdoc
-	 */
-	public function initFilter()/*: void*/ {
-		$this->filter_subject = new ilTextInputGUI(self::plugin()->translate("subject", MailLoggerLogGUI::LANG_MODULE_LOG), "subject");
-		$this->addFilterItem($this->filter_subject);
-		$this->filter_subject->readFromSession();
-
-		$this->filter_body = new ilTextInputGUI(self::plugin()->translate("body", MailLoggerLogGUI::LANG_MODULE_LOG), "body");
-		$this->addFilterItem($this->filter_body);
-		$this->filter_body->readFromSession();
-
-		$this->filter_from_email = new ilTextInputGUI(self::plugin()->translate("from_email", MailLoggerLogGUI::LANG_MODULE_LOG), "from_email");
-		$this->addFilterItem($this->filter_from_email);
-		$this->filter_from_email->readFromSession();
-
-		$this->filter_from_firstname = new ilTextInputGUI(self::plugin()
-			->translate("from_firstname", MailLoggerLogGUI::LANG_MODULE_LOG), "from_firstname");
-		$this->addFilterItem($this->filter_from_firstname);
-		$this->filter_from_firstname->readFromSession();
-
-		$this->filter_from_lastname = new ilTextInputGUI(self::plugin()
-			->translate("from_lastname", MailLoggerLogGUI::LANG_MODULE_LOG), "from_lastname");
-		$this->addFilterItem($this->filter_from_lastname);
-		$this->filter_from_lastname->readFromSession();
-
-		$this->filter_to_email = new ilTextInputGUI(self::plugin()->translate("to_email", MailLoggerLogGUI::LANG_MODULE_LOG), "to_email");
-		$this->addFilterItem($this->filter_to_email);
-		$this->filter_to_email->readFromSession();
-
-		$this->filter_to_firstname = new ilTextInputGUI(self::plugin()->translate("to_firstname", MailLoggerLogGUI::LANG_MODULE_LOG), "to_firstname");
-		$this->addFilterItem($this->filter_to_firstname);
-		$this->filter_to_firstname->readFromSession();
-
-		$this->filter_to_lastname = new ilTextInputGUI(self::plugin()->translate("to_lastname", MailLoggerLogGUI::LANG_MODULE_LOG), "to_lastname");
-		$this->addFilterItem($this->filter_to_lastname);
-		$this->filter_to_lastname->readFromSession();
-
-		/*$this->filter_context_title = new ilTextInputGUI(self::plugin()
-			->translate("context_title", MailLoggerLogGUI::LANG_MODULE_LOG), "context_title");
-		$this->addFilterItem($this->filter_context_title);
-		$this->filter_context_title->readFromSession();
-
-		$this->filter_context_ref_id = new NumberInputGUI(self::plugin()
-			->translate("context_ref_id", MailLoggerLogGUI::LANG_MODULE_LOG), "context_ref_id");
-		$this->filter_context_ref_id->setMinValue(1);
-		$this->addFilterItem($this->filter_context_ref_id);
-		$this->filter_context_ref_id->readFromSession();*/
-
-		self::dic()->language()->loadLanguageModule("form");
-		$this->filter_timestamp = new DateDurationInputGUI(self::plugin()->translate("timestamp", MailLoggerLogGUI::LANG_MODULE_LOG), "timestamp");
-		$this->filter_timestamp->setShowTime(true);
-		$this->addFilterItem($this->filter_timestamp);
-		$this->filter_timestamp->readFromSession();
-
-		$this->setDisableFilterHiding(true);
-	}
-
-
-	/**
-	 * @inheritdoc
-	 */
-	protected function initId()/*: void*/ {
-		$this->setId("maillogger_log");
-	}
-
-
-	/**
-	 * @inheritdoc
-	 */
-	protected function initRowTemplate()/*: void*/ {
-		$this->setRowTemplate("log_table_row.html", self::plugin()->directory());
-	}
-
-
-	/**
-	 * @inheritdoc
-	 */
-	protected function initTitle()/*: void*/ {
-		$this->setTitle(self::plugin()->translate("log", MailLoggerLogGUI::CMD_LOG));
-	}
-
-
-	/**
-	 * @return array
 	 */
 	public function getSelectableColumns(): array {
 		$columns = [
@@ -281,7 +87,7 @@ class LogTableGUI extends BaseTableGUI {
 		$columns = array_map(function (string $key) use (&$default): array {
 			return [
 				"id" => $key,
-				"txt" => self::plugin()->translate($key, MailLoggerLogGUI::LANG_MODULE_LOG),
+				"txt" => self::plugin()->translate($key, self::LANG_MODULE),
 				"default" => in_array($key, $default),
 				"sort" => true
 			];
@@ -292,47 +98,176 @@ class LogTableGUI extends BaseTableGUI {
 
 
 	/**
-	 * @param string $column
-	 * @param array  $log
-	 * @param bool   $raw_export
-	 *
-	 * @return string
+	 * @inheritdoc
 	 */
-	protected function getColumnValue(string $column, array $log, bool $raw_export = false): string {
-		switch ($column) {
-			case "timestamp":
-				if ($raw_export) {
-					$column = $log[$column];
-				} else {
-					$column = ilDatePresentation::formatDate(new ilDateTime($log[$column], IL_CAL_UNIX));
-				}
-				break;
-
-			default:
-				$column = $log[$column];
-				break;
+	protected function initColumns()/*: void*/ {
+		foreach ($this->getSelectableColumns() as $column) {
+			if ($this->isColumnSelected($column["id"])) {
+				$this->addColumn($column["txt"], ($column["sort"] ? $column["id"] : NULL));
+			}
 		}
 
-		if (!empty($column)) {
-			return $column;
-		} else {
-			return "";
-		}
+		$this->addColumn(self::plugin()->translate("actions", self::LANG_MODULE));
+
+		$this->setDefaultOrderField("timestamp");
+		$this->setDefaultOrderDirection("desc");
 	}
 
 
 	/**
-	 * @param array $log
+	 * @inheritdoc
+	 */
+	protected function initData()/*: void*/ {
+		$filter = $this->getFilterValues();
+
+		$subject = $filter["subject"];
+		if ($subject === false) {
+			$subject = "";
+		}
+		$body = $filter["body"];
+		if ($body === false) {
+			$body = "";
+		}
+		$from_email = $filter["from_email"];
+		if ($from_email === false) {
+			$from_email = "";
+		}
+		$from_firstname = $filter["from_firstname"];
+		if ($from_email === false) {
+			$from_email = "";
+		}
+		$from_lastname = $filter["from_lastname"];
+		if ($from_email === false) {
+			$from_email = "";
+		}
+		$to_email = $filter["to_email"];
+		if ($to_email === false) {
+			$to_email = "";
+		}
+		$to_firstname = $filter["to_firstname"];
+		if ($to_email === false) {
+			$to_email = "";
+		}
+		$to_lastname = $filter["to_lastname"];
+		if ($to_email === false) {
+			$to_email = "";
+		}
+		/*$context_title = $this->filter_context_title->getValue();
+		if ($context_title === false) {
+			$context_title = "";
+		}
+		$context_ref_id = $this->filter_context_ref_id->getValue();
+		if ($context_ref_id !== false) {
+			$context_ref_id = intval($context_ref_id);
+		} else {
+			$context_ref_id = NULL;
+		}*/
+		$context_title = "";
+		$context_ref_id = NULL;
+		/**
+		 * @var ilDateTime $timestamp_start
+		 */
+		$timestamp_start = $filter["timestamp_start"];
+		if (is_object($timestamp_start) && !$timestamp_start->isNull()) {
+			$timestamp_start = $timestamp_start->get(IL_CAL_UNIX);
+		} else {
+			$timestamp_start = NULL;
+		}
+		/**
+		 * @var ilDateTime $timestamp_end
+		 */
+		$timestamp_end = $filter["timestamp_end"];
+		if (is_object($timestamp_end) && !$timestamp_end->isNull()) {
+			$timestamp_end = $timestamp_end->get(IL_CAL_UNIX);
+		} else {
+			$timestamp_end = NULL;
+		}
+
+		$this->setData(self::logs()
+			->getLogs($subject, $body, $from_email, $from_firstname, $from_lastname, $to_email, $to_firstname, $to_lastname, $context_title, $context_ref_id, $timestamp_start, $timestamp_end));
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
+	protected function initExport()/*: void*/ {
+		$this->setExportFormats([ self::EXPORT_CSV, self::EXPORT_EXCEL ]);
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
+	public function initFilterFields()/*: void*/ {
+		$this->filters_fields = [
+			"subject" => [
+				PropertyFormGUI::PROPERTY_CLASS => ilTextInputGUI::class
+			],
+			"body" => [
+				PropertyFormGUI::PROPERTY_CLASS => ilTextInputGUI::class
+			],
+			"from_email" => [
+				PropertyFormGUI::PROPERTY_CLASS => ilTextInputGUI::class
+			],
+			"from_firstname" => [
+				PropertyFormGUI::PROPERTY_CLASS => ilTextInputGUI::class
+			],
+			"from_lastname" => [
+				PropertyFormGUI::PROPERTY_CLASS => ilTextInputGUI::class
+			],
+			"to_email" => [
+				PropertyFormGUI::PROPERTY_CLASS => ilTextInputGUI::class
+			],
+			"to_firstname" => [
+				PropertyFormGUI::PROPERTY_CLASS => ilTextInputGUI::class
+			],
+			"to_lastname" => [
+				PropertyFormGUI::PROPERTY_CLASS => ilTextInputGUI::class
+			],
+			/*"context_title" => [
+				PropertyFormGUI::PROPERTY_CLASS => ilTextInputGUI::class
+			],
+			"context_ref_id" => [
+				PropertyFormGUI::PROPERTY_CLASS => NumberInputGUI::class,
+				"setMinValue" => 0
+			]*/
+			"timestamp" => [
+				PropertyFormGUI::PROPERTY_CLASS => DateDurationInputGUI::class,
+				"setShowTime" => true
+			]
+		];
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
+	protected function initId()/*: void*/ {
+		$this->setId("maillogger_log");
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
+	protected function initTitle()/*: void*/ {
+		$this->setTitle(self::plugin()->translate("log", MailLoggerLogGUI::CMD_LOG));
+	}
+
+
+	/**
+	 * @param array $row
 	 */
 	protected function fillRow(/*array*/
-		$log)/*: void*/ {
-		self::dic()->ctrl()->setParameter($this->parent_obj, "log_id", $log["id"]);
+		$row)/*: void*/ {
+		self::dic()->ctrl()->setParameter($this->parent_obj, "log_id", $row["id"]);
 
 		$this->tpl->setCurrentBlock("column");
 
 		foreach ($this->getSelectableColumns() as $column) {
 			if ($this->isColumnSelected($column["id"])) {
-				$column = $this->getColumnValue($column["id"], $log);
+				$column = $this->getColumnValue($column["id"], $row);
 
 				if (!empty($column)) {
 					$this->tpl->setVariable("COLUMN", $column);
@@ -345,8 +280,8 @@ class LogTableGUI extends BaseTableGUI {
 		}
 
 		$actions = new ilAdvancedSelectionListGUI();
-		$actions->setListTitle(self::plugin()->translate("actions", MailLoggerLogGUI::LANG_MODULE_LOG));
-		$actions->addItem(self::plugin()->translate("show_email", MailLoggerLogGUI::LANG_MODULE_LOG), "", self::dic()->ctrl()
+		$actions->setListTitle(self::plugin()->translate("actions", self::LANG_MODULE));
+		$actions->addItem(self::plugin()->translate("show_email", self::LANG_MODULE), "", self::dic()->ctrl()
 			->getLinkTarget($this->parent_obj, MailLoggerLogGUI::CMD_SHOW_EMAIL));
 		$this->tpl->setVariable("COLUMN", $actions->getHTML());
 		$this->tpl->parseCurrentBlock();
@@ -356,7 +291,7 @@ class LogTableGUI extends BaseTableGUI {
 
 
 	/**
-	 * @param ilCSVWriter $csv
+	 * @inheritdoc
 	 */
 	protected function fillHeaderCSV(/*ilCSVWriter*/
 		$csv)/*: void*/ {
@@ -369,15 +304,14 @@ class LogTableGUI extends BaseTableGUI {
 
 
 	/**
-	 * @param ilCSVWriter $csv
-	 * @param array       $log
+	 * @inheritdoc
 	 */
 	protected function fillRowCSV(/*ilCSVWriter*/
 		$csv, /*array*/
-		$log)/*: void*/ {
+		$row)/*: void*/ {
 		foreach ($this->getSelectableColumns() as $column) {
 			if ($this->isColumnSelected($column["id"])) {
-				$csv->addColumn($this->getColumnValue($column["id"], $log, true));
+				$csv->addColumn($this->getColumnValue($column["id"], $row, true));
 			}
 		}
 
@@ -386,8 +320,7 @@ class LogTableGUI extends BaseTableGUI {
 
 
 	/**
-	 * @param ilExcel $excel
-	 * @param int     $row
+	 * @inheritdoc
 	 */
 	protected function fillHeaderExcel(ilExcel $excel, /*int*/
 		&$row)/*: void*/ {
@@ -403,17 +336,15 @@ class LogTableGUI extends BaseTableGUI {
 
 
 	/**
-	 * @param ilExcel $excel
-	 * @param int     $row
-	 * @param array   $log
+	 * @inheritdoc
 	 */
 	protected function fillRowExcel(ilExcel $excel, /*int*/
 		&$row, /*array*/
-		$log)/*: void*/ {
+		$result)/*: void*/ {
 		$col = 0;
 		foreach ($this->getSelectableColumns() as $column) {
 			if ($this->isColumnSelected($column["id"])) {
-				$excel->setCell($row, $col, $this->getColumnValue($column["id"], $log));
+				$excel->setCell($row, $col, $this->getColumnValue($column["id"], $result));
 				$col ++;
 			}
 		}

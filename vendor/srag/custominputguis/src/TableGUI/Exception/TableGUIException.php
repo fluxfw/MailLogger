@@ -1,20 +1,20 @@
 <?php
 
-namespace srag\CustomInputGUIs\MailLogger\PropertyFormGUI\Exception;
+namespace srag\CustomInputGUIs\MailLogger\TableGUI\Exception;
 
-use ilFormException;
+use ilException;
 
 /**
- * Class PropertyFormGUIException
+ * Class TableGUIException
  *
- * @package srag\CustomInputGUIs\MailLogger\PropertyFormGUI\Exception
+ * @package srag\CustomInputGUIs\MailLogger\TableGUI\Exception
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-final class PropertyFormGUIException extends ilFormException {
+final class TableGUIException extends ilException {
 
 	/**
-	 * PropertyFormGUIException constructor
+	 * TableGUIException constructor
 	 *
 	 * @param string $message
 	 * @param int    $code

@@ -10,6 +10,6 @@ return array(
     'srag\\LibrariesNamespaceChanger\\' => array($vendorDir . '/srag/librariesnamespacechanger/src'),
     'srag\\DIC\\MailLogger\\' => array($vendorDir . '/srag/dic/src'),
     'srag\\CustomInputGUIs\\' => array($vendorDir . '/srag/custominputguis/src'),
-    'srag\\ActiveRecordConfig\\' => array($vendorDir . '/srag/activerecordconfig/src'),
+    'srag\\ActiveRecordConfig\\MailLogger\\' => array($vendorDir . '/srag/activerecordconfig/src'),
     'srag\\AVL\\Plugins\\MailLogger\\' => array($baseDir . '/src'),
 );
