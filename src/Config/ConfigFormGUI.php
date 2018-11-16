@@ -19,7 +19,7 @@ class ConfigFormGUI extends ActiveRecordConfigFormGUI {
 
 	use MailLoggerTrait;
 	const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
-	const CONFIG_CLAS_NAME = Config::class;
+	const CONFIG_CLASS_NAME = Config::class;
 
 
 	/**
