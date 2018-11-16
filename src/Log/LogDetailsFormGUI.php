@@ -11,7 +11,6 @@ use MailLoggerLogGUI;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\CustomInputGUIs\MailLogger\PropertyFormGUI\BasePropertyFormGUI;
 use srag\CustomInputGUIs\MailLogger\StaticHTMLPresentationInputGUI\StaticHTMLPresentationInputGUI;
-use srag\DIC\MailLogger\DICTrait;
 
 /**
  * Class LogDetailsFormGUI
@@ -22,7 +21,6 @@ use srag\DIC\MailLogger\DICTrait;
  */
 class LogDetailsFormGUI extends BasePropertyFormGUI {
 
-	use DICTrait;
 	use MailLoggerTrait;
 	const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
 	/**
