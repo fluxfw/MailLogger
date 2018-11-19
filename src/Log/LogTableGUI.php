@@ -200,7 +200,7 @@ class LogTableGUI extends TableGUI {
 	 * @inheritdoc
 	 */
 	public function initFilterFields()/*: void*/ {
-		$this->filters_fields = [
+		$this->filter_fields = [
 			"subject" => [
 				PropertyFormGUI::PROPERTY_CLASS => ilTextInputGUI::class
 			],
