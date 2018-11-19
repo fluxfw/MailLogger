@@ -9,7 +9,7 @@ use ilMailLoggerPlugin;
 use ilNonEditableValueGUI;
 use MailLoggerLogGUI;
 use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
-use srag\CustomInputGUIs\MailLogger\PropertyFormGUI\BasePropertyFormGUI;
+use srag\CustomInputGUIs\MailLogger\PropertyFormGUI\PropertyFormGUI;
 use srag\CustomInputGUIs\MailLogger\StaticHTMLPresentationInputGUI\StaticHTMLPresentationInputGUI;
 
 /**
@@ -19,10 +19,11 @@ use srag\CustomInputGUIs\MailLogger\StaticHTMLPresentationInputGUI\StaticHTMLPre
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-class LogDetailsFormGUI extends BasePropertyFormGUI {
+class LogDetailsFormGUI extends PropertyFormGUI {
 
 	use MailLoggerTrait;
 	const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
+	const LANG_MODULE = MailLoggerLogGUI::LANG_MODULE_LOG;
 	/**
 	 * @var Log
 	 */
@@ -45,8 +46,63 @@ class LogDetailsFormGUI extends BasePropertyFormGUI {
 	/**
 	 * @inheritdoc
 	 */
+	protected function getValue(/*string*/
+		$key)/*: void*/ {
+		switch ($key) {
+			case "from":
+				return $this->log->getFromFirstname() . " " . $this->log->getFromLastname() . " <" . $this->log->getFromEmail() . ">";
+
+			case "subject":
+				return $this->log->getSubject();
+
+			case "timestamp":
+				return ilDatePresentation::formatDate(new ilDateTime($this->log->getTimestamp(), IL_CAL_UNIX));
+
+			case "to":
+				return $this->log->getToFirstname() . " " . $this->log->getToLastname() . " <" . $this->log->getToEmail() . ">";
+
+			default:
+				break;
+		}
+
+		return NULL;
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
 	protected function initCommands()/*: void*/ {
 
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
+	protected function initFields()/*: void*/ {
+		$this->fields = [
+			"from" => [
+				self::PROPERTY_CLASS => ilNonEditableValueGUI::class
+			],
+			"subject" => [
+				self::PROPERTY_CLASS => ilNonEditableValueGUI::class
+			],
+			"timestamp" => [
+				self::PROPERTY_CLASS => ilNonEditableValueGUI::class
+			],
+			"to" => [
+				self::PROPERTY_CLASS => ilNonEditableValueGUI::class
+			],
+			"header" => [
+				self::PROPERTY_CLASS => ilFormSectionHeaderGUI::class,
+				"setTitle" => $this->log->getSubject()
+			],
+			"body" => [
+				self::PROPERTY_CLASS => StaticHTMLPresentationInputGUI::class,
+				"setHtml" => $this->log->getBody()
+			]
+		];
 	}
 
 
@@ -61,38 +117,17 @@ class LogDetailsFormGUI extends BasePropertyFormGUI {
 	/**
 	 * @inheritdoc
 	 */
-	protected function initItems()/*: void*/ {
-		$from_email = new ilNonEditableValueGUI(self::plugin()->translate("from", MailLoggerLogGUI::LANG_MODULE_LOG));
-		$from_email->setValue($this->log->getFromFirstname() . " " . $this->log->getFromLastname() . " <" . $this->log->getFromEmail() . ">");
-		$this->addItem($from_email);
-
-		$subject = new ilNonEditableValueGUI(self::plugin()->translate("subject", MailLoggerLogGUI::LANG_MODULE_LOG));
-		$subject->setValue($this->log->getSubject());
-		$this->addItem($subject);
-
-		$timestamp = new ilNonEditableValueGUI(self::plugin()->translate("timestamp", MailLoggerLogGUI::LANG_MODULE_LOG));
-		$timestamp->setValue(ilDatePresentation::formatDate(new ilDateTime($this->log->getTimestamp(), IL_CAL_UNIX)));
-		$this->addItem($timestamp);
-
-		$to_email = new ilNonEditableValueGUI(self::plugin()->translate("to", MailLoggerLogGUI::LANG_MODULE_LOG));
-		$to_email->setValue($this->log->getToFirstname() . " " . $this->log->getToLastname() . " <" . $this->log->getToEmail() . ">");
-		$this->addItem($to_email);
-
-		$header = new ilFormSectionHeaderGUI();
-		$header->setTitle($this->log->getSubject());
-		$this->addItem($header);
-
-		$body = new StaticHTMLPresentationInputGUI(self::plugin()->translate("body", MailLoggerLogGUI::LANG_MODULE_LOG));
-		$body->setHtml($this->log->getBody());
-		$this->addItem($body);
+	protected function initTitle()/*: void*/ {
+		//$this->setTitle(self::plugin()->translate("infos", MailLoggerLogGUI::LANG_MODULE_LOG));
 	}
 
 
 	/**
 	 * @inheritdoc
 	 */
-	protected function initTitle()/*: void*/ {
-		//$this->setTitle(self::plugin()->translate("infos", MailLoggerLogGUI::LANG_MODULE_LOG));
+	protected function setValue(/*string*/
+		$key, $value)/*: void*/ {
+
 	}
 
 
