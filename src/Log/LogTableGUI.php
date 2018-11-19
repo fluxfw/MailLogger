@@ -200,6 +200,8 @@ class LogTableGUI extends TableGUI {
 	 * @inheritdoc
 	 */
 	public function initFilterFields()/*: void*/ {
+		self::dic()->language()->loadLanguageModule("form");
+
 		$this->filter_fields = [
 			"subject" => [
 				PropertyFormGUI::PROPERTY_CLASS => ilTextInputGUI::class
