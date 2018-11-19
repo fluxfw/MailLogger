@@ -118,7 +118,7 @@ class LogDetailsFormGUI extends PropertyFormGUI {
 	 * @inheritdoc
 	 */
 	protected function initTitle()/*: void*/ {
-		//$this->setTitle(self::plugin()->translate("infos", MailLoggerLogGUI::LANG_MODULE_LOG));
+		//$this->setTitle(self::plugin()->translate("infos", self::LANG_MODULE));
 	}
 
 
