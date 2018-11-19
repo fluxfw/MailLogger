@@ -5,7 +5,6 @@ namespace srag\AVL\Plugins\MailLogger\Log;
 use ilAdvancedSelectionListGUI;
 use ilDatePresentation;
 use ilDateTime;
-use ilExcel;
 use ilMailLoggerPlugin;
 use ilTextInputGUI;
 use MailLoggerLogGUI;
@@ -25,7 +24,6 @@ class LogTableGUI extends TableGUI {
 
 	use MailLoggerTrait;
 	const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
-	const ROW_TEMPLATE = "log_table_row.html";
 	const LANG_MODULE = MailLoggerLogGUI::LANG_MODULE_LOG;
 
 
@@ -101,11 +99,7 @@ class LogTableGUI extends TableGUI {
 	 * @inheritdoc
 	 */
 	protected function initColumns()/*: void*/ {
-		foreach ($this->getSelectableColumns() as $column) {
-			if ($this->isColumnSelected($column["id"])) {
-				$this->addColumn($column["txt"], ($column["sort"] ? $column["id"] : NULL));
-			}
-		}
+		parent::initColumns();
 
 		$this->addColumn(self::plugin()->translate("actions", self::LANG_MODULE));
 
@@ -121,43 +115,16 @@ class LogTableGUI extends TableGUI {
 		$filter = $this->getFilterValues();
 
 		$subject = $filter["subject"];
-		if ($subject === false) {
-			$subject = "";
-		}
 		$body = $filter["body"];
-		if ($body === false) {
-			$body = "";
-		}
 		$from_email = $filter["from_email"];
-		if ($from_email === false) {
-			$from_email = "";
-		}
 		$from_firstname = $filter["from_firstname"];
-		if ($from_email === false) {
-			$from_email = "";
-		}
 		$from_lastname = $filter["from_lastname"];
-		if ($from_email === false) {
-			$from_email = "";
-		}
 		$to_email = $filter["to_email"];
-		if ($to_email === false) {
-			$to_email = "";
-		}
 		$to_firstname = $filter["to_firstname"];
-		if ($to_email === false) {
-			$to_email = "";
-		}
 		$to_lastname = $filter["to_lastname"];
-		if ($to_email === false) {
-			$to_email = "";
-		}
 		/*$context_title = $this->filter_context_title->getValue();
-		if ($context_title === false) {
-			$context_title = "";
-		}
 		$context_ref_id = $this->filter_context_ref_id->getValue();
-		if ($context_ref_id !== false) {
+		if (!empty($context_ref_id)) {
 			$context_ref_id = intval($context_ref_id);
 		} else {
 			$context_ref_id = NULL;
@@ -265,21 +232,7 @@ class LogTableGUI extends TableGUI {
 		$row)/*: void*/ {
 		self::dic()->ctrl()->setParameter($this->parent_obj, "log_id", $row["id"]);
 
-		$this->tpl->setCurrentBlock("column");
-
-		foreach ($this->getSelectableColumns() as $column) {
-			if ($this->isColumnSelected($column["id"])) {
-				$column = $this->getColumnValue($column["id"], $row);
-
-				if (!empty($column)) {
-					$this->tpl->setVariable("COLUMN", $column);
-				} else {
-					$this->tpl->setVariable("COLUMN", " ");
-				}
-
-				$this->tpl->parseCurrentBlock();
-			}
-		}
+		parent::fillRow($row);
 
 		$actions = new ilAdvancedSelectionListGUI();
 		$actions->setListTitle(self::plugin()->translate("actions", self::LANG_MODULE));
@@ -289,66 +242,5 @@ class LogTableGUI extends TableGUI {
 		$this->tpl->parseCurrentBlock();
 
 		self::dic()->ctrl()->setParameter($this->parent_obj, "log_id", NULL);
-	}
-
-
-	/**
-	 * @inheritdoc
-	 */
-	protected function fillHeaderCSV(/*ilCSVWriter*/
-		$csv)/*: void*/ {
-		foreach ($this->getSelectableColumns() as $column) {
-			$csv->addColumn($column["txt"]);
-		}
-
-		$csv->addRow();
-	}
-
-
-	/**
-	 * @inheritdoc
-	 */
-	protected function fillRowCSV(/*ilCSVWriter*/
-		$csv, /*array*/
-		$row)/*: void*/ {
-		foreach ($this->getSelectableColumns() as $column) {
-			if ($this->isColumnSelected($column["id"])) {
-				$csv->addColumn($this->getColumnValue($column["id"], $row, true));
-			}
-		}
-
-		$csv->addRow();
-	}
-
-
-	/**
-	 * @inheritdoc
-	 */
-	protected function fillHeaderExcel(ilExcel $excel, /*int*/
-		&$row)/*: void*/ {
-		$col = 0;
-
-		foreach ($this->getSelectableColumns() as $column) {
-			$excel->setCell($row, $col, $column["txt"]);
-			$col ++;
-		}
-
-		$excel->setBold("A" . $row . ":" . $excel->getColumnCoord($col - 1) . $row);
-	}
-
-
-	/**
-	 * @inheritdoc
-	 */
-	protected function fillRowExcel(ilExcel $excel, /*int*/
-		&$row, /*array*/
-		$result)/*: void*/ {
-		$col = 0;
-		foreach ($this->getSelectableColumns() as $column) {
-			if ($this->isColumnSelected($column["id"])) {
-				$excel->setCell($row, $col, $this->getColumnValue($column["id"], $result));
-				$col ++;
-			}
-		}
 	}
 }
