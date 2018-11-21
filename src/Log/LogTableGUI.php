@@ -85,7 +85,6 @@ class LogTableGUI extends TableGUI {
 		$columns = array_map(function (string $key) use (&$default): array {
 			return [
 				"id" => $key,
-				"txt" => self::plugin()->translate($key, self::LANG_MODULE),
 				"default" => in_array($key, $default),
 				"sort" => true
 			];

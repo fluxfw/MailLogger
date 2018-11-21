@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.13.12]
+- TableGUI: Auto txt for columns
+
+## [0.13.11]
+- Call hasSessionValue
+
+## [0.13.10]
+- hasSessionValue
+
+## [0.13.9]
+- Fix getValue, setValue
+
+## [0.13.8]
+- Fix getValue, setValue
+
 ## [0.13.7]
 - Improve TableGUI
 

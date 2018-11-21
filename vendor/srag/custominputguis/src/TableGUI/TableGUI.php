@@ -60,12 +60,24 @@ abstract class TableGUI extends BaseTableGUI {
 
 
 	/**
+	 * @param string $field_id
+	 *
+	 * @return bool
+	 */
+	protected final function hasSessionValue(/*string*/
+		$field_id)/*: bool*/ {
+		// Not set (null) on first visit, false on reset filter, string if is set
+		return (isset($_SESSION["form_" . $this->getId()][$field_id]) && $_SESSION["form_" . $this->getId()][$field_id] !== false);
+	}
+
+
+	/**
 	 * @inheritdoc
 	 */
 	protected function initColumns()/*: void*/ {
 		foreach ($this->getSelectableColumns() as $column) {
 			if ($this->isColumnSelected($column["id"])) {
-				$this->addColumn($column["txt"], ($column["sort"] ? $column["id"] : NULL));
+				$this->addColumn($this->txt($column["id"]), ($column["sort"] ? $column["id"] : NULL));
 			}
 		}
 	}
@@ -101,7 +113,9 @@ abstract class TableGUI extends BaseTableGUI {
 
 			$this->addFilterItem($item);
 
-			$item->readFromSession();
+			if ($this->hasSessionValue($item->getFieldId())) { // Supports filter default values
+				$item->readFromSession();
+			}
 		}
 	}
 
@@ -149,7 +163,7 @@ abstract class TableGUI extends BaseTableGUI {
 	protected function fillHeaderCSV(/*ilCSVWriter*/
 		$csv)/*: void*/ {
 		foreach ($this->getSelectableColumns() as $column) {
-			$csv->addColumn($column["txt"]);
+			$csv->addColumn($this->txt($column["id"]));
 		}
 
 		$csv->addRow();
@@ -180,7 +194,7 @@ abstract class TableGUI extends BaseTableGUI {
 		$col = 0;
 
 		foreach ($this->getSelectableColumns() as $column) {
-			$excel->setCell($row, $col, $column["txt"]);
+			$excel->setCell($row, $col, $this->txt($column["id"]));
 			$col ++;
 		}
 
