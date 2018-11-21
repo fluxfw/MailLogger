@@ -75,9 +75,13 @@ abstract class TableGUI extends BaseTableGUI {
 	 * @inheritdoc
 	 */
 	protected function initColumns()/*: void*/ {
-		foreach ($this->getSelectableColumns() as $column) {
+		foreach ($this->getSelectableColumns() as &$column) {
+			if (empty($column["txt"])) {
+				$column["txt"] = $this->txt($column["id"]);
+			}
+
 			if ($this->isColumnSelected($column["id"])) {
-				$this->addColumn($this->txt($column["id"]), ($column["sort"] ? $column["id"] : NULL));
+				$this->addColumn($column["txt"], ($column["sort"] ? $column["id"] : NULL));
 			}
 		}
 	}
@@ -163,7 +167,7 @@ abstract class TableGUI extends BaseTableGUI {
 	protected function fillHeaderCSV(/*ilCSVWriter*/
 		$csv)/*: void*/ {
 		foreach ($this->getSelectableColumns() as $column) {
-			$csv->addColumn($this->txt($column["id"]));
+			$csv->addColumn($column["txt"]);
 		}
 
 		$csv->addRow();
@@ -194,7 +198,7 @@ abstract class TableGUI extends BaseTableGUI {
 		$col = 0;
 
 		foreach ($this->getSelectableColumns() as $column) {
-			$excel->setCell($row, $col, $this->txt($column["id"]));
+			$excel->setCell($row, $col, $column["txt"]);
 			$col ++;
 		}
 

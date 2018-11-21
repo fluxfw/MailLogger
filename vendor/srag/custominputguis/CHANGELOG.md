@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.13.13]
+- TableGUI: Auto txt for columns
+
 ## [0.13.12]
 - TableGUI: Auto txt for columns
 
