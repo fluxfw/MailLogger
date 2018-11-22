@@ -48,11 +48,7 @@ class LogTableGUI extends TableGUI {
 				break;
 		}
 
-		if (!empty($column)) {
-			return $column;
-		} else {
-			return "";
-		}
+		return strval($column);
 	}
 
 
