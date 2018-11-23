@@ -11,8 +11,8 @@ class ComposerStaticInitbc7b400c4e711f828557f7bd975f042c
         array (
             'srag\\RemovePluginDataConfirm\\MailLogger\\' => 40,
             'srag\\LibrariesNamespaceChanger\\' => 31,
-            'srag\\DIC\\MailLogger\\' => 20,
-            'srag\\CustomInputGUIs\\MailLogger\\' => 32,
+            'srag\\DIC\\' => 9,
+            'srag\\CustomInputGUIs\\' => 21,
             'srag\\ActiveRecordConfig\\MailLogger\\' => 35,
             'srag\\AVL\\Plugins\\MailLogger\\' => 28,
         ),
@@ -27,11 +27,11 @@ class ComposerStaticInitbc7b400c4e711f828557f7bd975f042c
         array (
             0 => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src',
         ),
-        'srag\\DIC\\MailLogger\\' => 
+        'srag\\DIC\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/dic/src',
         ),
-        'srag\\CustomInputGUIs\\MailLogger\\' => 
+        'srag\\CustomInputGUIs\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/custominputguis/src',
         ),
