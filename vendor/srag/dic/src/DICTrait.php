@@ -4,6 +4,7 @@ namespace srag\DIC\MailLogger;
 
 use srag\DIC\MailLogger\DIC\DICInterface;
 use srag\DIC\MailLogger\Exception\DICException;
+use srag\DIC\MailLogger\Output\OutputInterface;
 use srag\DIC\MailLogger\Plugin\PluginInterface;
 use srag\DIC\MailLogger\Version\VersionInterface;
 
@@ -32,6 +33,16 @@ trait DICTrait {
 	 */
 	protected static final function dic()/*: DICInterface*/ {
 		return DICStatic::dic();
+	}
+
+
+	/**
+	 * Get output interface
+	 *
+	 * @return OutputInterface Output interface
+	 */
+	protected static final function output()/*: OutputInterface*/ {
+		return DICStatic::output();
 	}
 
 

@@ -84,7 +84,7 @@ class MailLoggerLogGUI {
 	protected function log()/*: void*/ {
 		$table = $this->getLogTable();
 
-		self::plugin()->output($table);
+		self::output()->output($table);
 	}
 
 
@@ -114,9 +114,9 @@ class MailLoggerLogGUI {
 		if ($log !== NULL) {
 			$form = $this->getLogDetailsForm($log);
 
-			self::plugin()->output($form);
+			self::output()->output($form);
 		} else {
-			self::plugin()->output("");
+			self::output()->output("");
 		}
 	}
 

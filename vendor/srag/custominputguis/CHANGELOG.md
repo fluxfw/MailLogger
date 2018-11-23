@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.13.17]
+- Some improvments in PropertyFormGUI
+
+## [0.13.16]
+- Fix
+
+## [0.13.15]
+- Removed unnecessary BasePropertyFormGUI and BaseTableGUI
+
+## [0.13.14]
+- Fix
+
 ## [0.13.13]
 - TableGUI: Auto txt for columns
 

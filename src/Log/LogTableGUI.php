@@ -233,7 +233,7 @@ class LogTableGUI extends TableGUI {
 		$actions->setListTitle(self::plugin()->translate("actions", self::LANG_MODULE));
 		$actions->addItem(self::plugin()->translate("show_email", self::LANG_MODULE), "", self::dic()->ctrl()
 			->getLinkTarget($this->parent_obj, MailLoggerLogGUI::CMD_SHOW_EMAIL));
-		$this->tpl->setVariable("COLUMN", $actions->getHTML());
+		$this->tpl->setVariable("COLUMN", self::output()->getHTML($actions));
 		$this->tpl->parseCurrentBlock();
 
 		self::dic()->ctrl()->setParameter($this->parent_obj, "log_id", NULL);
