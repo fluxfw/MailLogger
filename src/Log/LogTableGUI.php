@@ -55,7 +55,7 @@ class LogTableGUI extends TableGUI {
 	/**
 	 * @inheritdoc
 	 */
-	public function getSelectableColumns(): array {
+	public function getSelectableColumns2(): array {
 		$columns = [
 			"subject" => "subject",
 			"from_email" => "from_email",
