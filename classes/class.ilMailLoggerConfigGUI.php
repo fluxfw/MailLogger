@@ -3,8 +3,8 @@
 require_once __DIR__ . "/../vendor/autoload.php";
 
 use srag\ActiveRecordConfig\MailLogger\ActiveRecordConfigGUI;
-use srag\AVL\Plugins\MailLogger\Config\ConfigFormGUI;
-use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
+use srag\Plugins\MailLogger\Config\ConfigFormGUI;
+use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 
 /**
  * Class ilMailLoggerConfigGUI

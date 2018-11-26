@@ -2,10 +2,10 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use srag\AVL\Plugins\MailLogger\Access\Access;
-use srag\AVL\Plugins\MailLogger\Config\Config;
-use srag\AVL\Plugins\MailLogger\Log\Log;
-use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
+use srag\Plugins\MailLogger\Access\Access;
+use srag\Plugins\MailLogger\Config\Config;
+use srag\Plugins\MailLogger\Log\Log;
+use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\Plugins\CtrlMainMenu\Entry\ctrlmmEntry;
 use srag\Plugins\CtrlMainMenu\EntryTypes\Ctrl\ctrlmmEntryCtrl;
 use srag\Plugins\CtrlMainMenu\Menu\ctrlmmMenu;

@@ -1,6 +1,6 @@
 <?php
 
-namespace srag\AVL\Plugins\MailLogger\Log;
+namespace srag\Plugins\MailLogger\Log;
 
 use ilDatePresentation;
 use ilDateTime;
@@ -8,14 +8,14 @@ use ilFormSectionHeaderGUI;
 use ilMailLoggerPlugin;
 use ilNonEditableValueGUI;
 use MailLoggerLogGUI;
-use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
+use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\CustomInputGUIs\MailLogger\PropertyFormGUI\PropertyFormGUI;
 use srag\CustomInputGUIs\MailLogger\StaticHTMLPresentationInputGUI\StaticHTMLPresentationInputGUI;
 
 /**
  * Class LogDetailsFormGUI
  *
- * @package srag\AVL\Plugins\MailLogger\Log
+ * @package srag\Plugins\MailLogger\Log
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */

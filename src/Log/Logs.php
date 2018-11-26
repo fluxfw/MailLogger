@@ -1,16 +1,16 @@
 <?php
 
-namespace srag\AVL\Plugins\MailLogger\Logs;
+namespace srag\Plugins\MailLogger\Logs;
 
 use ilMailLoggerPlugin;
-use srag\AVL\Plugins\MailLogger\Log\Log;
-use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
+use srag\Plugins\MailLogger\Log\Log;
+use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\DIC\MailLogger\DICTrait;
 
 /**
  * Class Logs
  *
- * @package srag\AVL\Plugins\MailLogger\Logs
+ * @package srag\Plugins\MailLogger\Logs
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */

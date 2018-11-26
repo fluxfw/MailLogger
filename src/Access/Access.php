@@ -1,15 +1,15 @@
 <?php
 
-namespace srag\AVL\Plugins\MailLogger\Access;
+namespace srag\Plugins\MailLogger\Access;
 
 use ilMailLoggerPlugin;
-use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
+use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\DIC\MailLogger\DICTrait;
 
 /**
  * Class Access
  *
- * @package srag\AVL\Plugins\MailLogger\Access
+ * @package srag\Plugins\MailLogger\Access
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */

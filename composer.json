@@ -30,7 +30,7 @@
   },
   "autoload": {
     "psr-4": {
-      "srag\\AVL\\Plugins\\MailLogger\\": "src/"
+      "srag\\Plugins\\MailLogger\\": "src/"
     },
     "classmap": [
       "classes/"

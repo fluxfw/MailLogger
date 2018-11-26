@@ -1,16 +1,16 @@
 <?php
 
-namespace srag\AVL\Plugins\MailLogger\Utils;
+namespace srag\Plugins\MailLogger\Utils;
 
-use srag\AVL\Plugins\MailLogger\Access\Access;
-use srag\AVL\Plugins\MailLogger\Access\Ilias;
-use srag\AVL\Plugins\MailLogger\Log\LogHandler;
-use srag\AVL\Plugins\MailLogger\Logs\Logs;
+use srag\Plugins\MailLogger\Access\Access;
+use srag\Plugins\MailLogger\Access\Ilias;
+use srag\Plugins\MailLogger\Log\LogHandler;
+use srag\Plugins\MailLogger\Logs\Logs;
 
 /**
  * Trait MailLoggerTrait
  *
- * @package srag\AVL\Plugins\MailLogger\Utils
+ * @package srag\Plugins\MailLogger\Utils
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */

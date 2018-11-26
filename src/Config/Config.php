@@ -1,15 +1,15 @@
 <?php
 
-namespace srag\AVL\Plugins\MailLogger\Config;
+namespace srag\Plugins\MailLogger\Config;
 
 use ilMailLoggerPlugin;
 use srag\ActiveRecordConfig\MailLogger\ActiveRecordConfig;
-use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
+use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 
 /**
  * Class Config
  *
- * @package srag\AVL\Plugins\MailLogger\Config
+ * @package srag\Plugins\MailLogger\Config
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */

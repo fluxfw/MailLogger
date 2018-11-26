@@ -1,6 +1,6 @@
 <?php
 
-namespace srag\AVL\Plugins\MailLogger\Log;
+namespace srag\Plugins\MailLogger\Log;
 
 use ilAdvancedSelectionListGUI;
 use ilDatePresentation;
@@ -8,7 +8,7 @@ use ilDateTime;
 use ilMailLoggerPlugin;
 use ilTextInputGUI;
 use MailLoggerLogGUI;
-use srag\AVL\Plugins\MailLogger\Utils\MailLoggerTrait;
+use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\CustomInputGUIs\MailLogger\DateDurationInputGUI\DateDurationInputGUI;
 use srag\CustomInputGUIs\MailLogger\PropertyFormGUI\PropertyFormGUI;
 use srag\CustomInputGUIs\MailLogger\TableGUI\TableGUI;
@@ -16,7 +16,7 @@ use srag\CustomInputGUIs\MailLogger\TableGUI\TableGUI;
 /**
  * Class LogTableGUI
  *
- * @package srag\AVL\Plugins\MailLogger\Log
+ * @package srag\Plugins\MailLogger\Log
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
