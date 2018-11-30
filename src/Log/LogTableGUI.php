@@ -126,21 +126,15 @@ class LogTableGUI extends TableGUI {
 		}*/
 		$context_title = "";
 		$context_ref_id = NULL;
-		/**
-		 * @var ilDateTime $timestamp_start
-		 */
-		$timestamp_start = $filter["timestamp_start"];
-		if (is_object($timestamp_start) && !$timestamp_start->isNull()) {
-			$timestamp_start = $timestamp_start->get(IL_CAL_UNIX);
+		$timestamp_start = $filter["timestamp"]["start"];
+		if (!empty($timestamp_start)) {
+			$timestamp_start = intval($timestamp_start);
 		} else {
 			$timestamp_start = NULL;
 		}
-		/**
-		 * @var ilDateTime $timestamp_end
-		 */
-		$timestamp_end = $filter["timestamp_end"];
-		if (is_object($timestamp_end) && !$timestamp_end->isNull()) {
-			$timestamp_end = $timestamp_end->get(IL_CAL_UNIX);
+		$timestamp_end = $filter["timestamp"]["end"];
+		if (!empty($timestamp_end)) {
+			$timestamp_end = intval($timestamp_end);
 		} else {
 			$timestamp_end = NULL;
 		}
