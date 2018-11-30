@@ -117,8 +117,8 @@ class LogTableGUI extends TableGUI {
 		$to_email = $filter["to_email"];
 		$to_firstname = $filter["to_firstname"];
 		$to_lastname = $filter["to_lastname"];
-		/*$context_title = $this->filter_context_title->getValue();
-		$context_ref_id = $this->filter_context_ref_id->getValue();
+		/*$context_title = $filter["context_title"];
+		$context_ref_id = $filter["context_ref_id"];
 		if (!empty($context_ref_id)) {
 			$context_ref_id = intval($context_ref_id);
 		} else {
