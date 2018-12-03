@@ -1,0 +1,35 @@
+config_configuration#:#Configuration
+config_configuration_saved#:#Configuration saved
+config_log_email_of_users#:#Log user emails
+config_log_email_of_users_info#:#Emails sent from the following ILIAS accounts will be logged
+config_log_system_emails#:#Log system emails
+config_log_system_emails_info#:#If activated, all system emails will be logged
+config_save#:#Save
+log_actions#:#Actions
+log_back#:#Back
+log_body#:#Content of the email
+log_context_title#:#Context title
+log_context_ref_id#:#Context ref id
+log_from#:#Sender
+log_from_email#:#Sender email address
+log_from_firstname#:#Sender first name
+log_from_lastname#:#Sender last name
+log_from_user_id#:#Sender user id
+log_log#:#Log
+log_no_access#:#No access
+log_show_email#:#Show Email
+log_subject#:#Subject
+log_timestamp#:#Date / Time
+log_to#:#Recipient
+log_to_email#:#Recipient email address
+log_to_firstname#:#Recipient first name
+log_to_lastname#:#Recipient last name
+log_to_user_id#:#Recipient User id
+removeplugindataconfirm_cancel#:#Cancel
+removeplugindataconfirm_confirm_remove_data#:#Do you want to remove the %1$s data as well? At most, you just want to disable the %1$s plugin?
+removeplugindataconfirm_deactivate#:#Just deactivate %1$s plugin
+removeplugindataconfirm_data#:#%1$s data
+removeplugindataconfirm_keep_data#:#Keep %1$s data
+removeplugindataconfirm_msg_kept_data#:#The %1$s data was kept
+removeplugindataconfirm_msg_removed_data#:#The %1$s data was also removed
+removeplugindataconfirm_remove_data#:#Remove %1$s data

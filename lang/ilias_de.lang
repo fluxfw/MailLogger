@@ -1,0 +1,35 @@
+config_configuration#:#Konfiguration
+config_configuration_saved#:#Konfiguration gespeichert
+config_log_email_of_users#:#Benutzer-E-Mails loggen
+config_log_email_of_users_info#:#E-Mails, welche von folgenden ILIAS-Accounts gesendet werden, werden geloggt
+config_log_system_emails#:#System-E-Mails loggen
+config_log_system_emails_info#:#Wenn aktiviert, werden sämtliche System-E-Mails geloggt
+config_save#:#Speichern
+log_actions#:#Aktionen
+log_back#:#Zurück
+log_body#:#Inhalt der E-Mail
+log_context_title#:#Context-Titel
+log_context_ref_id#:#Context-Ref-ID
+log_from#:#Absender
+log_from_email#:#Absender E-Mail-Adresse
+log_from_firstname#:#Absender Vorname
+log_from_lastname#:#Absender Nachname
+log_from_user_id#:#Absender User-ID
+log_log#:#Log
+log_no_access#:#Kein Zugriff
+log_show_email#:#E-Mail anzeigen
+log_subject#:#Betreff
+log_timestamp#:#Datum / Uhrzeit
+log_to#:#Empfänger
+log_to_email#:#Empfänger E-Mail Adresse
+log_to_firstname#:#Empfänger Vorname
+log_to_lastname#:#Empfänger Nachname
+log_to_user_id#:#Empfänger User-ID
+removeplugindataconfirm_cancel#:#Abbrechen
+removeplugindataconfirm_confirm_remove_data#:#Möchten Sie die %1$s-Daten auch entfernen? Allenfalls möchten Sie das %1$s-Plugin nur deaktivieren?
+removeplugindataconfirm_deactivate#:#%1$s-Plugin nur deaktivieren
+removeplugindataconfirm_data#:#%1$s-Daten
+removeplugindataconfirm_keep_data#:#%1$s-Daten behalten
+removeplugindataconfirm_msg_kept_data#:#Die %1$s-Daten wurden behalten
+removeplugindataconfirm_msg_removed_data#:#Die %1$s-Daten wurden auch entfernt
+removeplugindataconfirm_remove_data#:#Entferne %1$s-Daten
