@@ -2,11 +2,11 @@
 
 require_once __DIR__ . "/../../vendor/autoload.php";
 
+use srag\DIC\MailLogger\DICTrait;
 use srag\Plugins\MailLogger\Log\Log;
 use srag\Plugins\MailLogger\Log\LogDetailsFormGUI;
 use srag\Plugins\MailLogger\Log\LogTableGUI;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
-use srag\DIC\MailLogger\DICTrait;
 
 /**
  * Class MailLoggerLogGUI
@@ -84,7 +84,7 @@ class MailLoggerLogGUI {
 	protected function log()/*: void*/ {
 		$table = $this->getLogTable();
 
-		self::output()->output($table);
+		self::output()->output($table, true);
 	}
 
 
@@ -114,9 +114,9 @@ class MailLoggerLogGUI {
 		if ($log !== NULL) {
 			$form = $this->getLogDetailsForm($log);
 
-			self::output()->output($form);
+			self::output()->output($form, true);
 		} else {
-			self::output()->output("");
+			self::output()->output("", true);
 		}
 	}
 
