@@ -80,7 +80,17 @@ abstract class ilMailMimeTransportBase implements ilMailMimeTransport
 ```
 
 ### Some screenshots
-TODO
+Config:
+![Config](./doc/screenshots/config.png)
+
+Send test mail:
+![Send test mail](./doc/screenshots/send_test_mail.png)
+
+Log table:
+![Log table](./doc/screenshots/log_table.png)
+
+Show email:
+![Show email](./doc/screenshots/show_email.png)
 
 ### Dependencies
 * ILIAS 5.3
