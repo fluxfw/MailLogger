@@ -18,6 +18,7 @@ return array(
     'srag\\CustomInputGUIs\\MailLogger\\CheckboxInputGUI\\CheckboxInputGUI' => $vendorDir . '/srag/custominputguis/src/CheckboxInputGUI/CheckboxInputGUI.php',
     'srag\\CustomInputGUIs\\MailLogger\\DateDurationInputGUI\\DateDurationInputGUI' => $vendorDir . '/srag/custominputguis/src/DateDurationInputGUI/DateDurationInputGUI.php',
     'srag\\CustomInputGUIs\\MailLogger\\GlyphGUI\\GlyphGUI' => $vendorDir . '/srag/custominputguis/src/GlyphGUI/GlyphGUI.php',
+    'srag\\CustomInputGUIs\\MailLogger\\HiddenInputGUI\\HiddenInputGUI' => $vendorDir . '/srag/custominputguis/src/HiddenInputGUI/HiddenInputGUI.php',
     'srag\\CustomInputGUIs\\MailLogger\\MultiLineInputGUI\\MultiLineInputGUI' => $vendorDir . '/srag/custominputguis/src/MultiLineInputGUI/MultiLineInputGUI.php',
     'srag\\CustomInputGUIs\\MailLogger\\MultiSelectSearchInputGUI\\MultiSelectSearchInput2GUI' => $vendorDir . '/srag/custominputguis/src/MultiSelectSearchInputGUI/MultiSelectSearchInput2GUI.php',
     'srag\\CustomInputGUIs\\MailLogger\\MultiSelectSearchInputGUI\\MultiSelectSearchInputGUI' => $vendorDir . '/srag/custominputguis/src/MultiSelectSearchInputGUI/MultiSelectSearchInputGUI.php',
@@ -65,7 +66,7 @@ return array(
     'srag\\Plugins\\MailLogger\\Utils\\MailLoggerTrait' => $baseDir . '/src/Utils/MailLoggerTrait.php',
     'srag\\RemovePluginDataConfirm\\MailLogger\\AbstractPluginUninstallTrait' => $vendorDir . '/srag/removeplugindataconfirm/src/AbstractPluginUninstallTrait.php',
     'srag\\RemovePluginDataConfirm\\MailLogger\\AbstractRemovePluginDataConfirm' => $vendorDir . '/srag/removeplugindataconfirm/src/AbstractRemovePluginDataConfirm.php',
+    'srag\\RemovePluginDataConfirm\\MailLogger\\Exception\\RemovePluginDataConfirmException' => $vendorDir . '/srag/removeplugindataconfirm/src/Exception/RemovePluginDataConfirmException.php',
     'srag\\RemovePluginDataConfirm\\MailLogger\\PluginUninstallTrait' => $vendorDir . '/srag/removeplugindataconfirm/src/PluginUninstallTrait.php',
-    'srag\\RemovePluginDataConfirm\\MailLogger\\RemovePluginDataConfirmException' => $vendorDir . '/srag/removeplugindataconfirm/src/RemovePluginDataConfirmException.php',
     'srag\\RemovePluginDataConfirm\\MailLogger\\RepositoryObjectPluginUninstallTrait' => $vendorDir . '/srag/removeplugindataconfirm/src/RepositoryObjectPluginUninstallTrait.php',
 );

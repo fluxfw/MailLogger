@@ -80,7 +80,17 @@ abstract class ilMailMimeTransportBase implements ilMailMimeTransport
 ```
 
 ### Some screenshots
-TODO
+Config:
+![Config](./doc/screenshots/config.png)
+
+Send test mail:
+![Send test mail](./doc/screenshots/send_test_mail.png)
+
+Log table:
+![Log table](./doc/screenshots/log_table.png)
+
+Show email:
+![Show email](./doc/screenshots/show_email.png)
 
 ### Dependencies
 * ILIAS 5.3
@@ -97,8 +107,8 @@ Please use it for further development!
 
 ### Adjustment suggestions
 * Adjustment suggestions by pull requests on https://git.studer-raimann.ch/ILIAS/Plugins/MailLogger/tree/develop
-* Adjustment suggestions which are not yet worked out in detail by Jira tasks under https://jira.studer-raimann.ch/projects/AVL
-* Bug reports under https://jira.studer-raimann.ch/projects/AVL
+* Adjustment suggestions which are not yet worked out in detail by Jira tasks under https://jira.studer-raimann.ch/projects/PLMALOG
+* Bug reports under https://jira.studer-raimann.ch/projects/PLMALOG
 * For external users please send an email to support-custom1@studer-raimann.ch
 
 ### Development

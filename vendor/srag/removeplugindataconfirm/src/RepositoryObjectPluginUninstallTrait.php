@@ -2,6 +2,8 @@
 
 namespace srag\RemovePluginDataConfirm\MailLogger;
 
+use srag\RemovePluginDataConfirm\MailLogger\Exception\RemovePluginDataConfirmException;
+
 /**
  * Trait RepositoryObjectPluginUninstallTrait
  *
