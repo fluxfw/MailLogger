@@ -4,8 +4,7 @@
   "type": "project",
   "keywords": [
     "ILIAS",
-    "Plugin",
-    "AVL"
+    "Plugin"
   ],
   "homepage": "https://github.com/studer-raimann/MailLogger",
   "license": "GPL-3.0-only",
