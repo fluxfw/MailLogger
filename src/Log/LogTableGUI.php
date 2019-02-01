@@ -7,7 +7,6 @@ use ilDatePresentation;
 use ilDateTime;
 use ilMailLoggerPlugin;
 use ilTextInputGUI;
-use MailLoggerLogGUI;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\CustomInputGUIs\MailLogger\DateDurationInputGUI\DateDurationInputGUI;
 use srag\CustomInputGUIs\MailLogger\PropertyFormGUI\PropertyFormGUI;
@@ -24,7 +23,7 @@ class LogTableGUI extends TableGUI {
 
 	use MailLoggerTrait;
 	const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
-	const LANG_MODULE = MailLoggerLogGUI::LANG_MODULE_LOG;
+	const LANG_MODULE = LogGUI::LANG_MODULE_LOG;
 
 
 	/**
@@ -210,7 +209,7 @@ class LogTableGUI extends TableGUI {
 	 * @inheritdoc
 	 */
 	protected function initTitle()/*: void*/ {
-		$this->setTitle(self::plugin()->translate("log", MailLoggerLogGUI::CMD_LOG));
+		$this->setTitle(self::plugin()->translate("log", LogGUI::CMD_LOG));
 	}
 
 
@@ -226,7 +225,7 @@ class LogTableGUI extends TableGUI {
 		$actions = new ilAdvancedSelectionListGUI();
 		$actions->setListTitle(self::plugin()->translate("actions", self::LANG_MODULE));
 		$actions->addItem(self::plugin()->translate("show_email", self::LANG_MODULE), "", self::dic()->ctrl()
-			->getLinkTarget($this->parent_obj, MailLoggerLogGUI::CMD_SHOW_EMAIL));
+			->getLinkTarget($this->parent_obj, LogGUI::CMD_SHOW_EMAIL));
 		$this->tpl->setVariable("COLUMN", self::output()->getHTML($actions));
 		$this->tpl->parseCurrentBlock();
 

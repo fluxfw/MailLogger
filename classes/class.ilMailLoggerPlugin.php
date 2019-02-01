@@ -5,6 +5,7 @@ require_once __DIR__ . "/../vendor/autoload.php";
 use srag\Plugins\MailLogger\Access\Access;
 use srag\Plugins\MailLogger\Config\Config;
 use srag\Plugins\MailLogger\Log\Log;
+use srag\Plugins\MailLogger\Log\LogGUI;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\Plugins\CtrlMainMenu\Entry\ctrlmmEntry;
 use srag\Plugins\CtrlMainMenu\EntryTypes\Ctrl\ctrlmmEntryCtrl;
@@ -124,15 +125,15 @@ class ilMailLoggerPlugin extends ilEventHookPlugin {
 			include_once __DIR__ . "/../../../../UIComponent/UserInterfaceHook/CtrlMainMenu/vendor/autoload.php";
 
 			if (class_exists(ctrlmmEntry::class)) {
-				if (count(ctrlmmEntry::getEntriesByCmdClass(MailLoggerLogGUI::class)) === 0) {
+				if (count(ctrlmmEntry::getEntriesByCmdClass(LogGUI::class)) === 0) {
 					$entry = new ctrlmmEntryCtrl();
 					$entry->setTitle(self::PLUGIN_NAME);
 					$entry->setTranslations([
 						"en" => self::PLUGIN_NAME,
 						"de" => self::PLUGIN_NAME
 					]);
-					$entry->setGuiClass(implode(",", [ ilUIPluginRouterGUI::class, MailLoggerLogGUI::class ]));
-					$entry->setCmd(MailLoggerLogGUI::CMD_LOG);
+					$entry->setGuiClass(implode(",", [ ilUIPluginRouterGUI::class, LogGUI::class ]));
+					$entry->setCmd(LogGUI::CMD_LOG);
 					$entry->setPermissionType(ctrlmmMenu::PERM_SCRIPT);
 					$entry->setPermission(json_encode([
 						__DIR__ . "/../vendor/autoload.php",
@@ -155,7 +156,7 @@ class ilMailLoggerPlugin extends ilEventHookPlugin {
 			include_once __DIR__ . "/../../../../UIComponent/UserInterfaceHook/CtrlMainMenu/vendor/autoload.php";
 
 			if (class_exists(ctrlmmEntry::class)) {
-				foreach (ctrlmmEntry::getEntriesByCmdClass(MailLoggerLogGUI::class) as $entry) {
+				foreach (ctrlmmEntry::getEntriesByCmdClass(LogGUI::class) as $entry) {
 					/**
 					 * @var ctrlmmEntry $entry
 					 */

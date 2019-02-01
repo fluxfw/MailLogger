@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'MailLoggerLogGUI' => $baseDir . '/classes/Log/class.MailLoggerLogGUI.php',
     'MailLoggerRemoveDataConfirm' => $baseDir . '/classes/uninstall/class.MailLoggerRemoveDataConfirm.php',
     'ilMailLoggerConfigGUI' => $baseDir . '/classes/class.ilMailLoggerConfigGUI.php',
     'ilMailLoggerPlugin' => $baseDir . '/classes/class.ilMailLoggerPlugin.php',
@@ -60,6 +59,7 @@ return array(
     'srag\\Plugins\\MailLogger\\Config\\ConfigFormGUI' => $baseDir . '/src/Config/ConfigFormGUI.php',
     'srag\\Plugins\\MailLogger\\Log\\Log' => $baseDir . '/src/Log/Log.php',
     'srag\\Plugins\\MailLogger\\Log\\LogDetailsFormGUI' => $baseDir . '/src/Log/LogDetailsFormGUI.php',
+    'srag\\Plugins\\MailLogger\\Log\\LogGUI' => $baseDir . '/src/Log/class.LogGUI.php',
     'srag\\Plugins\\MailLogger\\Log\\LogHandler' => $baseDir . '/src/Log/LogHandler.php',
     'srag\\Plugins\\MailLogger\\Log\\LogTableGUI' => $baseDir . '/src/Log/LogTableGUI.php',
     'srag\\Plugins\\MailLogger\\Logs\\Logs' => $baseDir . '/src/Log/Logs.php',

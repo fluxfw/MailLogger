@@ -1,21 +1,26 @@
 <?php
 
+namespace srag\Plugins\MailLogger\Log;
+
+// ilCtrlMainMenu Bug
 require_once __DIR__ . "/../../vendor/autoload.php";
 
+use ilMailLoggerPlugin;
+use ilRepositoryGUI;
+use ilUtil;
 use srag\DIC\MailLogger\DICTrait;
-use srag\Plugins\MailLogger\Log\Log;
-use srag\Plugins\MailLogger\Log\LogDetailsFormGUI;
-use srag\Plugins\MailLogger\Log\LogTableGUI;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 
 /**
- * Class MailLoggerLogGUI
+ * Class LogGUI
+ *
+ * @package           srag\Plugins\MailLogger\Log
  *
  * @author            studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  *
- * @ilCtrl_isCalledBy MailLoggerLogGUI: ilUIPluginRouterGUI
+ * @ilCtrl_isCalledBy srag\Plugins\MailLogger\Log\LogGUI: ilUIPluginRouterGUI
  */
-class MailLoggerLogGUI {
+class LogGUI {
 
 	use DICTrait;
 	use MailLoggerTrait;
@@ -28,7 +33,7 @@ class MailLoggerLogGUI {
 
 
 	/**
-	 * MailLoggerLogGUI constructor
+	 * LogGUI constructor
 	 */
 	public function __construct() {
 

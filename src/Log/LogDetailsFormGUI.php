@@ -7,7 +7,6 @@ use ilDateTime;
 use ilFormSectionHeaderGUI;
 use ilMailLoggerPlugin;
 use ilNonEditableValueGUI;
-use MailLoggerLogGUI;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\CustomInputGUIs\MailLogger\PropertyFormGUI\PropertyFormGUI;
 use srag\CustomInputGUIs\MailLogger\StaticHTMLPresentationInputGUI\StaticHTMLPresentationInputGUI;
@@ -23,7 +22,7 @@ class LogDetailsFormGUI extends PropertyFormGUI {
 
 	use MailLoggerTrait;
 	const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
-	const LANG_MODULE = MailLoggerLogGUI::LANG_MODULE_LOG;
+	const LANG_MODULE = LogGUI::LANG_MODULE_LOG;
 	/**
 	 * @var Log
 	 */
@@ -33,10 +32,10 @@ class LogDetailsFormGUI extends PropertyFormGUI {
 	/**
 	 * LogDetailsFormGUI constructor
 	 *
-	 * @param MailLoggerLogGUI $parent
-	 * @param Log              $log
+	 * @param LogGUI $parent
+	 * @param Log    $log
 	 */
-	public function __construct(MailLoggerLogGUI $parent, Log $log) {
+	public function __construct(LogGUI $parent, Log $log) {
 		$this->log = $log;
 
 		parent::__construct($parent);
