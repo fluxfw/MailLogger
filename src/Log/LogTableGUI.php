@@ -154,7 +154,7 @@ class LogTableGUI extends TableGUI {
 	/**
 	 * @inheritdoc
 	 */
-	public function initFilterFields()/*: void*/ {
+	protected function initFilterFields()/*: void*/ {
 		self::dic()->language()->loadLanguageModule("form");
 
 		$this->filter_fields = [
