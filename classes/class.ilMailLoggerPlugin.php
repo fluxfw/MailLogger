@@ -2,14 +2,14 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
+use srag\Plugins\CtrlMainMenu\Entry\ctrlmmEntry;
+use srag\Plugins\CtrlMainMenu\EntryTypes\Ctrl\ctrlmmEntryCtrl;
+use srag\Plugins\CtrlMainMenu\Menu\ctrlmmMenu;
 use srag\Plugins\MailLogger\Access\Access;
 use srag\Plugins\MailLogger\Config\Config;
 use srag\Plugins\MailLogger\Log\Log;
 use srag\Plugins\MailLogger\Log\LogGUI;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
-use srag\Plugins\CtrlMainMenu\Entry\ctrlmmEntry;
-use srag\Plugins\CtrlMainMenu\EntryTypes\Ctrl\ctrlmmEntryCtrl;
-use srag\Plugins\CtrlMainMenu\Menu\ctrlmmMenu;
 use srag\RemovePluginDataConfirm\MailLogger\PluginUninstallTrait;
 
 /**
@@ -125,7 +125,7 @@ class ilMailLoggerPlugin extends ilEventHookPlugin {
 			include_once __DIR__ . "/../../../../UIComponent/UserInterfaceHook/CtrlMainMenu/vendor/autoload.php";
 
 			if (class_exists(ctrlmmEntry::class)) {
-				if (count(ctrlmmEntry::getEntriesByCmdClass(LogGUI::class)) === 0) {
+				if (count(ctrlmmEntry::getEntriesByCmdClass(str_replace("\\", "\\\\", LogGUI::class))) === 0) {
 					$entry = new ctrlmmEntryCtrl();
 					$entry->setTitle(self::PLUGIN_NAME);
 					$entry->setTranslations([
@@ -156,7 +156,7 @@ class ilMailLoggerPlugin extends ilEventHookPlugin {
 			include_once __DIR__ . "/../../../../UIComponent/UserInterfaceHook/CtrlMainMenu/vendor/autoload.php";
 
 			if (class_exists(ctrlmmEntry::class)) {
-				foreach (ctrlmmEntry::getEntriesByCmdClass(LogGUI::class) as $entry) {
+				foreach (ctrlmmEntry::getEntriesByCmdClass(str_replace("\\", "\\\\", LogGUI::class)) as $entry) {
 					/**
 					 * @var ctrlmmEntry $entry
 					 */
