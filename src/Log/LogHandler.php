@@ -8,9 +8,9 @@ use ilMimeMail;
 use ilObject;
 use ilObjectFactory;
 use ilObjUser;
+use srag\DIC\MailLogger\DICTrait;
 use srag\Plugins\MailLogger\Config\Config;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
-use srag\DIC\MailLogger\DICTrait;
 
 /**
  * Class LogHandler
@@ -69,8 +69,9 @@ final class LogHandler {
 
 		foreach ($mail->getTo() as $to) {
 
-			if (count(ilObjUser::_getUserIdsByEmail($to)) > 0) {
-				ilObjUser::_getUserIdsByEmail(ilObjUser::_getUserIdsByEmail($to));
+			$user_logins_of_email = ilObjUser::_getUserIdsByEmail($to);
+			if (count($user_logins_of_email) > 0) {
+				$to_user = new ilObjUser(ilObjUser::_lookupId(current($user_logins_of_email)));
 			} else {
 				$to_user = new ilObjUser();
 				$to_user->setEmail($to);
