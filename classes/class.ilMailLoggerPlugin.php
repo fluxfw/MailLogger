@@ -65,26 +65,6 @@ class ilMailLoggerPlugin extends ilEventHookPlugin {
 
 
 	/**
-	 *
-	 */
-	protected function afterActivation()/*: void*/ {
-		if (!self::version()->is54()) {
-			$this->addCtrlMainMenu();
-		}
-	}
-
-
-	/**
-	 *
-	 */
-	protected function afterDeactivation()/*: void*/ {
-		if (!self::version()->is54()) {
-			$this->removeCtrlMainMenu();
-		}
-	}
-
-
-	/**
 	 * @param string $a_component
 	 * @param string $a_event
 	 * @param array  $a_parameter
@@ -127,6 +107,26 @@ class ilMailLoggerPlugin extends ilEventHookPlugin {
 		self::dic()->database()->dropTable(Config::TABLE_NAME, false);
 		self::dic()->database()->dropTable(Log::TABLE_NAME, false);
 
+		if (!self::version()->is54()) {
+			$this->removeCtrlMainMenu();
+		}
+	}
+
+
+	/**
+	 *
+	 */
+	protected function afterActivation()/*: void*/ {
+		if (!self::version()->is54()) {
+			$this->addCtrlMainMenu();
+		}
+	}
+
+
+	/**
+	 *
+	 */
+	protected function afterDeactivation()/*: void*/ {
 		if (!self::version()->is54()) {
 			$this->removeCtrlMainMenu();
 		}
