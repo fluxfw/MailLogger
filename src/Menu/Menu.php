@@ -15,6 +15,8 @@ use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
  * @package srag\Plugins\MailLogger\Menu
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
+ *
+ * @since   ILIAS 5.4
  */
 class Menu extends AbstractStaticPluginMainMenuProvider {
 
