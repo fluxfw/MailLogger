@@ -33,7 +33,9 @@ class Menu extends AbstractStaticPluginMainMenuProvider {
 			self::dic()->globalScreen()->mainmenu()->topLinkItem(self::dic()->globalScreen()->identification()->plugin(self::plugin()
 				->getPluginObject(), $this)->identifier(ilMailLoggerPlugin::PLUGIN_ID))->withTitle(ilMailLoggerPlugin::PLUGIN_NAME)
 				->withAction(self::dic()->ctrl()->getLinkTargetByClass([ ilUIPluginRouterGUI::class, LogGUI::class ], LogGUI::CMD_LOG))
-				->withVisibilityCallable(function () {
+				->withAvailableCallable(function () {
+					return (self::plugin()->getPluginObject()->isActive());
+				})->withVisibilityCallable(function () {
 					return self::access()->hasLogAccess();
 				})
 		];
