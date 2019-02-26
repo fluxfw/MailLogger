@@ -7,10 +7,10 @@ use ilDatePresentation;
 use ilDateTime;
 use ilMailLoggerPlugin;
 use ilTextInputGUI;
-use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\CustomInputGUIs\MailLogger\DateDurationInputGUI\DateDurationInputGUI;
 use srag\CustomInputGUIs\MailLogger\PropertyFormGUI\PropertyFormGUI;
 use srag\CustomInputGUIs\MailLogger\TableGUI\TableGUI;
+use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 
 /**
  * Class LogTableGUI

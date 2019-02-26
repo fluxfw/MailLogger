@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.0]
+- Support ILIAS 5.4 with new MainMenu service
+- Adjust core patch for ILIAS 5.3 corresponding to ILIAS 5.4
+
 ## [1.0.2]
 - Fix log external emails
 - Increase mail output height

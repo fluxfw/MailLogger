@@ -5,8 +5,8 @@ namespace srag\Plugins\MailLogger\Config;
 use ilCheckboxInputGUI;
 use ilMailLoggerPlugin;
 use srag\ActiveRecordConfig\MailLogger\ActiveRecordConfigFormGUI;
-use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\CustomInputGUIs\MailLogger\MultiSelectSearchInputGUI\MultiSelectSearchInputGUI;
+use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 
 /**
  * Class ConfigFormGUI

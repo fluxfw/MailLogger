@@ -3,8 +3,8 @@
 namespace srag\Plugins\MailLogger\Access;
 
 use ilMailLoggerPlugin;
-use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\DIC\MailLogger\DICTrait;
+use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 
 /**
  * Class Users
