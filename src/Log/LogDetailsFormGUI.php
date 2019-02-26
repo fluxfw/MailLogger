@@ -7,9 +7,9 @@ use ilDateTime;
 use ilFormSectionHeaderGUI;
 use ilMailLoggerPlugin;
 use ilNonEditableValueGUI;
-use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\CustomInputGUIs\MailLogger\PropertyFormGUI\PropertyFormGUI;
 use srag\CustomInputGUIs\MailLogger\StaticHTMLPresentationInputGUI\StaticHTMLPresentationInputGUI;
+use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 
 /**
  * Class LogDetailsFormGUI
@@ -124,7 +124,7 @@ class LogDetailsFormGUI extends PropertyFormGUI {
 	/**
 	 * @inheritdoc
 	 */
-	public function storeForm()/*: bool*/ {
+	public function storeForm(): bool {
 		return false;
 	}
 

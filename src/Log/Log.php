@@ -6,8 +6,8 @@ use ActiveRecord;
 use arConnector;
 use ilDateTime;
 use ilMailLoggerPlugin;
-use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\DIC\MailLogger\DICTrait;
+use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 
 /**
  * Class Log
