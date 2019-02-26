@@ -9,8 +9,11 @@ git clone https://github.com/studer-raimann/MailLogger.git MailLogger
 ```
 Update, activate and config the plugin in the ILIAS Plugin Administration
 
-### ILIAS-Core-Patch
-In order for log sending emails correctly, it needs some patches in the ILIAS core:
+### Menu (Only ILIAS 5.3)
+For ILIAS 5.3, you need to install [CtrlMainMenu](https://github.com/studer-raimann/CtrlMainMenu) before you activate the MailLogger-Plugin
+
+### ILIAS-Core-Patch (Only ILIAS 5.3)
+In order for log sending emails correctly in ILIAS 5.3, it needs some patches in the ILIAS core:
 
 1. Event for send internal emails:
 `Services/Mail/classes/class.ilMail.php::sendInternalMail`:
@@ -32,12 +35,12 @@ class ilMimeMail
 		//Only save outgoing mails not mails saved in sent folder
 		if ($mbox->getSentFolder() != $a_folder_id) {
 			global $DIC;
-			$DIC->event()->raise("Services/Mail", "sendInternalEmail", [
+			$DIC->event()->raise("Services/Mail", "sentInternalMail", [
 				"subject" => $a_m_subject,
 				"body" => $a_m_message,
 				"is_system" => in_array("system", $a_m_type),
-				"from_user_id" => $a_sender_id,
-				"to_user_id" => $a_user_id,
+				"from_usr_id" => $a_sender_id,
+				"to_usr_id" => $a_user_id,
 				"context_ref_id" => $a_tpl_context_id
 			]);
 		}
@@ -65,7 +68,7 @@ abstract class ilMailMimeTransportBase implements ilMailMimeTransport
 		
 			//PATCH MailLogger Event for send external emails:
 			global $DIC;
-			$DIC->event()->raise("Services/Mail", "sendExternalEmail", [ "mail" => $mail ]);
+			$DIC->event()->raise("Services/Mail", "externalEmailDelegated", [ "mail" => $mail ]);
 			//PATCH MailLogger
 		}
 		else
@@ -93,10 +96,9 @@ Show email:
 ![Show email](./doc/screenshots/show_email.png)
 
 ### Dependencies
-* ILIAS 5.3
+* ILIAS 5.3 or ILIAS 5.4
 * PHP >=7.0
 * [composer](https://getcomposer.org)
-* [CtrlMainMenu](https://github.com/studer-raimann/CtrlMainMenu)
 * [srag/activerecordconfig](https://packagist.org/packages/srag/activerecordconfig)
 * [srag/custominputguis](https://packagist.org/packages/srag/custominputguis)
 * [srag/dic](https://packagist.org/packages/srag/dic)

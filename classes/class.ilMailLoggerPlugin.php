@@ -2,6 +2,7 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
+use ILIAS\GlobalScreen\Provider\StaticProvider\AbstractStaticPluginMainMenuProvider;
 use srag\Plugins\CtrlMainMenu\Entry\ctrlmmEntry;
 use srag\Plugins\CtrlMainMenu\EntryTypes\Ctrl\ctrlmmEntryCtrl;
 use srag\Plugins\CtrlMainMenu\Menu\ctrlmmMenu;
@@ -9,6 +10,7 @@ use srag\Plugins\MailLogger\Access\Access;
 use srag\Plugins\MailLogger\Config\Config;
 use srag\Plugins\MailLogger\Log\Log;
 use srag\Plugins\MailLogger\Log\LogGUI;
+use srag\Plugins\MailLogger\Menu\Menu;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\RemovePluginDataConfirm\MailLogger\PluginUninstallTrait;
 
@@ -26,8 +28,8 @@ class ilMailLoggerPlugin extends ilEventHookPlugin {
 	const PLUGIN_CLASS_NAME = self::class;
 	const REMOVE_PLUGIN_DATA_CONFIRM_CLASS_NAME = MailLoggerRemoveDataConfirm::class;
 	const COMPONENT_MAIL = "Services/Mail";
-	const EVENT_SEND_EXTERNAL_EMAIL = "sendExternalEmail";
-	const EVENT_SEND_INTERNAL_EMAIL = "sendInternalEmail";
+	const EVENT_SENT_INTERNAL_MAIL = "sentInternalMail";
+	const EVENT_SENT_EXTERNAL_MAIL = "externalEmailDelegated";
 	/**
 	 * @var self|null
 	 */
@@ -66,7 +68,9 @@ class ilMailLoggerPlugin extends ilEventHookPlugin {
 	 *
 	 */
 	protected function afterActivation()/*: void*/ {
-		$this->addCtrlMainMenu();
+		if (!self::version()->is54()) {
+			$this->addCtrlMainMenu();
+		}
 	}
 
 
@@ -74,7 +78,9 @@ class ilMailLoggerPlugin extends ilEventHookPlugin {
 	 *
 	 */
 	protected function afterDeactivation()/*: void*/ {
-		$this->removeCtrlMainMenu();
+		if (!self::version()->is54()) {
+			$this->removeCtrlMainMenu();
+		}
 	}
 
 
@@ -89,14 +95,14 @@ class ilMailLoggerPlugin extends ilEventHookPlugin {
 		$a_parameter)/*: void*/ {
 		if ($a_component === self::COMPONENT_MAIL) {
 			switch ($a_event) {
-				case self::EVENT_SEND_INTERNAL_EMAIL:
+				case self::EVENT_SENT_INTERNAL_MAIL:
 					$mail = $a_parameter;
-					self::logHandler()->handleSendInternalEmail($mail);
+					self::logHandler()->handleSentInternalEmail($mail);
 					break;
 
-				case self::EVENT_SEND_EXTERNAL_EMAIL:
+				case self::EVENT_SENT_EXTERNAL_MAIL:
 					$mail = $a_parameter["mail"];
-					self::logHandler()->handleSendExternalEmail($mail);
+					self::logHandler()->handleSentExternalEmail($mail);
 					break;
 
 				default:
@@ -109,11 +115,21 @@ class ilMailLoggerPlugin extends ilEventHookPlugin {
 	/**
 	 * @inheritdoc
 	 */
+	public function promoteGlobalScreenProvider(): AbstractStaticPluginMainMenuProvider {
+		return new Menu(self::dic()->dic(), $this);
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
 	protected function deleteData()/*: void*/ {
 		self::dic()->database()->dropTable(Config::TABLE_NAME, false);
 		self::dic()->database()->dropTable(Log::TABLE_NAME, false);
 
-		$this->removeCtrlMainMenu();
+		if (!self::version()->is54()) {
+			$this->removeCtrlMainMenu();
+		}
 	}
 
 

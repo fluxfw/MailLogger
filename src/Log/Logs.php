@@ -3,9 +3,9 @@
 namespace srag\Plugins\MailLogger\Logs;
 
 use ilMailLoggerPlugin;
+use srag\DIC\MailLogger\DICTrait;
 use srag\Plugins\MailLogger\Log\Log;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
-use srag\DIC\MailLogger\DICTrait;
 
 /**
  * Class Logs

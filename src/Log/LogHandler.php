@@ -53,23 +53,25 @@ final class LogHandler {
 	/**
 	 * @param array $mail
 	 */
-	public function handleSendInternalEmail(array $mail)/*: void*/ {
-		$from_user = new ilObjUser($mail["from_user_id"]);
-		$to_user = new ilObjUser($mail["to_user_id"]);
+	public function handleSentInternalEmail(array $mail)/*: void*/ {
+		$from_user = new ilObjUser($mail["from_usr_id"]);
+		$to_user = new ilObjUser($mail["to_usr_id"]);
 
-		$this->log(strval($mail["subject"]), strval($mail["body"]), $mail["is_system"], $from_user, $to_user, (!empty($mail["context_ref_id"]) ? intval($mail["context_ref_id"]) : NULL));
+		$this->log(strval($mail["subject"]), strval($mail["body"]), $mail["is_system"] ??
+			false, $from_user, $to_user, (!empty($mail["context_ref_id"]) ? intval($mail["context_ref_id"]) : NULL));
 	}
 
 
 	/**
 	 * @param ilMimeMail $mail
 	 */
-	public function handleSendExternalEmail(ilMimeMail $mail)/*: void*/ {
-		$from_user = new ilObjUser(ilObjUser::_lookupId(current(ilObjUser::_getUserIdsByEmail($mail->getFrom()->getReplyToAddress()))));
+	public function handleSentExternalEmail(ilMimeMail $mail)/*: void*/ {
+		$from_user = new ilObjUser(ilObjUser::_lookupId(current(self::version()->is54() ? ilObjUser::getUserLoginsByEmail($mail->getFrom()
+			->getReplyToAddress()) : ilObjUser::_getUserIdsByEmail($mail->getFrom()->getReplyToAddress()))));
 
 		foreach ($mail->getTo() as $to) {
 
-			$user_logins_of_email = ilObjUser::_getUserIdsByEmail($to);
+			$user_logins_of_email = self::version()->is54() ? ilObjUser::getUserLoginsByEmail($to) : ilObjUser::_getUserIdsByEmail($to);
 			if (count($user_logins_of_email) > 0) {
 				$to_user = new ilObjUser(ilObjUser::_lookupId(current($user_logins_of_email)));
 			} else {
