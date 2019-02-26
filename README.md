@@ -38,7 +38,7 @@ class ilMimeMail
 			$DIC->event()->raise("Services/Mail", "sentInternalMail", [
 				"subject" => $a_m_subject,
 				"body" => $a_m_message,
-				"is_system" => in_array("system", $a_m_type),
+				"type" => $a_m_type,
 				"from_usr_id" => $a_sender_id,
 				"to_usr_id" => $a_user_id,
 				"context_ref_id" => $a_tpl_context_id
