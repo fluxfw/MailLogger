@@ -1,7 +1,7 @@
 # Changelog
 
 ## [1.1.0]
-- Support ILIAS 5.4 with new MainMenu service
+- Support ILIAS 5.4 with new main menu service and mail events
 - Adjust core patch for ILIAS 5.3 corresponding to ILIAS 5.4
 
 ## [1.0.2]
