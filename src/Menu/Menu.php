@@ -2,7 +2,7 @@
 
 namespace srag\Plugins\MailLogger\Menu;
 
-use ILIAS\GlobalScreen\Provider\StaticProvider\AbstractStaticPluginMainMenuProvider;
+use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
 use ilMailLoggerPlugin;
 use ilUIPluginRouterGUI;
 use srag\DIC\MailLogger\DICTrait;
