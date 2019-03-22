@@ -151,7 +151,7 @@ class Log extends ActiveRecord {
 	 * @con_fieldtype   text
 	 * @con_is_notnull  false
 	 */
-	protected $context_title = NULL;
+	protected $context_title = null;
 	/**
 	 * @var int|null
 	 *
@@ -160,7 +160,7 @@ class Log extends ActiveRecord {
 	 * @con_length      8
 	 * @con_is_notnull  false
 	 */
-	protected $context_ref_id = NULL;
+	protected $context_ref_id = null;
 	/**
 	 * @var int
 	 *
@@ -179,7 +179,7 @@ class Log extends ActiveRecord {
 	 */
 	public function __construct(/*int*/
 		$primary_key_value = 0, /*?*/
-		arConnector $connector = NULL) {
+		arConnector $connector = null) {
 		parent::__construct($primary_key_value, $connector);
 	}
 
@@ -201,7 +201,7 @@ class Log extends ActiveRecord {
 				return (new ilDateTime($field_value, IL_CAL_UNIX))->get(IL_CAL_DATETIME);
 
 			default:
-				return NULL;
+				return null;
 		}
 	}
 
@@ -220,26 +220,22 @@ class Log extends ActiveRecord {
 			case "from_user_id":
 			case "to_user_id":
 				return intval($field_value);
-				break;
 
 			case "is_system":
 				return boolval($field_value);
-				break;
 
 			case "context_ref_id":
-				if ($field_value !== NULL) {
+				if ($field_value !== null) {
 					return intval($field_value);
 				} else {
-					return NULL;
+					return null;
 				}
-				break;
 
 			case "timestamp":
 				return (new ilDateTime($field_value, IL_CAL_DATETIME))->getUnixTime();
-				break;
 
 			default:
-				return NULL;
+				return null;
 		}
 	}
 
