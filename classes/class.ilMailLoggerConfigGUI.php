@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . "/../vendor/autoload.php";
+
 use srag\ActiveRecordConfig\MailLogger\ActiveRecordConfigGUI;
 use srag\Plugins\MailLogger\Config\ConfigFormGUI;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
