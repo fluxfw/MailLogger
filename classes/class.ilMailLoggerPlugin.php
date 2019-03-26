@@ -3,6 +3,7 @@
 require_once __DIR__ . "/../vendor/autoload.php";
 
 use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
+use srag\DIC\MailLogger\Util\LibraryLanguageInstaller;
 use srag\Plugins\CtrlMainMenu\Entry\ctrlmmEntry;
 use srag\Plugins\CtrlMainMenu\EntryTypes\Ctrl\ctrlmmEntryCtrl;
 use srag\Plugins\CtrlMainMenu\Menu\ctrlmmMenu;
@@ -97,6 +98,17 @@ class ilMailLoggerPlugin extends ilEventHookPlugin {
 	 */
 	public function promoteGlobalScreenProvider(): AbstractStaticPluginMainMenuProvider {
 		return new Menu(self::dic()->dic(), $this);
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
+	public function updateLanguages(array $a_lang_keys = null) {
+		parent::updateLanguages($a_lang_keys);
+
+		LibraryLanguageInstaller::getInstance()->withPlugin(self::plugin())->withLibraryLanguageDirectory(__DIR__
+			. "/../vendor/srag/removeplugindataconfirm/lang")->updateLanguages();
 	}
 
 
