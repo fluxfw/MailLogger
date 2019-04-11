@@ -116,7 +116,7 @@ class LogGUI {
 
 		$log = self::logs()->getLogById($log_id);
 
-		if ($log !== NULL) {
+		if ($log !== null) {
 			$form = $this->getLogDetailsForm($log);
 
 			self::output()->output($form, true);
@@ -134,7 +134,10 @@ class LogGUI {
 
 		$table->writeFilterToSession();
 
-		self::dic()->ctrl()->redirect($this, self::CMD_LOG);
+		$table->resetOffset();
+
+		//self::dic()->ctrl()->redirect($this, self::CMD_LOG);
+		$this->log(); // Fix reset offset
 	}
 
 
@@ -148,6 +151,7 @@ class LogGUI {
 
 		$table->resetOffset();
 
-		self::dic()->ctrl()->redirect($this, self::CMD_LOG);
+		//self::dic()->ctrl()->redirect($this, self::CMD_LOG);
+		$this->log(); // Fix reset offset
 	}
 }
