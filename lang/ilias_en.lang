@@ -15,7 +15,7 @@ log_from_email#:#Sender email address
 log_from_firstname#:#Sender first name
 log_from_lastname#:#Sender last name
 log_from_user_id#:#Sender user id
-log_log#:#Log
+log_log#:#Logged mails
 log_no_access#:#No access
 log_show_email#:#Show Email
 log_subject#:#Subject

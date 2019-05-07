@@ -15,7 +15,7 @@ log_from_email#:#Absender E-Mail-Adresse
 log_from_firstname#:#Absender Vorname
 log_from_lastname#:#Absender Nachname
 log_from_user_id#:#Absender User-ID
-log_log#:#Log
+log_log#:#Geloggte Mails
 log_no_access#:#Kein Zugriff
 log_show_email#:#E-Mail anzeigen
 log_subject#:#Betreff

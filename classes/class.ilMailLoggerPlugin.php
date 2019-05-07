@@ -157,8 +157,8 @@ class ilMailLoggerPlugin extends ilEventHookPlugin {
 					$entry = new ctrlmmEntryCtrl();
 					$entry->setTitle(self::PLUGIN_NAME);
 					$entry->setTranslations([
-						"en" => self::PLUGIN_NAME,
-						"de" => self::PLUGIN_NAME
+						"en" => self::plugin()->translate("log", LogGUI::LANG_MODULE_LOG, [], true, "en"),
+						"de" => self::plugin()->translate("log", LogGUI::LANG_MODULE_LOG, [], true, "de")
 					]);
 					$entry->setGuiClass(implode(",", [ ilUIPluginRouterGUI::class, LogGUI::class ]));
 					$entry->setCmd(LogGUI::CMD_LOG);
