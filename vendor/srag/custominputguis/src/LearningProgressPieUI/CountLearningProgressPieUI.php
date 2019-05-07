@@ -1,15 +1,15 @@
 <?php
 
-namespace srag\CustomInputGUIs\MailLogger\LearningProgressPie;
+namespace srag\CustomInputGUIs\MailLogger\LearningProgressPieUI;
 
 /**
- * Class CountLearningProgressPie
+ * Class CountLearningProgressPieUI
  *
- * @package srag\CustomInputGUIs\MailLogger\LearningProgressPie
+ * @package srag\CustomInputGUIs\MailLogger\LearningProgressPieUI
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-class CountLearningProgressPie extends AbstractLearningProgressPie {
+class CountLearningProgressPieUI extends AbstractLearningProgressPieUI {
 
 	/**
 	 * @var int[]
@@ -18,7 +18,7 @@ class CountLearningProgressPie extends AbstractLearningProgressPie {
 
 
 	/**
-	 * @param array $count
+	 * @param int[] $count
 	 *
 	 * @return self
 	 */

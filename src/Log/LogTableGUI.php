@@ -2,7 +2,6 @@
 
 namespace srag\Plugins\MailLogger\Log;
 
-use ilAdvancedSelectionListGUI;
 use ilDatePresentation;
 use ilDateTime;
 use ilMailLoggerPlugin;
@@ -124,18 +123,18 @@ class LogTableGUI extends TableGUI {
 			$context_ref_id = NULL;
 		}*/
 		$context_title = "";
-		$context_ref_id = NULL;
+		$context_ref_id = null;
 		$timestamp_start = $filter["timestamp"]["start"];
 		if (!empty($timestamp_start)) {
 			$timestamp_start = intval($timestamp_start);
 		} else {
-			$timestamp_start = NULL;
+			$timestamp_start = null;
 		}
 		$timestamp_end = $filter["timestamp"]["end"];
 		if (!empty($timestamp_end)) {
 			$timestamp_end = intval($timestamp_end);
 		} else {
-			$timestamp_end = NULL;
+			$timestamp_end = null;
 		}
 
 		$this->setData(self::logs()
@@ -222,13 +221,9 @@ class LogTableGUI extends TableGUI {
 
 		parent::fillRow($row);
 
-		$actions = new ilAdvancedSelectionListGUI();
-		$actions->setListTitle(self::plugin()->translate("actions", self::LANG_MODULE));
-		$actions->addItem(self::plugin()->translate("show_email", self::LANG_MODULE), "", self::dic()->ctrl()
-			->getLinkTarget($this->parent_obj, LogGUI::CMD_SHOW_EMAIL));
-		$this->tpl->setVariable("COLUMN", self::output()->getHTML($actions));
-		$this->tpl->parseCurrentBlock();
-
-		self::dic()->ctrl()->setParameter($this->parent_obj, "log_id", NULL);
+		$this->tpl->setVariable("COLUMN", self::output()->getHTML(self::dic()->ui()->factory()->dropdown()->standard([
+			self::dic()->ui()->factory()->button()->shy(self::plugin()->translate("show_email", self::LANG_MODULE), self::dic()->ctrl()
+				->getLinkTarget($this->parent_obj, LogGUI::CMD_SHOW_EMAIL))
+		])->withLabel(self::plugin()->translate("actions", self::LANG_MODULE))));
 	}
 }

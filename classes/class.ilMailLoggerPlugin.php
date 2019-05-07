@@ -3,6 +3,7 @@
 require_once __DIR__ . "/../vendor/autoload.php";
 
 use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
+use srag\DIC\MailLogger\Util\LibraryLanguageInstaller;
 use srag\Plugins\CtrlMainMenu\Entry\ctrlmmEntry;
 use srag\Plugins\CtrlMainMenu\EntryTypes\Ctrl\ctrlmmEntryCtrl;
 use srag\Plugins\CtrlMainMenu\Menu\ctrlmmMenu;
@@ -103,6 +104,17 @@ class ilMailLoggerPlugin extends ilEventHookPlugin {
 	/**
 	 * @inheritdoc
 	 */
+	public function updateLanguages($a_lang_keys = null) {
+		parent::updateLanguages($a_lang_keys);
+
+		LibraryLanguageInstaller::getInstance()->withPlugin(self::plugin())->withLibraryLanguageDirectory(__DIR__
+			. "/../vendor/srag/removeplugindataconfirm/lang")->updateLanguages();
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
 	protected function deleteData()/*: void*/ {
 		self::dic()->database()->dropTable(Config::TABLE_NAME, false);
 		self::dic()->database()->dropTable(Log::TABLE_NAME, false);
@@ -145,8 +157,8 @@ class ilMailLoggerPlugin extends ilEventHookPlugin {
 					$entry = new ctrlmmEntryCtrl();
 					$entry->setTitle(self::PLUGIN_NAME);
 					$entry->setTranslations([
-						"en" => self::PLUGIN_NAME,
-						"de" => self::PLUGIN_NAME
+						"en" => self::plugin()->translate("log", LogGUI::LANG_MODULE_LOG, [], true, "en"),
+						"de" => self::plugin()->translate("log", LogGUI::LANG_MODULE_LOG, [], true, "de")
 					]);
 					$entry->setGuiClass(implode(",", [ ilUIPluginRouterGUI::class, LogGUI::class ]));
 					$entry->setCmd(LogGUI::CMD_LOG);
