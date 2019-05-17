@@ -2,6 +2,7 @@
 
 namespace srag\Plugins\MailLogger\Access;
 
+use ilDBConstants;
 use ilMailLoggerPlugin;
 use srag\DIC\MailLogger\DICTrait;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
@@ -49,7 +50,7 @@ final class Users {
 	 */
 	public function getUsers(): array {
 		$result = self::dic()->database()->queryF('SELECT usr_id, firstname, lastname FROM usr_data WHERE active=%s', [
-			"integer"
+			ilDBConstants::T_INTEGER
 		], [ 1 ]);
 
 		$array = [];
