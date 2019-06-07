@@ -29,17 +29,21 @@ class Menu extends AbstractStaticPluginMainMenuProvider {
 	 * @inheritdoc
 	 */
 	public function getStaticTopItems(): array {
+		if (!self::plugin()->getPluginObject()->isActive()) {
+			return [];
+		}
+
 		return [
 			self::dic()->globalScreen()->mainmenu()->topLinkItem(self::dic()->globalScreen()->identification()->plugin(self::plugin()
 				->getPluginObject(), $this)->identifier(ilMailLoggerPlugin::PLUGIN_ID))->withTitle(self::plugin()
 				->translate("log", LogGUI::LANG_MODULE_LOG))->withAction(self::dic()->ctrl()->getLinkTargetByClass([
-					ilUIPluginRouterGUI::class,
-					LogGUI::class
-				], LogGUI::CMD_LOG))->withAvailableCallable(function (): bool {
-					return self::plugin()->getPluginObject()->isActive();
-				})->withVisibilityCallable(function (): bool {
-					return self::access()->hasLogAccess();
-				})
+				ilUIPluginRouterGUI::class,
+				LogGUI::class
+			], LogGUI::CMD_LOG))->withAvailableCallable(function (): bool {
+				return self::plugin()->getPluginObject()->isActive();
+			})->withVisibilityCallable(function (): bool {
+				return self::access()->hasLogAccess();
+			})
 		];
 	}
 
