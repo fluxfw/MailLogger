@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "srag/activerecordconfig",
-            "version": "v0.14.3",
+            "version": "v0.16.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/studer-raimann/ActiveRecordConfig.git",
-                "reference": "96d6c2b61cd1a3fb219a7fabf8ffc07aa95e1b02"
+                "reference": "d1b6274f206afe02d58cb02335bae06fae212b67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/studer-raimann/ActiveRecordConfig/zipball/96d6c2b61cd1a3fb219a7fabf8ffc07aa95e1b02",
-                "reference": "96d6c2b61cd1a3fb219a7fabf8ffc07aa95e1b02",
+                "url": "https://api.github.com/repos/studer-raimann/ActiveRecordConfig/zipball/d1b6274f206afe02d58cb02335bae06fae212b67",
+                "reference": "d1b6274f206afe02d58cb02335bae06fae212b67",
                 "shasum": ""
             },
             "require": {
@@ -28,7 +28,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "srag\\ActiveRecordConfig\\MailLogger\\": "src/"
+                    "srag\\ActiveRecordConfig\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -50,20 +50,20 @@
                 "activerecord",
                 "config"
             ],
-            "time": "2019-02-11T14:20:12+00:00"
+            "time": "2019-05-09T09:05:20+00:00"
         },
         {
             "name": "srag/custominputguis",
-            "version": "v0.19.9",
+            "version": "v0.20.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/studer-raimann/CustomInputGUIs.git",
-                "reference": "ad4420a2a53a82bbf109682ce6ebc9a01fd49202"
+                "reference": "e3c8b9598b68fb5a8652800a3b08e352c91b823b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/studer-raimann/CustomInputGUIs/zipball/ad4420a2a53a82bbf109682ce6ebc9a01fd49202",
-                "reference": "ad4420a2a53a82bbf109682ce6ebc9a01fd49202",
+                "url": "https://api.github.com/repos/studer-raimann/CustomInputGUIs/zipball/e3c8b9598b68fb5a8652800a3b08e352c91b823b",
+                "reference": "e3c8b9598b68fb5a8652800a3b08e352c91b823b",
                 "shasum": ""
             },
             "require": {
@@ -73,7 +73,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "srag\\CustomInputGUIs\\MailLogger\\": "src/"
+                    "srag\\CustomInputGUIs\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -97,20 +97,20 @@
                 "input",
                 "table"
             ],
-            "time": "2019-03-26T09:38:29+00:00"
+            "time": "2019-05-10T11:57:06+00:00"
         },
         {
             "name": "srag/dic",
-            "version": "v0.15.4",
+            "version": "0.15.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/studer-raimann/DIC.git",
-                "reference": "9f90f54f36a00a793fc08a7916dfdb06ebe3a76c"
+                "reference": "574eea5823cd75636ee1a7dcba4ed9e8cef47fe8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/studer-raimann/DIC/zipball/9f90f54f36a00a793fc08a7916dfdb06ebe3a76c",
-                "reference": "9f90f54f36a00a793fc08a7916dfdb06ebe3a76c",
+                "url": "https://api.github.com/repos/studer-raimann/DIC/zipball/574eea5823cd75636ee1a7dcba4ed9e8cef47fe8",
+                "reference": "574eea5823cd75636ee1a7dcba4ed9e8cef47fe8",
                 "shasum": ""
             },
             "require": {
@@ -119,7 +119,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "srag\\DIC\\MailLogger\\": "src/"
+                    "srag\\DIC\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -142,20 +142,20 @@
                 "globals",
                 "trait"
             ],
-            "time": "2019-03-26T13:15:41+00:00"
+            "time": "2019-04-29T06:15:24+00:00"
         },
         {
             "name": "srag/librariesnamespacechanger",
-            "version": "v0.5.2",
+            "version": "v0.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/studer-raimann/LibrariesNamespaceChanger.git",
-                "reference": "4db267d97b5768d31429c14acde288181bfa4928"
+                "reference": "323df7e5538f20e789b4cb5fcf4e37dcacd14f45"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/studer-raimann/LibrariesNamespaceChanger/zipball/4db267d97b5768d31429c14acde288181bfa4928",
-                "reference": "4db267d97b5768d31429c14acde288181bfa4928",
+                "url": "https://api.github.com/repos/studer-raimann/LibrariesNamespaceChanger/zipball/323df7e5538f20e789b4cb5fcf4e37dcacd14f45",
+                "reference": "323df7e5538f20e789b4cb5fcf4e37dcacd14f45",
                 "shasum": ""
             },
             "require": {
@@ -185,7 +185,7 @@
                 "ILIAS",
                 "libraries"
             ],
-            "time": "2019-03-19T14:25:06+00:00"
+            "time": "2019-05-03T10:57:26+00:00"
         },
         {
             "name": "srag/removeplugindataconfirm",

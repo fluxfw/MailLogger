@@ -30,11 +30,11 @@ class LogTableGUI extends TableGUI {
 	 */
 	protected function getColumnValue(/*string*/
 		$column, /*array*/
-		$row, /*bool*/
-		$raw_export = false): string {
+		$row, /*int*/
+		$format = self::DEFAULT_FORMAT): string {
 		switch ($column) {
 			case "timestamp":
-				if ($raw_export) {
+				if ($format) {
 					$column = $row[$column];
 				} else {
 					$column = ilDatePresentation::formatDate(new ilDateTime($row[$column], IL_CAL_UNIX));

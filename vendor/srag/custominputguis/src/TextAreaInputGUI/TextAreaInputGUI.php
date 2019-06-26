@@ -7,7 +7,7 @@ use ilTextAreaInputGUI;
 use srag\DIC\MailLogger\DICTrait;
 
 /**
- * Class TextInputGUI
+ * Class TextAreaInputGUI
  *
  * @package srag\CustomInputGUIs\MailLogger\TextAreaInputGUI
  *
