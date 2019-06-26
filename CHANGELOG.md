@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.1.3]
+- Some changes (libraries)
+
 ## [1.1.2]
 - Using some new ILIAS 5.3 UI's
 - Fix reset offset
