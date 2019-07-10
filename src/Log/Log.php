@@ -177,9 +177,7 @@ class Log extends ActiveRecord {
 	 * @param int              $primary_key_value
 	 * @param arConnector|null $connector
 	 */
-	public function __construct(/*int*/
-		$primary_key_value = 0, /*?*/
-		arConnector $connector = null) {
+	public function __construct(/*int*/ $primary_key_value = 0, /*?*/ arConnector $connector = null) {
 		parent::__construct($primary_key_value, $connector);
 	}
 
@@ -189,8 +187,7 @@ class Log extends ActiveRecord {
 	 *
 	 * @return mixed|null
 	 */
-	public function sleep(/*string*/
-		$field_name) {
+	public function sleep(/*string*/ $field_name) {
 		$field_value = $this->{$field_name};
 
 		switch ($field_name) {
@@ -212,8 +209,7 @@ class Log extends ActiveRecord {
 	 *
 	 * @return mixed|null
 	 */
-	public function wakeUp(/*string*/
-		$field_name, $field_value) {
+	public function wakeUp(/*string*/ $field_name, $field_value) {
 		switch ($field_name) {
 			case "id":
 			case "from_type":
@@ -232,7 +228,7 @@ class Log extends ActiveRecord {
 				}
 
 			case "timestamp":
-				return (new ilDateTime($field_value, IL_CAL_DATETIME))->getUnixTime();
+				return intval((new ilDateTime($field_value, IL_CAL_DATETIME))->getUnixTime());
 
 			default:
 				return null;
@@ -443,8 +439,7 @@ class Log extends ActiveRecord {
 	/**
 	 * @param string|null $context_title
 	 */
-	public function setContextTitle(/*?string*/
-		$context_title)/*: void*/ {
+	public function setContextTitle(/*?string*/ $context_title)/*: void*/ {
 		$this->context_title = $context_title;
 	}
 
@@ -460,8 +455,7 @@ class Log extends ActiveRecord {
 	/**
 	 * @param int|null $context_ref_id
 	 */
-	public function setContextRefId(/*?int*/
-		$context_ref_id)/*: void*/ {
+	public function setContextRefId(/*?int*/ $context_ref_id)/*: void*/ {
 		$this->context_ref_id = $context_ref_id;
 	}
 
