@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.1.5]
+- Config menu entry
+
 ## [1.1.4]
 - Fix parsing empty datetimes
 
