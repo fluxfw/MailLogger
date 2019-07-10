@@ -8,7 +8,6 @@ use ilDateTime;
 use ilMailLoggerPlugin;
 use srag\DIC\MailLogger\DICTrait;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
-use Throwable;
 
 /**
  * Class Log
@@ -229,11 +228,7 @@ class Log extends ActiveRecord {
 				}
 
 			case "timestamp":
-				try {
-					return (new ilDateTime($field_value, IL_CAL_DATETIME))->getUnixTime();
-				} catch (Throwable $ex) {
-					return 0;
-				}
+				return intval((new ilDateTime($field_value, IL_CAL_DATETIME))->getUnixTime());
 
 			default:
 				return null;
