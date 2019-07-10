@@ -2,8 +2,11 @@
 
 namespace srag\Plugins\MailLogger\Menu;
 
+use ilAdministrationGUI;
 use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
+use ilMailLoggerConfigGUI;
 use ilMailLoggerPlugin;
+use ilObjComponentSettingsGUI;
 use ilUIPluginRouterGUI;
 use srag\DIC\MailLogger\DICTrait;
 use srag\Plugins\MailLogger\Log\LogGUI;
@@ -33,6 +36,12 @@ class Menu extends AbstractStaticPluginMainMenuProvider {
 			return [];
 		}
 
+		self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "ref_id", 31);
+		self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "ctype", IL_COMP_SERVICE);
+		self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "cname", "EventHandling");
+		self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "slot_id", "evh");
+		self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "pname", ilMailLoggerPlugin::PLUGIN_NAME);
+
 		return [
 			self::dic()->globalScreen()->mainmenu()->topLinkItem(self::dic()->globalScreen()->identification()->plugin(self::plugin()
 				->getPluginObject(), $this)->identifier(ilMailLoggerPlugin::PLUGIN_ID))->withTitle(self::plugin()
@@ -43,6 +52,18 @@ class Menu extends AbstractStaticPluginMainMenuProvider {
 				return self::plugin()->getPluginObject()->isActive();
 			})->withVisibilityCallable(function (): bool {
 				return self::access()->hasLogAccess();
+			}),
+			self::dic()->globalScreen()->mainmenu()->topLinkItem(self::dic()->globalScreen()->identification()->plugin(self::plugin()
+				->getPluginObject(), $this)->identifier(ilMailLoggerPlugin::PLUGIN_ID . "_config"))->withTitle(ilMailLoggerPlugin::PLUGIN_NAME . " "
+				. self::plugin()->translate("configuration", ilMailLoggerConfigGUI::LANG_MODULE_CONFIG))->withAction(self::dic()->ctrl()
+				->getLinkTargetByClass([
+					ilAdministrationGUI::class,
+					ilObjComponentSettingsGUI::class,
+					ilMailLoggerConfigGUI::class
+				], ""))->withAvailableCallable(function (): bool {
+				return self::plugin()->getPluginObject()->isActive();
+			})->withVisibilityCallable(function (): bool {
+				return self::dic()->rbacreview()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role
 			})
 		];
 	}
