@@ -1,5 +1,8 @@
 # Changelog
 
+## [x]
+- Fix parsing empty datetimes
+
 ## [1.1.3]
 - Some changes (libraries)
 
