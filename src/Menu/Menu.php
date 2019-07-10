@@ -36,34 +36,13 @@ class Menu extends AbstractStaticPluginMainMenuProvider {
 			return [];
 		}
 
-		self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "ref_id", 31);
-		self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "ctype", IL_COMP_SERVICE);
-		self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "cname", "EventHandling");
-		self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "slot_id", "evh");
-		self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "pname", ilMailLoggerPlugin::PLUGIN_NAME);
-
 		return [
-			self::dic()->globalScreen()->mainmenu()->topLinkItem(self::dic()->globalScreen()->identification()->plugin(self::plugin()
-				->getPluginObject(), $this)->identifier(ilMailLoggerPlugin::PLUGIN_ID))->withTitle(self::plugin()
-				->translate("log", LogGUI::LANG_MODULE_LOG))->withAction(self::dic()->ctrl()->getLinkTargetByClass([
-				ilUIPluginRouterGUI::class,
-				LogGUI::class
-			], LogGUI::CMD_LOG))->withAvailableCallable(function (): bool {
+			self::dic()->globalScreen()->mainmenu()->topParentItem(self::dic()->globalScreen()->identification()->plugin(self::plugin()
+				->getPluginObject(), $this)->identifier(ilMailLoggerPlugin::PLUGIN_ID . "_top"))->withTitle(self::plugin()
+				->translate("log", LogGUI::LANG_MODULE_LOG))->withAvailableCallable(function (): bool {
 				return self::plugin()->getPluginObject()->isActive();
 			})->withVisibilityCallable(function (): bool {
 				return self::access()->hasLogAccess();
-			}),
-			self::dic()->globalScreen()->mainmenu()->topLinkItem(self::dic()->globalScreen()->identification()->plugin(self::plugin()
-				->getPluginObject(), $this)->identifier(ilMailLoggerPlugin::PLUGIN_ID . "_config"))->withTitle(ilMailLoggerPlugin::PLUGIN_NAME . " "
-				. self::plugin()->translate("configuration", ilMailLoggerConfigGUI::LANG_MODULE_CONFIG))->withAction(self::dic()->ctrl()
-				->getLinkTargetByClass([
-					ilAdministrationGUI::class,
-					ilObjComponentSettingsGUI::class,
-					ilMailLoggerConfigGUI::class
-				], ""))->withAvailableCallable(function (): bool {
-				return self::plugin()->getPluginObject()->isActive();
-			})->withVisibilityCallable(function (): bool {
-				return self::dic()->rbacreview()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role
 			})
 		];
 	}
@@ -73,6 +52,41 @@ class Menu extends AbstractStaticPluginMainMenuProvider {
 	 * @inheritdoc
 	 */
 	public function getStaticSubItems(): array {
-		return [];
+		if (!self::plugin()->getPluginObject()->isActive()) {
+			return [];
+		}
+
+		$parent = $this->getStaticTopItems()[0];
+
+		self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "ref_id", 31);
+		self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "ctype", IL_COMP_SERVICE);
+		self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "cname", "EventHandling");
+		self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "slot_id", "evh");
+		self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "pname", ilMailLoggerPlugin::PLUGIN_NAME);
+
+		return [
+			self::dic()->globalScreen()->mainmenu()->link(self::dic()->globalScreen()->identification()->plugin(self::plugin()
+				->getPluginObject(), $this)->identifier(ilMailLoggerPlugin::PLUGIN_ID . "_log"))->withParent($parent->getProviderIdentification())
+				->withTitle(self::plugin()->translate("log", LogGUI::LANG_MODULE_LOG))->withAction(self::dic()->ctrl()->getLinkTargetByClass([
+					ilUIPluginRouterGUI::class,
+					LogGUI::class
+				], LogGUI::CMD_LOG))->withAvailableCallable(function (): bool {
+					return self::plugin()->getPluginObject()->isActive();
+				})->withVisibilityCallable(function (): bool {
+					return self::access()->hasLogAccess();
+				}),
+			self::dic()->globalScreen()->mainmenu()->link(self::dic()->globalScreen()->identification()->plugin(self::plugin()
+				->getPluginObject(), $this)->identifier(ilMailLoggerPlugin::PLUGIN_ID . "_configuration"))
+				->withParent($parent->getProviderIdentification())->withTitle(self::plugin()
+					->translate("configuration", ilMailLoggerConfigGUI::LANG_MODULE_CONFIG))->withAction(self::dic()->ctrl()->getLinkTargetByClass([
+						ilAdministrationGUI::class,
+						ilObjComponentSettingsGUI::class,
+						ilMailLoggerConfigGUI::class
+					], ""))->withAvailableCallable(function (): bool {
+					return self::plugin()->getPluginObject()->isActive();
+				})->withVisibilityCallable(function (): bool {
+					return self::dic()->rbacreview()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role
+				})
+		];
 	}
 }
