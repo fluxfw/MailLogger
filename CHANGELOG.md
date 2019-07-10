@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.1.6]
+- Menu dropdown
+
 ## [1.1.5]
 - Config menu entry
 
