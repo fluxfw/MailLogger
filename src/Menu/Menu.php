@@ -32,10 +32,6 @@ class Menu extends AbstractStaticPluginMainMenuProvider {
 	 * @inheritdoc
 	 */
 	public function getStaticTopItems(): array {
-		if (!self::plugin()->getPluginObject()->isActive()) {
-			return [];
-		}
-
 		return [
 			self::dic()->globalScreen()->mainmenu()->topParentItem(self::dic()->globalScreen()->identification()->plugin(self::plugin()
 				->getPluginObject(), $this)->identifier(ilMailLoggerPlugin::PLUGIN_ID . "_top"))->withTitle(self::plugin()
@@ -52,10 +48,6 @@ class Menu extends AbstractStaticPluginMainMenuProvider {
 	 * @inheritdoc
 	 */
 	public function getStaticSubItems(): array {
-		if (!self::plugin()->getPluginObject()->isActive()) {
-			return [];
-		}
-
 		$parent = $this->getStaticTopItems()[0];
 
 		self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "ref_id", 31);
@@ -79,10 +71,10 @@ class Menu extends AbstractStaticPluginMainMenuProvider {
 				->getPluginObject(), $this)->identifier(ilMailLoggerPlugin::PLUGIN_ID . "_configuration"))
 				->withParent($parent->getProviderIdentification())->withTitle(self::plugin()
 					->translate("configuration", ilMailLoggerConfigGUI::LANG_MODULE_CONFIG))->withAction(self::dic()->ctrl()->getLinkTargetByClass([
-						ilAdministrationGUI::class,
-						ilObjComponentSettingsGUI::class,
-						ilMailLoggerConfigGUI::class
-					], ""))->withAvailableCallable(function (): bool {
+					ilAdministrationGUI::class,
+					ilObjComponentSettingsGUI::class,
+					ilMailLoggerConfigGUI::class
+				], ""))->withAvailableCallable(function (): bool {
 					return self::plugin()->getPluginObject()->isActive();
 				})->withVisibilityCallable(function (): bool {
 					return self::dic()->rbacreview()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role
