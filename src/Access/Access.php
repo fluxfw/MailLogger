@@ -13,42 +13,46 @@ use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-final class Access {
+final class Access
+{
 
-	use DICTrait;
-	use MailLoggerTrait;
-	const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
-	const ADMIN_ROLE_ID = 2;
-	/**
-	 * @var self
-	 */
-	protected static $instance = NULL;
-
-
-	/**
-	 * @return self
-	 */
-	public static function getInstance(): self {
-		if (self::$instance === NULL) {
-			self::$instance = new self();
-		}
-
-		return self::$instance;
-	}
+    use DICTrait;
+    use MailLoggerTrait;
+    const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
+    const ADMIN_ROLE_ID = 2;
+    /**
+     * @var self
+     */
+    protected static $instance = null;
 
 
-	/**
-	 * Access constructor
-	 */
-	private function __construct() {
+    /**
+     * @return self
+     */
+    public static function getInstance() : self
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
 
-	}
+        return self::$instance;
+    }
 
 
-	/**
-	 * @return bool
-	 */
-	public function hasLogAccess(): bool {
-		return self::dic()->rbacreview()->isAssigned(self::dic()->user()->getId(), self::ADMIN_ROLE_ID);
-	}
+    /**
+     * Access constructor
+     */
+    private function __construct()
+    {
+
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function hasLogAccess() : bool
+    {
+        return (self::plugin()->getPluginObject()->isActive() && self::dic()->rbacreview()->isAssigned(self::dic()->user()->getId(), self::ADMIN_ROLE_ID));
+    }
 }
