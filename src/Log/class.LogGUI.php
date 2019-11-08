@@ -20,138 +20,147 @@ use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
  *
  * @ilCtrl_isCalledBy srag\Plugins\MailLogger\Log\LogGUI: ilUIPluginRouterGUI
  */
-class LogGUI {
+class LogGUI
+{
 
-	use DICTrait;
-	use MailLoggerTrait;
-	const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
-	const CMD_APPLY_FILTER = "applyFilter";
-	const CMD_LOG = "log";
-	const CMD_RESET_FILTER = "resetFilter";
-	const CMD_SHOW_EMAIL = "showEmail";
-	const LANG_MODULE_LOG = "log";
-
-
-	/**
-	 * LogGUI constructor
-	 */
-	public function __construct() {
-
-	}
+    use DICTrait;
+    use MailLoggerTrait;
+    const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
+    const CMD_APPLY_FILTER = "applyFilter";
+    const CMD_LOG = "log";
+    const CMD_RESET_FILTER = "resetFilter";
+    const CMD_SHOW_EMAIL = "showEmail";
+    const LANG_MODULE_LOG = "log";
 
 
-	/**
-	 *
-	 */
-	public function executeCommand()/*: void*/ {
-		$next_class = self::dic()->ctrl()->getNextClass($this);
+    /**
+     * LogGUI constructor
+     */
+    public function __construct()
+    {
 
-		switch (strtolower($next_class)) {
-			default:
-				if (!self::access()->hasLogAccess()) {
-					ilUtil::sendInfo(self::plugin()->translate("no_access", self:: LANG_MODULE_LOG), true);
-					self::dic()->ctrl()->redirectByClass(ilRepositoryGUI::class);
-				}
-
-				$cmd = self::dic()->ctrl()->getCmd();
-
-				switch ($cmd) {
-					case self::CMD_APPLY_FILTER:
-					case self::CMD_LOG:
-					case self::CMD_RESET_FILTER:
-					case self::CMD_SHOW_EMAIL:
-						$this->{$cmd}();
-						break;
-
-					default:
-						break;
-				}
-				break;
-		}
-	}
+    }
 
 
-	/**
-	 * @param string $cmd
-	 *
-	 * @return LogTableGUI
-	 */
-	protected function getLogTable(string $cmd = self::CMD_LOG): LogTableGUI {
-		$table = new LogTableGUI($this, $cmd);
+    /**
+     *
+     */
+    public function executeCommand()/*: void*/
+    {
+        $next_class = self::dic()->ctrl()->getNextClass($this);
 
-		return $table;
-	}
+        switch (strtolower($next_class)) {
+            default:
+                if (!self::access()->hasLogAccess()) {
+                    ilUtil::sendInfo(self::plugin()->translate("no_access", self:: LANG_MODULE_LOG), true);
+                    self::dic()->ctrl()->redirectByClass(ilRepositoryGUI::class);
+                }
 
+                $cmd = self::dic()->ctrl()->getCmd();
 
-	/**
-	 *
-	 */
-	protected function log()/*: void*/ {
-		$table = $this->getLogTable();
+                switch ($cmd) {
+                    case self::CMD_APPLY_FILTER:
+                    case self::CMD_LOG:
+                    case self::CMD_RESET_FILTER:
+                    case self::CMD_SHOW_EMAIL:
+                        $this->{$cmd}();
+                        break;
 
-		self::output()->output($table, true);
-	}
-
-
-	/**
-	 * @param Log $log
-	 *
-	 * @return LogDetailsFormGUI
-	 */
-	protected function getLogDetailsForm(Log $log): LogDetailsFormGUI {
-		$form = new LogDetailsFormGUI($this, $log);
-
-		return $form;
-	}
+                    default:
+                        break;
+                }
+                break;
+        }
+    }
 
 
-	/**
-	 *
-	 */
-	protected function showEmail()/*: void*/ {
-		self::dic()->tabs()->setBackTarget(self::plugin()->translate("back", self::LANG_MODULE_LOG), self::dic()->ctrl()
-			->getLinkTarget($this, self::CMD_LOG));
+    /**
+     * @param string $cmd
+     *
+     * @return LogTableGUI
+     */
+    protected function getLogTable(string $cmd = self::CMD_LOG) : LogTableGUI
+    {
+        $table = new LogTableGUI($this, $cmd);
 
-		$log_id = filter_input(INPUT_GET, "log_id");
-
-		$log = self::logs()->getLogById($log_id);
-
-		if ($log !== null) {
-			$form = $this->getLogDetailsForm($log);
-
-			self::output()->output($form, true);
-		} else {
-			self::output()->output("", true);
-		}
-	}
+        return $table;
+    }
 
 
-	/**
-	 *
-	 */
-	protected function applyFilter()/*: void*/ {
-		$table = $this->getLogTable(self::CMD_APPLY_FILTER);
+    /**
+     *
+     */
+    protected function log()/*: void*/
+    {
+        $table = $this->getLogTable();
 
-		$table->writeFilterToSession();
-
-		$table->resetOffset();
-
-		//self::dic()->ctrl()->redirect($this, self::CMD_LOG);
-		$this->log(); // Fix reset offset
-	}
+        self::output()->output($table, true);
+    }
 
 
-	/**
-	 *
-	 */
-	protected function resetFilter()/*: void*/ {
-		$table = $this->getLogTable(self::CMD_RESET_FILTER);
+    /**
+     * @param Log $log
+     *
+     * @return LogDetailsFormGUI
+     */
+    protected function getLogDetailsForm(Log $log) : LogDetailsFormGUI
+    {
+        $form = new LogDetailsFormGUI($this, $log);
 
-		$table->resetFilter();
+        return $form;
+    }
 
-		$table->resetOffset();
 
-		//self::dic()->ctrl()->redirect($this, self::CMD_LOG);
-		$this->log(); // Fix reset offset
-	}
+    /**
+     *
+     */
+    protected function showEmail()/*: void*/
+    {
+        self::dic()->tabs()->setBackTarget(self::plugin()->translate("back", self::LANG_MODULE_LOG), self::dic()->ctrl()
+            ->getLinkTarget($this, self::CMD_LOG));
+
+        $log_id = filter_input(INPUT_GET, "log_id");
+
+        $log = self::logs()->getLogById($log_id);
+
+        if ($log !== null) {
+            $form = $this->getLogDetailsForm($log);
+
+            self::output()->output($form, true);
+        } else {
+            self::output()->output("", true);
+        }
+    }
+
+
+    /**
+     *
+     */
+    protected function applyFilter()/*: void*/
+    {
+        $table = $this->getLogTable(self::CMD_APPLY_FILTER);
+
+        $table->writeFilterToSession();
+
+        $table->resetOffset();
+
+        //self::dic()->ctrl()->redirect($this, self::CMD_LOG);
+        $this->log(); // Fix reset offset
+    }
+
+
+    /**
+     *
+     */
+    protected function resetFilter()/*: void*/
+    {
+        $table = $this->getLogTable(self::CMD_RESET_FILTER);
+
+        $table->resetFilter();
+
+        $table->resetOffset();
+
+        //self::dic()->ctrl()->redirect($this, self::CMD_LOG);
+        $this->log(); // Fix reset offset
+    }
 }

@@ -14,51 +14,55 @@ use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-final class Users {
+final class Users
+{
 
-	use DICTrait;
-	use MailLoggerTrait;
-	const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
-	/**
-	 * @var self
-	 */
-	protected static $instance = null;
-
-
-	/**
-	 * @return self
-	 */
-	public static function getInstance(): self {
-		if (self::$instance === null) {
-			self::$instance = new self();
-		}
-
-		return self::$instance;
-	}
+    use DICTrait;
+    use MailLoggerTrait;
+    const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
+    /**
+     * @var self
+     */
+    protected static $instance = null;
 
 
-	/**
-	 * Users constructor
-	 */
-	private function __construct() {
+    /**
+     * @return self
+     */
+    public static function getInstance() : self
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
 
-	}
+        return self::$instance;
+    }
 
 
-	/**
-	 * @return array
-	 */
-	public function getUsers(): array {
-		$result = self::dic()->database()->queryF('SELECT usr_id, firstname, lastname FROM usr_data WHERE active=%s', [
-			ilDBConstants::T_INTEGER
-		], [ 1 ]);
+    /**
+     * Users constructor
+     */
+    private function __construct()
+    {
 
-		$array = [];
+    }
 
-		while (($row = $result->fetchAssoc()) !== false) {
-			$array[$row["usr_id"]] = $row["lastname"] . ", " . $row["firstname"];
-		}
 
-		return $array;
-	}
+    /**
+     * @return array
+     */
+    public function getUsers() : array
+    {
+        $result = self::dic()->database()->queryF('SELECT usr_id, firstname, lastname FROM usr_data WHERE active=%s', [
+            ilDBConstants::T_INTEGER
+        ], [1]);
+
+        $array = [];
+
+        while (($row = $result->fetchAssoc()) !== false) {
+            $array[$row["usr_id"]] = $row["lastname"] . ", " . $row["firstname"];
+        }
+
+        return $array;
+    }
 }
