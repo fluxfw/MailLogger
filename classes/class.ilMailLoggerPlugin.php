@@ -4,13 +4,8 @@ require_once __DIR__ . "/../vendor/autoload.php";
 
 use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
 use srag\DIC\MailLogger\Util\LibraryLanguageInstaller;
-use srag\Plugins\CtrlMainMenu\Entry\ctrlmmEntry;
-use srag\Plugins\CtrlMainMenu\EntryTypes\Ctrl\ctrlmmEntryCtrl;
-use srag\Plugins\CtrlMainMenu\Menu\ctrlmmMenu;
-use srag\Plugins\MailLogger\Access\Access;
 use srag\Plugins\MailLogger\Config\Config;
 use srag\Plugins\MailLogger\Log\Log;
-use srag\Plugins\MailLogger\Log\LogGUI;
 use srag\Plugins\MailLogger\Menu\Menu;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\RemovePluginDataConfirm\MailLogger\PluginUninstallTrait;
@@ -128,7 +123,7 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
         self::dic()->database()->dropTable(Config::TABLE_NAME, false);
         self::dic()->database()->dropTable(Log::TABLE_NAME, false);
 
-        $this->removeCtrlMainMenu();
+        Menu::removeCtrlMainMenu();
     }
 
 
@@ -137,59 +132,6 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
      */
     protected function afterActivation()/*: void*/
     {
-        $this->addCtrlMainMenu();
-    }
-
-
-    /**
-     *
-     */
-    protected function addCtrlMainMenu()/*: void*/
-    {
-        try {
-            include_once __DIR__ . "/../../../../UIComponent/UserInterfaceHook/CtrlMainMenu/vendor/autoload.php";
-
-            if (class_exists(ctrlmmEntry::class)) {
-                if (count(ctrlmmEntry::getEntriesByCmdClass(str_replace("\\", "\\\\", LogGUI::class))) === 0) {
-                    $entry = new ctrlmmEntryCtrl();
-                    $entry->setTitle(self::PLUGIN_NAME);
-                    $entry->setTranslations([
-                        "en" => self::plugin()->translate("log", LogGUI::LANG_MODULE_LOG, [], true, "en"),
-                        "de" => self::plugin()->translate("log", LogGUI::LANG_MODULE_LOG, [], true, "de")
-                    ]);
-                    $entry->setGuiClass(implode(",", [ilUIPluginRouterGUI::class, LogGUI::class]));
-                    $entry->setCmd(LogGUI::CMD_LOG);
-                    $entry->setPermissionType(ctrlmmMenu::PERM_SCRIPT);
-                    $entry->setPermission(json_encode([
-                        __DIR__ . "/../vendor/autoload.php",
-                        Access::class,
-                        "hasLogAccess"
-                    ]));
-                    $entry->store();
-                }
-            }
-        } catch (Throwable $ex) {
-        }
-    }
-
-
-    /**
-     *
-     */
-    protected function removeCtrlMainMenu()/*: void*/
-    {
-        try {
-            include_once __DIR__ . "/../../../../UIComponent/UserInterfaceHook/CtrlMainMenu/vendor/autoload.php";
-
-            if (class_exists(ctrlmmEntry::class)) {
-                foreach (ctrlmmEntry::getEntriesByCmdClass(str_replace("\\", "\\\\", LogGUI::class)) as $entry) {
-                    /**
-                     * @var ctrlmmEntry $entry
-                     */
-                    $entry->delete();
-                }
-            }
-        } catch (Throwable $ex) {
-        }
+        Menu::addCtrlMainMenu();
     }
 }
