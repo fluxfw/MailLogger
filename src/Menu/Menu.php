@@ -108,7 +108,7 @@ class Menu extends AbstractStaticPluginMainMenuProvider
                     $entry->setCmd(LogGUI::CMD_LOG);
                     $entry->setPermissionType(ctrlmmMenu::PERM_SCRIPT);
                     $entry->setPermission(json_encode([
-                        __DIR__ . "/../vendor/autoload.php",
+                        __DIR__ . "/../../vendor/autoload.php",
                         Access::class,
                         "hasLogAccess"
                     ]));
