@@ -122,16 +122,5 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
     {
         self::dic()->database()->dropTable(Config::TABLE_NAME, false);
         self::dic()->database()->dropTable(Log::TABLE_NAME, false);
-
-        Menu::removeCtrlMainMenu();
-    }
-
-
-    /**
-     *
-     */
-    protected function afterActivation()/*: void*/
-    {
-        Menu::addCtrlMainMenu();
     }
 }

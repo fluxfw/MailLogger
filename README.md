@@ -12,7 +12,7 @@ git clone https://github.com/studer-raimann/MailLogger.git MailLogger
 Update, activate and config the plugin in the ILIAS Plugin Administration
 
 ### Menu (Only ILIAS 5.3)
-For ILIAS 5.3, you need to install [CtrlMainMenu](https://github.com/studer-raimann/CtrlMainMenu) before you activate the MailLogger-Plugin
+For ILIAS 5.3, you need to use [CtrlMainMenu](https://github.com/studer-raimann/CtrlMainMenu)
 
 ### ILIAS-Core-Patch (Only ILIAS 5.3)
 In order for log sending emails correctly in ILIAS 5.3, it needs some patches in the ILIAS core:
