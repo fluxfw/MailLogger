@@ -12,8 +12,9 @@ use srag\RemovePluginDataConfirm\MailLogger\AbstractRemovePluginDataConfirm;
  *
  * @ilCtrl_isCalledBy MailLoggerRemoveDataConfirm: ilUIPluginRouterGUI
  */
-class MailLoggerRemoveDataConfirm extends AbstractRemovePluginDataConfirm {
+class MailLoggerRemoveDataConfirm extends AbstractRemovePluginDataConfirm
+{
 
-	use MailLoggerTrait;
-	const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
+    use MailLoggerTrait;
+    const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
 }

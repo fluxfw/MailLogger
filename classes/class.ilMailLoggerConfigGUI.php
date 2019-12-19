@@ -11,12 +11,13 @@ use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
  *
  * @author studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-class ilMailLoggerConfigGUI extends ActiveRecordConfigGUI {
+class ilMailLoggerConfigGUI extends ActiveRecordConfigGUI
+{
 
-	use MailLoggerTrait;
-	const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
-	/**
-	 * @var array
-	 */
-	protected static $tabs = [ self::TAB_CONFIGURATION => ConfigFormGUI::class ];
+    use MailLoggerTrait;
+    const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
+    /**
+     * @var array
+     */
+    protected static $tabs = [self::TAB_CONFIGURATION => ConfigFormGUI::class];
 }

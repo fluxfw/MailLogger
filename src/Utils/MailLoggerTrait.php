@@ -14,36 +14,41 @@ use srag\Plugins\MailLogger\Logs\Logs;
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-trait MailLoggerTrait {
+trait MailLoggerTrait
+{
 
-	/**
-	 * @return Access
-	 */
-	protected static function access(): Access {
-		return Access::getInstance();
-	}
-
-
-	/**
-	 * @return Ilias
-	 */
-	protected static function ilias(): Ilias {
-		return Ilias::getInstance();
-	}
+    /**
+     * @return Access
+     */
+    protected static function access() : Access
+    {
+        return Access::getInstance();
+    }
 
 
-	/**
-	 * @return LogHandler
-	 */
-	protected static function logHandler(): LogHandler {
-		return LogHandler::getInstance();
-	}
+    /**
+     * @return Ilias
+     */
+    protected static function ilias() : Ilias
+    {
+        return Ilias::getInstance();
+    }
 
 
-	/**
-	 * @return Logs
-	 */
-	protected static function logs(): Logs {
-		return Logs::getInstance();
-	}
+    /**
+     * @return LogHandler
+     */
+    protected static function logHandler() : LogHandler
+    {
+        return LogHandler::getInstance();
+    }
+
+
+    /**
+     * @return Logs
+     */
+    protected static function logs() : Logs
+    {
+        return Logs::getInstance();
+    }
 }
