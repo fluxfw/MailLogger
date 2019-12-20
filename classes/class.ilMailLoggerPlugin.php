@@ -23,7 +23,6 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
     const PLUGIN_ID = "maillog";
     const PLUGIN_NAME = "MailLogger";
     const PLUGIN_CLASS_NAME = self::class;
-    const REMOVE_PLUGIN_DATA_CONFIRM_CLASS_NAME = MailLoggerRemoveDataConfirm::class;
     const COMPONENT_MAIL = "Services/Mail";
     const EVENT_SENT_INTERNAL_MAIL = "sentInternalMail";
     const EVENT_SENT_EXTERNAL_MAIL = "externalEmailDelegated";
