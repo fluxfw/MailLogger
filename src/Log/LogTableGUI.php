@@ -233,7 +233,7 @@ class LogTableGUI extends TableGUI
         parent::fillRow($row);
 
         $this->tpl->setVariable("COLUMN", self::output()->getHTML(self::dic()->ui()->factory()->dropdown()->standard([
-            self::dic()->ui()->factory()->button()->shy(self::plugin()->translate("show_email", self::LANG_MODULE), self::dic()->ctrl()
+            self::dic()->ui()->factory()->link()->standard(self::plugin()->translate("show_email", self::LANG_MODULE), self::dic()->ctrl()
                 ->getLinkTarget($this->parent_obj, LogGUI::CMD_SHOW_EMAIL))
         ])->withLabel(self::plugin()->translate("actions", self::LANG_MODULE))));
     }
