@@ -88,7 +88,7 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function promoteGlobalScreenProvider() : AbstractStaticPluginMainMenuProvider
     {
@@ -109,7 +109,7 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function deleteData()/*: void*/
     {
