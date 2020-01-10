@@ -55,7 +55,7 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
 
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getPluginName() : string
     {
@@ -64,15 +64,9 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
 
 
     /**
-     * @param string $a_component
-     * @param string $a_event
-     * @param array  $a_parameter
+     * @inheritDoc
      */
-    public function handleEvent(/*string*/
-        $a_component, /*string*/
-        $a_event,/*array*/
-        $a_parameter
-    )/*: void*/
+    public function handleEvent(/*string*/ $a_component, /*string*/ $a_event, /*array*/ $a_parameter)/*: void*/
     {
         if ($a_component === self::COMPONENT_MAIL) {
             switch ($a_event) {
@@ -103,9 +97,9 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function updateLanguages($a_lang_keys = null)
+    public function updateLanguages(/*?array*/ $a_lang_keys = null)/*:void*/
     {
         parent::updateLanguages($a_lang_keys);
 
