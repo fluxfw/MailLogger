@@ -54,7 +54,7 @@ class ConfigFormGUI extends ConfigPropertyFormGUI
             Config::KEY_LOG_EMAIL_OF_USERS => [
                 self::PROPERTY_CLASS    => MultiSelectSearchInputGUI::class,
                 self::PROPERTY_REQUIRED => true,
-                self::PROPERTY_OPTIONS  => self::ilias()->users()->getUsers()
+                self::PROPERTY_OPTIONS  => self::mailLogger()->ilias()->users()->getUsers()
             ],
             Config::KEY_LOG_SYSTEM_EMAILS  => [
                 self::PROPERTY_CLASS => ilCheckboxInputGUI::class

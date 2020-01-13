@@ -9,17 +9,17 @@ class ComposerStaticInitbc7b400c4e711f828557f7bd975f042c
     public static $prefixLengthsPsr4 = array (
         's' => 
         array (
-            'srag\\RemovePluginDataConfirm\\' => 29,
+            'srag\\RemovePluginDataConfirm\\MailLogger\\' => 40,
             'srag\\Plugins\\MailLogger\\' => 24,
             'srag\\LibrariesNamespaceChanger\\' => 31,
-            'srag\\DIC\\' => 9,
-            'srag\\CustomInputGUIs\\' => 21,
-            'srag\\ActiveRecordConfig\\' => 24,
+            'srag\\DIC\\MailLogger\\' => 20,
+            'srag\\CustomInputGUIs\\MailLogger\\' => 32,
+            'srag\\ActiveRecordConfig\\MailLogger\\' => 35,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'srag\\RemovePluginDataConfirm\\' => 
+        'srag\\RemovePluginDataConfirm\\MailLogger\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/removeplugindataconfirm/src',
         ),
@@ -31,15 +31,15 @@ class ComposerStaticInitbc7b400c4e711f828557f7bd975f042c
         array (
             0 => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src',
         ),
-        'srag\\DIC\\' => 
+        'srag\\DIC\\MailLogger\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/dic/src',
         ),
-        'srag\\CustomInputGUIs\\' => 
+        'srag\\CustomInputGUIs\\MailLogger\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/custominputguis/src',
         ),
-        'srag\\ActiveRecordConfig\\' => 
+        'srag\\ActiveRecordConfig\\MailLogger\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/activerecordconfig/src',
         ),
@@ -148,13 +148,15 @@ class ComposerStaticInitbc7b400c4e711f828557f7bd975f042c
         'srag\\Plugins\\MailLogger\\Access\\Users' => __DIR__ . '/../..' . '/src/Access/Users.php',
         'srag\\Plugins\\MailLogger\\Config\\Config' => __DIR__ . '/../..' . '/src/Config/Config.php',
         'srag\\Plugins\\MailLogger\\Config\\ConfigFormGUI' => __DIR__ . '/../..' . '/src/Config/ConfigFormGUI.php',
+        'srag\\Plugins\\MailLogger\\Log\\Factory' => __DIR__ . '/../..' . '/src/Log/Factory.php',
         'srag\\Plugins\\MailLogger\\Log\\Log' => __DIR__ . '/../..' . '/src/Log/Log.php',
         'srag\\Plugins\\MailLogger\\Log\\LogDetailsFormGUI' => __DIR__ . '/../..' . '/src/Log/LogDetailsFormGUI.php',
         'srag\\Plugins\\MailLogger\\Log\\LogGUI' => __DIR__ . '/../..' . '/src/Log/class.LogGUI.php',
         'srag\\Plugins\\MailLogger\\Log\\LogHandler' => __DIR__ . '/../..' . '/src/Log/LogHandler.php',
         'srag\\Plugins\\MailLogger\\Log\\LogTableGUI' => __DIR__ . '/../..' . '/src/Log/LogTableGUI.php',
-        'srag\\Plugins\\MailLogger\\Logs\\Logs' => __DIR__ . '/../..' . '/src/Log/Logs.php',
+        'srag\\Plugins\\MailLogger\\Log\\Repository' => __DIR__ . '/../..' . '/src/Log/Repository.php',
         'srag\\Plugins\\MailLogger\\Menu\\Menu' => __DIR__ . '/../..' . '/src/Menu/Menu.php',
+        'srag\\Plugins\\MailLogger\\Repository' => __DIR__ . '/../..' . '/src/Repository.php',
         'srag\\Plugins\\MailLogger\\Utils\\MailLoggerTrait' => __DIR__ . '/../..' . '/src/Utils/MailLoggerTrait.php',
         'srag\\RemovePluginDataConfirm\\MailLogger\\BasePluginUninstallTrait' => __DIR__ . '/..' . '/srag/removeplugindataconfirm/src/BasePluginUninstallTrait.php',
         'srag\\RemovePluginDataConfirm\\MailLogger\\PluginUninstallTrait' => __DIR__ . '/..' . '/srag/removeplugindataconfirm/src/PluginUninstallTrait.php',

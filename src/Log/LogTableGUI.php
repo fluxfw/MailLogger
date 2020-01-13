@@ -23,7 +23,19 @@ class LogTableGUI extends TableGUI
 
     use MailLoggerTrait;
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
-    const LANG_MODULE = LogGUI::LANG_MODULE_LOG;
+    const LANG_MODULE = LogGUI::LANG_MODULE;
+
+
+    /**
+     * LogTableGUI constructor
+     *
+     * @param LogGUI $parent
+     * @param string $parent_cmd
+     */
+    public function __construct(LogGUI $parent, string $parent_cmd)
+    {
+        parent::__construct($parent, $parent_cmd);
+    }
 
 
     /**
@@ -142,7 +154,7 @@ class LogTableGUI extends TableGUI
             $timestamp_end = null;
         }
 
-        $this->setData(self::logs()
+        $this->setData(self::mailLogger()->logs()
             ->getLogs($subject, $body, $from_email, $from_firstname, $from_lastname, $to_email, $to_firstname, $to_lastname, $context_title, $context_ref_id, $timestamp_start, $timestamp_end));
     }
 
@@ -217,7 +229,7 @@ class LogTableGUI extends TableGUI
      */
     protected function initTitle()/*: void*/
     {
-        $this->setTitle(self::plugin()->translate("log", LogGUI::CMD_LOG));
+        $this->setTitle(self::plugin()->translate("log", "log"));
     }
 
 
@@ -228,7 +240,7 @@ class LogTableGUI extends TableGUI
         $row
     )/*: void*/
     {
-        self::dic()->ctrl()->setParameter($this->parent_obj, "log_id", $row["id"]);
+        self::dic()->ctrl()->setParameter($this->parent_obj, LogGUI::GET_PARAM_LOG_ID, $row["id"]);
 
         parent::fillRow($row);
 

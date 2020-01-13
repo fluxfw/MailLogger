@@ -108,7 +108,7 @@ final class LogHandler
     )/*: void*/
     {
         if ($this->shouldLog($is_system, $from)) {
-            $log = new Log();
+            $log = self::mailLogger()->logs()->factory()->newInstance();
 
             $log->setSubject($subject);
 
@@ -141,7 +141,7 @@ final class LogHandler
             $time = time();
             $log->setTimestamp($time);
 
-            $log->store();
+            self::mailLogger()->logs()->storeLog($log);
         }
     }
 

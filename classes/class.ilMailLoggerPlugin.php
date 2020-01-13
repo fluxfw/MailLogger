@@ -4,8 +4,6 @@ require_once __DIR__ . "/../vendor/autoload.php";
 
 use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
 use srag\DIC\MailLogger\Util\LibraryLanguageInstaller;
-use srag\Plugins\MailLogger\Config\Config;
-use srag\Plugins\MailLogger\Log\Log;
 use srag\Plugins\MailLogger\Menu\Menu;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\RemovePluginDataConfirm\MailLogger\PluginUninstallTrait;
@@ -72,12 +70,12 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
             switch ($a_event) {
                 case self::EVENT_SENT_INTERNAL_MAIL:
                     $mail = $a_parameter;
-                    self::logHandler()->handleSentInternalEmail($mail);
+                    self::mailLogger()->logs()->handler()->handleSentInternalEmail($mail);
                     break;
 
                 case self::EVENT_SENT_EXTERNAL_MAIL:
                     $mail = $a_parameter["mail"];
-                    self::logHandler()->handleSentExternalEmail($mail);
+                    self::mailLogger()->logs()->handler()->handleSentExternalEmail($mail);
                     break;
 
                 default:
@@ -113,7 +111,6 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
      */
     protected function deleteData()/*: void*/
     {
-        self::dic()->database()->dropTable(Config::TABLE_NAME, false);
-        self::dic()->database()->dropTable(Log::TABLE_NAME, false);
+        self::mailLogger()->dropTables();
     }
 }

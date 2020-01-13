@@ -36,10 +36,10 @@ class Menu extends AbstractStaticPluginMainMenuProvider
     {
         return [
             $this->mainmenu->topParentItem($this->if->identifier(ilMailLoggerPlugin::PLUGIN_ID . "_top"))->withTitle(self::plugin()
-                ->translate("log", LogGUI::LANG_MODULE_LOG))->withAvailableCallable(function () : bool {
+                ->translate("log", LogGUI::LANG_MODULE))->withAvailableCallable(function () : bool {
                 return self::plugin()->getPluginObject()->isActive();
             })->withVisibilityCallable(function () : bool {
-                return self::access()->hasLogAccess();
+                return self::mailLogger()->access()->hasLogAccess();
             })
         ];
     }
@@ -60,17 +60,17 @@ class Menu extends AbstractStaticPluginMainMenuProvider
 
         return [
             $this->mainmenu->link($this->if->identifier(ilMailLoggerPlugin::PLUGIN_ID . "_log"))->withParent($parent->getProviderIdentification())
-                ->withTitle(self::plugin()->translate("log", LogGUI::LANG_MODULE_LOG))->withAction(self::dic()->ctrl()->getLinkTargetByClass([
+                ->withTitle(self::plugin()->translate("log", LogGUI::LANG_MODULE))->withAction(self::dic()->ctrl()->getLinkTargetByClass([
                     ilUIPluginRouterGUI::class,
                     LogGUI::class
-                ], LogGUI::CMD_LOG))->withAvailableCallable(function () : bool {
+                ], LogGUI::CMD_LIST_LOGS))->withAvailableCallable(function () : bool {
                     return self::plugin()->getPluginObject()->isActive();
                 })->withVisibilityCallable(function () : bool {
-                    return self::access()->hasLogAccess();
+                    return self::mailLogger()->access()->hasLogAccess();
                 }),
             $this->mainmenu->link($this->if->identifier(ilMailLoggerPlugin::PLUGIN_ID . "_configuration"))
                 ->withParent($parent->getProviderIdentification())->withTitle(self::plugin()
-                    ->translate("configuration", ilMailLoggerConfigGUI::LANG_MODULE_CONFIG))->withAction(self::dic()->ctrl()->getLinkTargetByClass([
+                    ->translate("configuration", ilMailLoggerConfigGUI::LANG_MODULE))->withAction(self::dic()->ctrl()->getLinkTargetByClass([
                     ilAdministrationGUI::class,
                     ilObjComponentSettingsGUI::class,
                     ilMailLoggerConfigGUI::class
