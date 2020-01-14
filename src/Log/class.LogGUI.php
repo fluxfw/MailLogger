@@ -49,11 +49,11 @@ class LogGUI
      */
     public function executeCommand()/*: void*/
     {
+        $this->log = self::mailLogger()->logs()->getLogById(intval(filter_input(INPUT_GET, self::GET_PARAM_LOG_ID)));
+
         if (!self::mailLogger()->access()->hasLogAccess()) {
             die();
         }
-
-        $this->log = self::mailLogger()->logs()->getLogById(intval(filter_input(INPUT_GET, self::GET_PARAM_LOG_ID)));
 
         //self::dic()->ctrl()->saveParameter($this, self::GET_PARAM_LOG_ID);
 

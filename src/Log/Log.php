@@ -26,7 +26,7 @@ class Log extends ActiveRecord
 
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getConnectorContainerName() : string
     {
@@ -35,7 +35,7 @@ class Log extends ActiveRecord
 
 
     /**
-     * @return string
+     * @inheritDoc
      *
      * @deprecated
      */
