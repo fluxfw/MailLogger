@@ -21,6 +21,8 @@ class ConfigFormGUI extends PropertyFormGUI
 
     use MailLoggerTrait;
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
+    const KEY_LOG_EMAIL_OF_USERS = "log_email_of_users";
+    const KEY_LOG_SYSTEM_EMAILS = "log_system_emails";
     const LANG_MODULE = ilMailLoggerConfigGUI::LANG_MODULE;
 
 
@@ -42,7 +44,7 @@ class ConfigFormGUI extends PropertyFormGUI
     {
         switch ($key) {
             default:
-                return Config::getField($key);
+                return self::mailLogger()->config()->getField($key);
         }
     }
 
@@ -62,12 +64,12 @@ class ConfigFormGUI extends PropertyFormGUI
     protected function initFields()/*: void*/
     {
         $this->fields = [
-            Config::KEY_LOG_EMAIL_OF_USERS => [
+            self::KEY_LOG_EMAIL_OF_USERS => [
                 self::PROPERTY_CLASS    => MultiSelectSearchInputGUI::class,
                 self::PROPERTY_REQUIRED => true,
                 self::PROPERTY_OPTIONS  => self::mailLogger()->ilias()->users()->getUsers()
             ],
-            Config::KEY_LOG_SYSTEM_EMAILS  => [
+            self::KEY_LOG_SYSTEM_EMAILS  => [
                 self::PROPERTY_CLASS => ilCheckboxInputGUI::class
             ]
         ];
@@ -99,7 +101,7 @@ class ConfigFormGUI extends PropertyFormGUI
     {
         switch ($key) {
             default:
-                Config::setField($key, $value);
+                self::mailLogger()->config()->setField($key, $value);
                 break;
         }
     }

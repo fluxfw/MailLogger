@@ -9,7 +9,7 @@ use ilObject;
 use ilObjectFactory;
 use ilObjUser;
 use srag\DIC\MailLogger\DICTrait;
-use srag\Plugins\MailLogger\Config\Config;
+use srag\Plugins\MailLogger\Config\ConfigFormGUI;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 
 /**
@@ -155,9 +155,9 @@ final class LogHandler
     protected function shouldLog(bool $is_system, ilObjUser $from) : bool
     {
         if ($is_system) {
-            return Config::getField(Config::KEY_LOG_SYSTEM_EMAILS);
+            return self::mailLogger()->config()->getField(ConfigFormGUI::KEY_LOG_SYSTEM_EMAILS);
         } else {
-            $log_email_of_users = Config::getField(Config::KEY_LOG_EMAIL_OF_USERS);
+            $log_email_of_users = self::mailLogger()->config()->getField(ConfigFormGUI::KEY_LOG_EMAIL_OF_USERS);
 
             return in_array($from->getId(), $log_email_of_users);
         }

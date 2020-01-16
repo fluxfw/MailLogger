@@ -110,7 +110,6 @@ return array(
     'srag\\Plugins\\MailLogger\\Access\\Access' => $baseDir . '/src/Access/Access.php',
     'srag\\Plugins\\MailLogger\\Access\\Ilias' => $baseDir . '/src/Access/Ilias.php',
     'srag\\Plugins\\MailLogger\\Access\\Users' => $baseDir . '/src/Access/Users.php',
-    'srag\\Plugins\\MailLogger\\Config\\Config' => $baseDir . '/src/Config/Config.php',
     'srag\\Plugins\\MailLogger\\Config\\ConfigFormGUI' => $baseDir . '/src/Config/ConfigFormGUI.php',
     'srag\\Plugins\\MailLogger\\Log\\Factory' => $baseDir . '/src/Log/Factory.php',
     'srag\\Plugins\\MailLogger\\Log\\Log' => $baseDir . '/src/Log/Log.php',
