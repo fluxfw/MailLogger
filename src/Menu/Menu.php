@@ -74,7 +74,7 @@ class Menu extends AbstractStaticPluginMainMenuProvider
                     ilAdministrationGUI::class,
                     ilObjComponentSettingsGUI::class,
                     ilMailLoggerConfigGUI::class
-                ], ""))->withAvailableCallable(function () : bool {
+                ], ilMailLoggerConfigGUI::CMD_CONFIGURE))->withAvailableCallable(function () : bool {
                     return self::plugin()->getPluginObject()->isActive();
                 })->withVisibilityCallable(function () : bool {
                     return self::dic()->rbacreview()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role
