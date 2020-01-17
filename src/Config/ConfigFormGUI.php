@@ -44,7 +44,7 @@ class ConfigFormGUI extends PropertyFormGUI
     {
         switch ($key) {
             default:
-                return self::mailLogger()->config()->getField($key);
+                return self::mailLogger()->config()->getValue($key);
         }
     }
 
@@ -101,7 +101,7 @@ class ConfigFormGUI extends PropertyFormGUI
     {
         switch ($key) {
             default:
-                self::mailLogger()->config()->setField($key, $value);
+                self::mailLogger()->config()->setValue($key, $value);
                 break;
         }
     }

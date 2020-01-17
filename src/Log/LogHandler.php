@@ -155,9 +155,9 @@ final class LogHandler
     protected function shouldLog(bool $is_system, ilObjUser $from) : bool
     {
         if ($is_system) {
-            return self::mailLogger()->config()->getField(ConfigFormGUI::KEY_LOG_SYSTEM_EMAILS);
+            return self::mailLogger()->config()->getValue(ConfigFormGUI::KEY_LOG_SYSTEM_EMAILS);
         } else {
-            $log_email_of_users = self::mailLogger()->config()->getField(ConfigFormGUI::KEY_LOG_EMAIL_OF_USERS);
+            $log_email_of_users = self::mailLogger()->config()->getValue(ConfigFormGUI::KEY_LOG_EMAIL_OF_USERS);
 
             return in_array($from->getId(), $log_email_of_users);
         }

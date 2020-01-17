@@ -3,7 +3,6 @@
 require_once __DIR__ . "/../vendor/autoload.php";
 
 use srag\DIC\MailLogger\DICTrait;
-use srag\Plugins\MailLogger\Config\ConfigFormGUI;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 
 /**
@@ -72,24 +71,13 @@ class ilMailLoggerConfigGUI extends ilPluginConfigGUI
 
 
     /**
-     * @return ConfigFormGUI
-     */
-    protected function getConfigForm() : ConfigFormGUI
-    {
-        $form = new ConfigFormGUI($this);
-
-        return $form;
-    }
-
-
-    /**
      *
      */
     protected function configure()/*: void*/
     {
         self::dic()->tabs()->activateTab(self::TAB_CONFIGURATION);
 
-        $form = $this->getConfigForm();
+        $form = self::mailLogger()->config()->factory()->newFormInstance($this);
 
         self::output()->output($form);
     }
@@ -102,7 +90,7 @@ class ilMailLoggerConfigGUI extends ilPluginConfigGUI
     {
         self::dic()->tabs()->activateTab(self::TAB_CONFIGURATION);
 
-        $form = $this->getConfigForm();
+        $form = self::mailLogger()->config()->factory()->newFormInstance($this);
 
         if (!$form->storeForm()) {
             self::output()->output($form);
