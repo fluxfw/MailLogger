@@ -111,9 +111,6 @@ class LogTableGUI extends TableGUI
         parent::initColumns();
 
         $this->addColumn(self::plugin()->translate("actions", self::LANG_MODULE));
-
-        $this->setDefaultOrderField("timestamp");
-        $this->setDefaultOrderDirection("desc");
     }
 
 
@@ -122,6 +119,9 @@ class LogTableGUI extends TableGUI
      */
     protected function initData()/*: void*/
     {
+        $this->setDefaultOrderField("timestamp");
+        $this->setDefaultOrderDirection("desc");
+
         $filter = $this->getFilterValues();
 
         $subject = $filter["subject"];
