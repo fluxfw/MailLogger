@@ -39,6 +39,7 @@ return array(
     'srag\\CustomInputGUIs\\MailLogger\\MultiLineNewInputGUI\\MultiLineNewInputGUI' => $vendorDir . '/srag/custominputguis/src/MultiLineNewInputGUI/MultiLineNewInputGUI.php',
     'srag\\CustomInputGUIs\\MailLogger\\MultiSelectSearchInputGUI\\MultiSelectSearchInput2GUI' => $vendorDir . '/srag/custominputguis/src/MultiSelectSearchInputGUI/MultiSelectSearchInput2GUI.php',
     'srag\\CustomInputGUIs\\MailLogger\\MultiSelectSearchInputGUI\\MultiSelectSearchInputGUI' => $vendorDir . '/srag/custominputguis/src/MultiSelectSearchInputGUI/MultiSelectSearchInputGUI.php',
+    'srag\\CustomInputGUIs\\MailLogger\\MultiSelectSearchNewInputGUI\\MultiSelectSearchNewInputGUI' => $vendorDir . '/srag/custominputguis/src/MultiSelectSearchNewInputGUI/MultiSelectSearchNewInputGUI.php',
     'srag\\CustomInputGUIs\\MailLogger\\NumberInputGUI\\NumberInputGUI' => $vendorDir . '/srag/custominputguis/src/NumberInputGUI/NumberInputGUI.php',
     'srag\\CustomInputGUIs\\MailLogger\\PieChart\\Component\\LegendEntry' => $vendorDir . '/srag/custominputguis/src/PieChart/Component/LegendEntry.php',
     'srag\\CustomInputGUIs\\MailLogger\\PieChart\\Component\\PieChart' => $vendorDir . '/srag/custominputguis/src/PieChart/Component/PieChart.php',

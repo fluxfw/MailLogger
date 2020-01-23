@@ -5,7 +5,7 @@ namespace srag\Plugins\MailLogger\Config;
 use ilCheckboxInputGUI;
 use ilMailLoggerConfigGUI;
 use ilMailLoggerPlugin;
-use srag\CustomInputGUIs\MailLogger\MultiSelectSearchInputGUI\MultiSelectSearchInputGUI;
+use srag\CustomInputGUIs\MailLogger\MultiSelectSearchNewInputGUI\MultiSelectSearchNewInputGUI;
 use srag\CustomInputGUIs\MailLogger\PropertyFormGUI\PropertyFormGUI;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 
@@ -65,7 +65,7 @@ class ConfigFormGUI extends PropertyFormGUI
     {
         $this->fields = [
             self::KEY_LOG_EMAIL_OF_USERS => [
-                self::PROPERTY_CLASS    => MultiSelectSearchInputGUI::class,
+                self::PROPERTY_CLASS    => MultiSelectSearchNewInputGUI::class,
                 self::PROPERTY_REQUIRED => true,
                 self::PROPERTY_OPTIONS  => self::mailLogger()->ilias()->users()->getUsers()
             ],
