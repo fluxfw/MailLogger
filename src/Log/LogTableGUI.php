@@ -53,10 +53,11 @@ class LogTableGUI extends TableGUI
                 } else {
                     $column = ilDatePresentation::formatDate(new ilDateTime($row[$column], IL_CAL_UNIX));
                 }
+                $column = htmlspecialchars($column);
                 break;
 
             default:
-                $column = $row[$column];
+                $column = htmlspecialchars($row[$column]);
                 break;
         }
 
