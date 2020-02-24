@@ -21,7 +21,7 @@ final class Repository extends AbstractRepository
     use MailLoggerTrait;
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     /**
-     * @var self
+     * @var self|null
      */
     protected static $instance = null;
 

@@ -21,7 +21,7 @@ final class Access
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     const ADMIN_ROLE_ID = 2;
     /**
-     * @var self
+     * @var self|null
      */
     protected static $instance = null;
 

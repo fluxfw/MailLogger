@@ -20,7 +20,7 @@ final class Factory
     use MailLoggerTrait;
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     /**
-     * @var self
+     * @var self|null
      */
     protected static $instance = null;
 
