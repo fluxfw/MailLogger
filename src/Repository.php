@@ -8,6 +8,7 @@ use srag\Plugins\MailLogger\Access\Access;
 use srag\Plugins\MailLogger\Access\Ilias;
 use srag\Plugins\MailLogger\Config\Repository as ConfigRepository;
 use srag\Plugins\MailLogger\Log\Repository as LogsRepository;
+use srag\Plugins\MailLogger\Menu\Menu;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 
 /**
@@ -104,5 +105,14 @@ final class Repository
     public function logs() : LogsRepository
     {
         return LogsRepository::getInstance();
+    }
+
+
+    /**
+     * @return Menu
+     */
+    public function menu() : Menu
+    {
+        return new Menu(self::dic()->dic(), self::plugin()->getPluginObject());
     }
 }

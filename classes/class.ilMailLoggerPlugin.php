@@ -3,7 +3,6 @@
 require_once __DIR__ . "/../vendor/autoload.php";
 
 use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
-use srag\Plugins\MailLogger\Menu\Menu;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\RemovePluginDataConfirm\MailLogger\PluginUninstallTrait;
 
@@ -89,7 +88,7 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
      */
     public function promoteGlobalScreenProvider() : AbstractStaticPluginMainMenuProvider
     {
-        return new Menu(self::dic()->dic(), $this);
+        return self::mailLogger()->menu();
     }
 
 
