@@ -53,6 +53,6 @@ final class Access
      */
     public function hasLogAccess() : bool
     {
-        return (self::plugin()->getPluginObject()->isActive() && self::dic()->rbacreview()->isAssigned(self::dic()->user()->getId(), self::ADMIN_ROLE_ID));
+        return (self::plugin()->getPluginObject()->isActive() && self::dic()->rbac()->review()->isAssigned(self::dic()->user()->getId(), self::ADMIN_ROLE_ID));
     }
 }

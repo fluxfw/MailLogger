@@ -2,7 +2,6 @@
 
 namespace srag\Plugins\MailLogger\Config;
 
-use ilMailLoggerConfigGUI;
 use ilMailLoggerPlugin;
 use srag\ActiveRecordConfig\MailLogger\Config\AbstractFactory;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
@@ -48,11 +47,11 @@ final class Factory extends AbstractFactory
 
 
     /**
-     * @param ilMailLoggerConfigGUI $parent
+     * @param ConfigCtrl $parent
      *
      * @return ConfigFormGUI
      */
-    public function newFormInstance(ilMailLoggerConfigGUI $parent) : ConfigFormGUI
+    public function newFormInstance(ConfigCtrl $parent) : ConfigFormGUI
     {
         $form = new ConfigFormGUI($parent);
 

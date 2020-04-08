@@ -9,6 +9,7 @@ use ilMailLoggerPlugin;
 use ilObjComponentSettingsGUI;
 use ilUIPluginRouterGUI;
 use srag\DIC\MailLogger\DICTrait;
+use srag\Plugins\MailLogger\Config\ConfigCtrl;
 use srag\Plugins\MailLogger\Log\LogGUI;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 
@@ -70,14 +71,14 @@ class Menu extends AbstractStaticPluginMainMenuProvider
                 }),
             $this->mainmenu->link($this->if->identifier(ilMailLoggerPlugin::PLUGIN_ID . "_configuration"))
                 ->withParent($parent->getProviderIdentification())->withTitle(self::plugin()
-                    ->translate("configuration", ilMailLoggerConfigGUI::LANG_MODULE))->withAction(self::dic()->ctrl()->getLinkTargetByClass([
+                    ->translate("configuration", ConfigCtrl::LANG_MODULE))->withAction(self::dic()->ctrl()->getLinkTargetByClass([
                     ilAdministrationGUI::class,
                     ilObjComponentSettingsGUI::class,
                     ilMailLoggerConfigGUI::class
                 ], ilMailLoggerConfigGUI::CMD_CONFIGURE))->withAvailableCallable(function () : bool {
                     return self::plugin()->getPluginObject()->isActive();
                 })->withVisibilityCallable(function () : bool {
-                    return self::dic()->rbacreview()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role
+                    return self::dic()->rbac()->review()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role
                 })
         ];
     }

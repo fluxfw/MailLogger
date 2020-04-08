@@ -3,7 +3,6 @@
 namespace srag\Plugins\MailLogger\Config;
 
 use ilCheckboxInputGUI;
-use ilMailLoggerConfigGUI;
 use ilMailLoggerPlugin;
 use srag\CustomInputGUIs\MailLogger\MultiSelectSearchNewInputGUI\MultiSelectSearchNewInputGUI;
 use srag\CustomInputGUIs\MailLogger\PropertyFormGUI\PropertyFormGUI;
@@ -23,15 +22,15 @@ class ConfigFormGUI extends PropertyFormGUI
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     const KEY_LOG_EMAIL_OF_USERS = "log_email_of_users";
     const KEY_LOG_SYSTEM_EMAILS = "log_system_emails";
-    const LANG_MODULE = ilMailLoggerConfigGUI::LANG_MODULE;
+    const LANG_MODULE = ConfigCtrl::LANG_MODULE;
 
 
     /**
      * ConfigFormGUI constructor
      *
-     * @param ilMailLoggerConfigGUI $parent
+     * @param ConfigCtrl $parent
      */
-    public function __construct(ilMailLoggerConfigGUI $parent)
+    public function __construct(ConfigCtrl $parent)
     {
         parent::__construct($parent);
     }
@@ -54,7 +53,7 @@ class ConfigFormGUI extends PropertyFormGUI
      */
     protected function initCommands()/*: void*/
     {
-        $this->addCommandButton(ilMailLoggerConfigGUI::CMD_UPDATE_CONFIGURE, $this->txt("save"));
+        $this->addCommandButton(ConfigCtrl::CMD_UPDATE_CONFIGURE, $this->txt("save"));
     }
 
 
