@@ -16,6 +16,7 @@ class ilMailLoggerConfigGUI extends ilPluginConfigGUI
 
     use DICTrait;
     use MailLoggerTrait;
+
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     const CMD_CONFIGURE = "configure";
 

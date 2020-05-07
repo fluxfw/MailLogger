@@ -18,6 +18,7 @@ final class Repository
 
     use MailLoggerTrait;
     use DICTrait;
+
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     /**
      * @var self|null

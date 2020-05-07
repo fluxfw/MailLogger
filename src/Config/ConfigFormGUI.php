@@ -19,6 +19,7 @@ class ConfigFormGUI extends PropertyFormGUI
 {
 
     use MailLoggerTrait;
+
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     const KEY_LOG_EMAIL_OF_USERS = "log_email_of_users";
     const KEY_LOG_SYSTEM_EMAILS = "log_system_emails";

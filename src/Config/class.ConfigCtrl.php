@@ -21,6 +21,7 @@ class ConfigCtrl
 
     use DICTrait;
     use MailLoggerTrait;
+
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     const CMD_CONFIGURE = "configure";
     const CMD_UPDATE_CONFIGURE = "updateConfigure";

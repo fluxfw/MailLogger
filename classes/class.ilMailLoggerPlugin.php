@@ -16,6 +16,7 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
 
     use PluginUninstallTrait;
     use MailLoggerTrait;
+
     const PLUGIN_ID = "maillog";
     const PLUGIN_NAME = "MailLogger";
     const PLUGIN_CLASS_NAME = self::class;

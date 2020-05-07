@@ -17,6 +17,7 @@ final class Factory extends AbstractFactory
 {
 
     use MailLoggerTrait;
+
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     /**
      * @var self|null

@@ -27,6 +27,7 @@ class Menu extends AbstractStaticPluginMainMenuProvider
 
     use DICTrait;
     use MailLoggerTrait;
+
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
 
 

@@ -18,6 +18,7 @@ final class Factory
 
     use DICTrait;
     use MailLoggerTrait;
+
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     /**
      * @var self|null

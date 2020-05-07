@@ -22,6 +22,7 @@ class LogDetailsFormGUI extends PropertyFormGUI
 {
 
     use MailLoggerTrait;
+
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     const LANG_MODULE = LogGUI::LANG_MODULE;
     /**

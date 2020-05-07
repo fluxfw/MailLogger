@@ -21,6 +21,7 @@ class Log extends ActiveRecord
 
     use DICTrait;
     use MailLoggerTrait;
+
     const TABLE_NAME = ilMailLoggerPlugin::PLUGIN_ID . "_log";
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
 

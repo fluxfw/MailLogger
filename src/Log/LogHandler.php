@@ -24,6 +24,7 @@ final class LogHandler
 
     use DICTrait;
     use MailLoggerTrait;
+
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     /**
      * @var self|null

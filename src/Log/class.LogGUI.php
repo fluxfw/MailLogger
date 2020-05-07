@@ -22,6 +22,7 @@ class LogGUI
 
     use DICTrait;
     use MailLoggerTrait;
+
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     const CMD_APPLY_FILTER = "applyFilter";
     const CMD_LIST_LOGS = "listLogs";
