@@ -1,8 +1,14 @@
 This is an OpenSource project by studer + raimann ag, CH-Burgdorf (https://studer-raimann.ch)
 
+## Description
+See in [doc/DESCRIPTION.md](./doc/DESCRIPTION.md)
+
+## Documentation
+See in [doc/DOCUMENTATION.md](./doc/DOCUMENTATION.md)
+
 ## Installation
 
-### Install MailLogger-Plugin
+### Install MailLogger Plugin
 Start at your ILIAS root directory
 ```bash
 mkdir -p Customizing/global/plugins/Services/EventHandling/EventHook
@@ -83,19 +89,6 @@ abstract class ilMailMimeTransportBase implements ilMailMimeTransport
 	}
 }
 ```
-
-### Some screenshots
-Config:
-![Config](./doc/screenshots/config.png)
-
-Send test mail:
-![Send test mail](./doc/screenshots/send_test_mail.png)
-
-Log table:
-![Log table](./doc/screenshots/log_table.png)
-
-Show email:
-![Show email](./doc/screenshots/show_email.png)
 
 ### Requirements
 * ILIAS 5.3 or ILIAS 5.4
