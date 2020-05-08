@@ -1,1 +1,1 @@
-## MailLogger Documentation
+# MailLogger ILIAS Plugin Documentation
