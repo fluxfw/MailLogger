@@ -143,7 +143,7 @@ class LogGUI
             ->getLinkTarget($this, self::CMD_LIST_LOGS));
 
         if ($this->log !== null) {
-            $form = self::mailLogger()->logs()->factory()->newFormInstance($this, $this->log);
+            $form = self::mailLogger()->logs()->factory()->newFormBuilderInstance($this, $this->log);
 
             self::output()->output($form, true);
         } else {

@@ -13,7 +13,7 @@ class ComposerStaticInitbc7b400c4e711f828557f7bd975f042c
             'srag\\Plugins\\MailLogger\\' => 24,
             'srag\\LibrariesNamespaceChanger\\' => 31,
             'srag\\DIC\\MailLogger\\' => 20,
-            'srag\\CustomInputGUIs\\' => 21,
+            'srag\\CustomInputGUIs\\MailLogger\\' => 32,
             'srag\\ActiveRecordConfig\\MailLogger\\' => 35,
         ),
     );
@@ -35,7 +35,7 @@ class ComposerStaticInitbc7b400c4e711f828557f7bd975f042c
         array (
             0 => __DIR__ . '/..' . '/srag/dic/src',
         ),
-        'srag\\CustomInputGUIs\\' => 
+        'srag\\CustomInputGUIs\\MailLogger\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/custominputguis/src',
         ),
@@ -163,12 +163,12 @@ class ComposerStaticInitbc7b400c4e711f828557f7bd975f042c
         'srag\\Plugins\\MailLogger\\Access\\Ilias' => __DIR__ . '/../..' . '/src/Access/Ilias.php',
         'srag\\Plugins\\MailLogger\\Access\\Users' => __DIR__ . '/../..' . '/src/Access/Users.php',
         'srag\\Plugins\\MailLogger\\Config\\ConfigCtrl' => __DIR__ . '/../..' . '/src/Config/class.ConfigCtrl.php',
-        'srag\\Plugins\\MailLogger\\Config\\ConfigFormGUI' => __DIR__ . '/../..' . '/src/Config/ConfigFormGUI.php',
         'srag\\Plugins\\MailLogger\\Config\\Factory' => __DIR__ . '/../..' . '/src/Config/Factory.php',
+        'srag\\Plugins\\MailLogger\\Config\\Form\\FormBuilder' => __DIR__ . '/../..' . '/src/Config/Form/FormBuilder.php',
         'srag\\Plugins\\MailLogger\\Config\\Repository' => __DIR__ . '/../..' . '/src/Config/Repository.php',
         'srag\\Plugins\\MailLogger\\Log\\Factory' => __DIR__ . '/../..' . '/src/Log/Factory.php',
+        'srag\\Plugins\\MailLogger\\Log\\Form\\FormBuilder' => __DIR__ . '/../..' . '/src/Log/Form/FormBuilder.php',
         'srag\\Plugins\\MailLogger\\Log\\Log' => __DIR__ . '/../..' . '/src/Log/Log.php',
-        'srag\\Plugins\\MailLogger\\Log\\LogDetailsFormGUI' => __DIR__ . '/../..' . '/src/Log/LogDetailsFormGUI.php',
         'srag\\Plugins\\MailLogger\\Log\\LogGUI' => __DIR__ . '/../..' . '/src/Log/class.LogGUI.php',
         'srag\\Plugins\\MailLogger\\Log\\LogHandler' => __DIR__ . '/../..' . '/src/Log/LogHandler.php',
         'srag\\Plugins\\MailLogger\\Log\\LogTableGUI' => __DIR__ . '/../..' . '/src/Log/LogTableGUI.php',

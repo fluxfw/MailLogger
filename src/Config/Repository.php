@@ -6,6 +6,7 @@ use ilMailLoggerPlugin;
 use srag\ActiveRecordConfig\MailLogger\Config\AbstractFactory;
 use srag\ActiveRecordConfig\MailLogger\Config\AbstractRepository;
 use srag\ActiveRecordConfig\MailLogger\Config\Config;
+use srag\Plugins\MailLogger\Config\Form\FormBuilder;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 
 /**
@@ -75,8 +76,8 @@ final class Repository extends AbstractRepository
     protected function getFields() : array
     {
         return [
-            ConfigFormGUI::KEY_LOG_EMAIL_OF_USERS => [Config::TYPE_JSON, []],
-            ConfigFormGUI::KEY_LOG_SYSTEM_EMAILS  => Config::TYPE_BOOLEAN
+            FormBuilder::KEY_LOG_EMAIL_OF_USERS => [Config::TYPE_JSON, []],
+            FormBuilder::KEY_LOG_SYSTEM_EMAILS  => Config::TYPE_BOOLEAN
         ];
     }
 }

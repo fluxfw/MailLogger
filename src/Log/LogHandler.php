@@ -10,6 +10,7 @@ use ilObjectFactory;
 use ilObjUser;
 use srag\DIC\MailLogger\DICTrait;
 use srag\Plugins\MailLogger\Config\ConfigFormGUI;
+use srag\Plugins\MailLogger\Config\Form\FormBuilder;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 
 /**
@@ -72,12 +73,11 @@ final class LogHandler
      */
     public function handleSentExternalEmail(ilMimeMail $mail)/*: void*/
     {
-        $from_user = new ilObjUser(ilObjUser::_lookupId(current(self::version()->is54() ? ilObjUser::getUserLoginsByEmail($mail->getFrom()
-            ->getReplyToAddress()) : ilObjUser::_getUserIdsByEmail($mail->getFrom()->getReplyToAddress()))));
+        $from_user = new ilObjUser(ilObjUser::_lookupId(current(ilObjUser::getUserLoginsByEmail($mail->getFrom()->getReplyToAddress()))));
 
         foreach ($mail->getTo() as $to) {
 
-            $user_logins_of_email = self::version()->is54() ? ilObjUser::getUserLoginsByEmail($to) : ilObjUser::_getUserIdsByEmail($to);
+            $user_logins_of_email = ilObjUser::getUserLoginsByEmail($to);
             if (count($user_logins_of_email) > 0) {
                 $to_user = new ilObjUser(ilObjUser::_lookupId(current($user_logins_of_email)));
             } else {
@@ -156,9 +156,9 @@ final class LogHandler
     protected function shouldLog(bool $is_system, ilObjUser $from) : bool
     {
         if ($is_system) {
-            return self::mailLogger()->config()->getValue(ConfigFormGUI::KEY_LOG_SYSTEM_EMAILS);
+            return self::mailLogger()->config()->getValue(FormBuilder::KEY_LOG_SYSTEM_EMAILS);
         } else {
-            $log_email_of_users = self::mailLogger()->config()->getValue(ConfigFormGUI::KEY_LOG_EMAIL_OF_USERS);
+            $log_email_of_users = self::mailLogger()->config()->getValue(FormBuilder::KEY_LOG_EMAIL_OF_USERS);
 
             return in_array($from->getId(), $log_email_of_users);
         }

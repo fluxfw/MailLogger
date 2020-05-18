@@ -4,6 +4,7 @@ namespace srag\Plugins\MailLogger\Log;
 
 use ilMailLoggerPlugin;
 use srag\DIC\MailLogger\DICTrait;
+use srag\Plugins\MailLogger\Log\Form\FormBuilder;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 
 /**
@@ -77,11 +78,11 @@ final class Factory
      * @param LogGUI $parent
      * @param Log    $log
      *
-     * @return LogDetailsFormGUI
+     * @return FormBuilder
      */
-    public function newFormInstance(LogGUI $parent, Log $log) : LogDetailsFormGUI
+    public function newFormBuilderInstance(LogGUI $parent, Log $log) : FormBuilder
     {
-        $form = new LogDetailsFormGUI($parent, $log);
+        $form = new FormBuilder($parent, $log);
 
         return $form;
     }
