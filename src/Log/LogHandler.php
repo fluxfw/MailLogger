@@ -63,7 +63,7 @@ final class LogHandler
         $from_user = new ilObjUser($mail["from_usr_id"]);
         $to_user = new ilObjUser($mail["to_usr_id"]);
 
-        $this->log(strval($mail["subject"]), strval($mail["body"]), in_array("system", $mail["type"]), $from_user, $to_user,
+        $this->log(strval($mail["subject"]), strval($mail["body"]), in_array("system", (array) $mail["type"]), $from_user, $to_user,
             (!empty($mail["context_ref_id"]) ? intval($mail["context_ref_id"]) : null));
     }
 
