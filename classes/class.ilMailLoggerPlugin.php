@@ -2,7 +2,9 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
+use ILIAS\DI\Container;
 use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
+use srag\CustomInputGUIs\MailLogger\Loader\CustomInputGUIsLoaderDetector;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\RemovePluginDataConfirm\MailLogger\PluginUninstallTrait;
 
@@ -110,5 +112,14 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
     protected function deleteData()/*: void*/
     {
         self::mailLogger()->dropTables();
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function exchangeUIRendererAfterInitialization(Container $dic) : Closure
+    {
+        return CustomInputGUIsLoaderDetector::exchangeUIRendererAfterInitialization();
     }
 }
