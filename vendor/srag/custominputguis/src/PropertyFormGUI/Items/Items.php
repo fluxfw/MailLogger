@@ -2,18 +2,20 @@
 
 namespace srag\CustomInputGUIs\MailLogger\PropertyFormGUI\Items;
 
+use ilDateTime;
 use ilFormPropertyGUI;
 use ilFormSectionHeaderGUI;
 use ILIAS\UI\Component\Input\Field\Input;
 use ilNumberInputGUI;
 use ilPropertyFormGUI;
 use ilRadioOption;
-use ilTemplate;
+use ilRepositorySelector2InputGUI;
 use ilUtil;
 use srag\CustomInputGUIs\MailLogger\MultiLineInputGUI\MultiLineInputGUI;
 use srag\CustomInputGUIs\MailLogger\PropertyFormGUI\Exception\PropertyFormGUIException;
 use srag\CustomInputGUIs\MailLogger\PropertyFormGUI\PropertyFormGUI;
 use srag\CustomInputGUIs\MailLogger\TableGUI\TableGUI;
+use srag\CustomInputGUIs\MailLogger\Template\Template;
 use srag\CustomInputGUIs\MailLogger\UIInputComponentWrapperInputGUI\UIInputComponentWrapperInputGUI;
 use srag\DIC\MailLogger\DICTrait;
 use TypeError;
@@ -32,6 +34,27 @@ final class Items
 
     use DICTrait;
 
+    /**
+     * @var bool
+     */
+    protected static $init = false;
+
+
+    /**
+     *
+     */
+    public static function init()/*: void*/
+    {
+        if (self::$init === false) {
+            self::$init = true;
+
+            $dir = __DIR__;
+            $dir = "./" . substr($dir, strpos($dir, "/Customizing/") + 1);
+
+            self::dic()->ui()->mainTemplate()->addCss($dir . "/css/input_gui_input.css");
+        }
+    }
+
 
     /**
      * @param string                              $key
@@ -40,6 +63,8 @@ final class Items
      * @param PropertyFormGUI|TableGUI            $parent
      *
      * @return ilFormPropertyGUI|ilFormSectionHeaderGUI|ilRadioOption
+     *
+     * @deprecated
      */
     public static final function getItem($key, array $field, $parent_item, $parent)
     {
@@ -66,7 +91,11 @@ final class Items
                     . " not exists!", PropertyFormGUIException::CODE_INVALID_PROPERTY_CLASS);
             }
 
-            $item = new $field[PropertyFormGUI::PROPERTY_CLASS]();
+            if ($field[PropertyFormGUI::PROPERTY_CLASS] === ilRepositorySelector2InputGUI::class) {
+                $item = new $field[PropertyFormGUI::PROPERTY_CLASS]("", $key, false, get_class($parent));
+            } else {
+                $item = new $field[PropertyFormGUI::PROPERTY_CLASS]();
+            }
 
             if ($item instanceof ilFormSectionHeaderGUI) {
                 if (!$field["setTitle"]) {
@@ -111,6 +140,8 @@ final class Items
      * @param ilFormPropertyGUI|ilFormSectionHeaderGUI|ilRadioOption $item
      *
      * @return mixed
+     *
+     * @deprecated
      */
     public static function getValueFromItem($item)
     {
@@ -160,36 +191,36 @@ final class Items
      */
     public static function renderInputs(array $inputs) : string
     {
-        $dir = __DIR__;
-        $dir = "./" . substr($dir, strpos($dir, "/Customizing/") + 1);
-        self::dic()->mainTemplate()->addCss($dir . "/css/input_gui_input.css");
+        self::init();
 
-        $input_tpl = new ilTemplate(__DIR__ . "/templates/input_gui_input.html", true, true);
+        $input_tpl = new Template(__DIR__ . "/templates/input_gui_input.html");
 
         $input_tpl->setCurrentBlock("input");
 
         foreach ($inputs as $input) {
-            $input_tpl->setVariable("TITLE", $input->getTitle());
+            $input_tpl->setVariableEscaped("TITLE", $input->getTitle());
 
             if ($input->getRequired()) {
-                $input_tpl->setVariable("REQUIRED", self::output()->getHTML(new ilTemplate(__DIR__ . "/templates/input_gui_input_required.html", true, false)));
+                $input_tpl->setVariable("REQUIRED", self::output()->getHTML(new Template(__DIR__ . "/templates/input_gui_input_required.html", true, false)));
             }
 
-            $input_tpl->setVariable("INPUT", self::output()->getHTML($input));
+            $input_html = self::output()->getHTML($input);
+            $input_html = str_replace('<div class="help-block"></div>', "", $input_html);
+            $input_tpl->setVariable("INPUT", $input_html);
 
             if ($input->getInfo()) {
-                $input_info_tpl = new ilTemplate(__DIR__ . "/templates/input_gui_input_info.html", true, true);
+                $input_info_tpl = new Template(__DIR__ . "/templates/input_gui_input_info.html");
 
-                $input_info_tpl->setVariable("INFO", $input->getInfo());
+                $input_info_tpl->setVariableEscaped("INFO", $input->getInfo());
 
                 $input_tpl->setVariable("INFO", self::output()->getHTML($input_info_tpl));
             }
 
             if ($input->getAlert()) {
-                $input_alert_tpl = new ilTemplate(__DIR__ . "/templates/input_gui_input_alert.html", true, true);
+                $input_alert_tpl = new Template(__DIR__ . "/templates/input_gui_input_alert.html");
                 $input_alert_tpl->setVariable("IMG",
                     self::output()->getHTML(self::dic()->ui()->factory()->image()->standard(ilUtil::getImagePath("icon_alert.svg"), self::dic()->language()->txt("alert"))));
-                $input_alert_tpl->setVariable("TXT", $input->getAlert());
+                $input_alert_tpl->setVariableEscaped("TXT", $input->getAlert());
                 $input_tpl->setVariable("ALERT", self::output()->getHTML($input_alert_tpl));
             }
 
@@ -203,6 +234,8 @@ final class Items
     /**
      * @param ilFormPropertyGUI|ilFormSectionHeaderGUI|ilRadioOption $item
      * @param array                                                  $properties
+     *
+     * @deprecated
      */
     private static function setPropertiesToItem($item, array $properties)/*: void*/
     {
@@ -243,7 +276,21 @@ final class Items
                     $property_value = [$property_value];
                 }
 
-                call_user_func_array([$item, $property], $property_value);
+                if (method_exists($item, $property)) {
+                    call_user_func_array([$item, $property], $property_value);
+                } else {
+                    if ($item instanceof ilRepositorySelector2InputGUI) {
+                        if (method_exists($item->getExplorerGUI(), $property)) {
+                            call_user_func_array([$item->getExplorerGUI(), $property], $property_value);
+                        } else {
+                            throw new PropertyFormGUIException("Class " . get_class($item)
+                                . " has no method " . $property . "!", PropertyFormGUIException::CODE_INVALID_FIELD);
+                        }
+                    } else {
+                        throw new PropertyFormGUIException("Class " . get_class($item)
+                            . " has no method " . $property . "!", PropertyFormGUIException::CODE_INVALID_FIELD);
+                    }
+                }
             }
         }
     }
@@ -252,6 +299,8 @@ final class Items
     /**
      * @param ilFormPropertyGUI|ilFormSectionHeaderGUI|ilRadioOption $item
      * @param mixed                                                  $value
+     *
+     * @deprecated
      */
     public static function setValueToItem($item, $value)/*: void*/
     {
@@ -270,6 +319,10 @@ final class Items
         }
 
         if (method_exists($item, "setDate")) {
+            if (is_string($value)) {
+                $value = new ilDateTime($value, IL_CAL_DATE);
+            }
+
             $item->setDate($value);
 
             return;
@@ -311,20 +364,26 @@ final class Items
      * @param object $object
      * @param string $property
      * @param mixed  $value
+     *
+     * @return mixed
      */
-    public static function setter(/*object*/ $object,/*string*/ $property, $value)/*: void*/
+    public static function setter(/*object*/ $object,/*string*/ $property, $value)
     {
-        if (method_exists($object, $method = "set" . self::strToCamelCase($property))) {
+        $res = null;
+
+        if (method_exists($object, $method = "with" . self::strToCamelCase($property)) || method_exists($object, $method = "set" . self::strToCamelCase($property))) {
             try {
-                $object->{$method}($value);
+                $res = $object->{$method}($value);
             } catch (TypeError $ex) {
                 try {
-                    $object->{$method}(intval($value));
+                    $res = $object->{$method}(intval($value));
                 } catch (TypeError $ex) {
-                    $object->{$method}(boolval($value));
+                    $res = $object->{$method}(boolval($value));
                 }
             }
         }
+
+        return $res;
     }
 
 

@@ -28,9 +28,8 @@ class Renderer extends AbstractComponentRenderer
 
     use DICTrait;
 
-
     /**
-     * @inheritdocs
+     * @inheritDocs
      */
     public function render(Component\Component $component, RendererInterface $default_renderer)
     {
@@ -362,7 +361,7 @@ class Renderer extends AbstractComponentRenderer
 
 
     /**
-     * @inheritdocs
+     * @inheritDocs
      */
     protected function getComponentInterfaceName()
     {

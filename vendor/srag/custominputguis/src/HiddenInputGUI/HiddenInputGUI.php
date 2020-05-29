@@ -3,6 +3,7 @@
 namespace srag\CustomInputGUIs\MailLogger\HiddenInputGUI;
 
 use ilHiddenInputGUI;
+use srag\CustomInputGUIs\MailLogger\Template\Template;
 use srag\DIC\MailLogger\DICTrait;
 
 /**
@@ -17,7 +18,6 @@ class HiddenInputGUI extends ilHiddenInputGUI
 
     use DICTrait;
 
-
     /**
      * HiddenInputGUI constructor
      *
@@ -27,5 +27,18 @@ class HiddenInputGUI extends ilHiddenInputGUI
         $a_postvar = ""
     ) {
         parent::__construct($a_postvar);
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function render() : string
+    {
+        $tpl = new Template("Services/Form/templates/default/tpl.property_form.html", true, true);
+
+        $this->insert($tpl);
+
+        return self::output()->getHTML($tpl);
     }
 }

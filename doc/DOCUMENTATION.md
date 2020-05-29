@@ -1,0 +1,1 @@
+# MailLogger ILIAS Plugin Documentation

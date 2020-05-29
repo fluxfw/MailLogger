@@ -9,6 +9,7 @@ use ILIAS\UI\Implementation\Component\Input\Container\Form\PostDataFromServerReq
 use ilTableFilterItem;
 use ilTemplate;
 use ilToolbarItem;
+use srag\CustomInputGUIs\MailLogger\Template\Template;
 use srag\DIC\MailLogger\DICTrait;
 use Throwable;
 
@@ -23,6 +24,29 @@ class UIInputComponentWrapperInputGUI extends ilFormPropertyGUI implements ilTab
 {
 
     use DICTrait;
+
+    /**
+     * @var bool
+     */
+    protected static $init = false;
+
+
+    /**
+     *
+     */
+    public static function init()/*: void*/
+    {
+        if (self::$init === false) {
+            self::$init = true;
+
+            $dir = __DIR__;
+            $dir = "./" . substr($dir, strpos($dir, "/Customizing/") + 1);
+
+            self::dic()->ui()->mainTemplate()->addCss($dir . "/css/UIInputComponentWrapperInputGUI.css");
+        }
+    }
+
+
     /**
      * @var Input
      */
@@ -40,7 +64,10 @@ class UIInputComponentWrapperInputGUI extends ilFormPropertyGUI implements ilTab
         $this->input = $input;
 
         $this->setPostVar($post_var);
+
         //parent::__construct($title, $post_var);
+
+        self::init();
     }
 
 
@@ -75,8 +102,8 @@ class UIInputComponentWrapperInputGUI extends ilFormPropertyGUI implements ilTab
      */
     public function getDisabled()/*:bool*/
     {
-        if (self::version()->is60()) {
-            return $this->input->getDisabled();
+        if (self::version()->is6()) {
+            return $this->input->isDisabled();
         } else {
             throw new ilFormException("disabled not exists in ILIAS 5.4 or below!");
         }
@@ -173,12 +200,7 @@ class UIInputComponentWrapperInputGUI extends ilFormPropertyGUI implements ilTab
      */
     public function render() : string
     {
-        $dir = __DIR__;
-        $dir = "./" . substr($dir, strpos($dir, "/Customizing/") + 1);
-
-        self::dic()->mainTemplate()->addCss($dir . "/css/UIInputComponentWrapperInputGUI.css");
-
-        $tpl = new ilTemplate(__DIR__ . "/templates/input.html", true, true);
+        $tpl = new Template(__DIR__ . "/templates/input.html");
 
         $tpl->setVariable("INPUT", self::output()->getHTML($this->input));
 
@@ -202,7 +224,7 @@ class UIInputComponentWrapperInputGUI extends ilFormPropertyGUI implements ilTab
      */
     public function setDisabled(/*bool*/ $disabled)/*: void*/
     {
-        if (self::version()->is60()) {
+        if (self::version()->is6()) {
             $this->input = $this->input->withDisabled($disabled);
         } else {
             throw new ilFormException("disabled not exists in ILIAS 5.4 or below!");
@@ -260,7 +282,11 @@ class UIInputComponentWrapperInputGUI extends ilFormPropertyGUI implements ilTab
      */
     public function setValue($value)/*: void*/
     {
-        $this->input = $this->input->withValue($value);
+        try {
+            $this->input = $this->input->withValue($value);
+        } catch (Throwable $ex) {
+
+        }
     }
 
 

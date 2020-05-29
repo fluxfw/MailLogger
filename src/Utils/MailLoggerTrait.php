@@ -2,10 +2,7 @@
 
 namespace srag\Plugins\MailLogger\Utils;
 
-use srag\Plugins\MailLogger\Access\Access;
-use srag\Plugins\MailLogger\Access\Ilias;
-use srag\Plugins\MailLogger\Log\LogHandler;
-use srag\Plugins\MailLogger\Logs\Logs;
+use srag\Plugins\MailLogger\Repository;
 
 /**
  * Trait MailLoggerTrait
@@ -18,37 +15,10 @@ trait MailLoggerTrait
 {
 
     /**
-     * @return Access
+     * @return Repository
      */
-    protected static function access() : Access
+    protected static function mailLogger() : Repository
     {
-        return Access::getInstance();
-    }
-
-
-    /**
-     * @return Ilias
-     */
-    protected static function ilias() : Ilias
-    {
-        return Ilias::getInstance();
-    }
-
-
-    /**
-     * @return LogHandler
-     */
-    protected static function logHandler() : LogHandler
-    {
-        return LogHandler::getInstance();
-    }
-
-
-    /**
-     * @return Logs
-     */
-    protected static function logs() : Logs
-    {
-        return Logs::getInstance();
+        return Repository::getInstance();
     }
 }

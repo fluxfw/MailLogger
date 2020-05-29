@@ -5,7 +5,6 @@ namespace srag\DIC\MailLogger;
 use ilLogLevel;
 use ilPlugin;
 use srag\DIC\MailLogger\DIC\DICInterface;
-use srag\DIC\MailLogger\DIC\Implementation\ILIAS53DIC;
 use srag\DIC\MailLogger\DIC\Implementation\ILIAS54DIC;
 use srag\DIC\MailLogger\DIC\Implementation\ILIAS60DIC;
 use srag\DIC\MailLogger\Exception\DICException;
@@ -45,7 +44,7 @@ final class DICStatic implements DICStaticInterface
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      *
      * @deprecated
      */
@@ -59,22 +58,17 @@ final class DICStatic implements DICStaticInterface
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public static function dic() : DICInterface
     {
         if (self::$dic === null) {
             switch (true) {
-                case (self::version()->isLower(VersionInterface::ILIAS_VERSION_5_3)):
+                case (self::version()->isLower(VersionInterface::ILIAS_VERSION_5_4)):
                     throw new DICException("DIC not supports ILIAS " . self::version()->getILIASVersion() . " anymore!");
                     break;
 
-                case (self::version()->isLower(VersionInterface::ILIAS_VERSION_5_4)):
-                    global $DIC;
-                    self::$dic = new ILIAS53DIC($DIC);
-                    break;
-
-                case (self::version()->isLower(VersionInterface::ILIAS_VERSION_6_0)):
+                case (self::version()->isLower(VersionInterface::ILIAS_VERSION_6)):
                     global $DIC;
                     self::$dic = new ILIAS54DIC($DIC);
                     break;
@@ -91,7 +85,7 @@ final class DICStatic implements DICStaticInterface
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public static function output() : OutputInterface
     {
@@ -104,7 +98,7 @@ final class DICStatic implements DICStaticInterface
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public static function plugin(string $plugin_class_name) : PluginInterface
     {
@@ -133,7 +127,7 @@ final class DICStatic implements DICStaticInterface
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public static function version() : VersionInterface
     {

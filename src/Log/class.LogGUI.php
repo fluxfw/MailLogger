@@ -2,12 +2,9 @@
 
 namespace srag\Plugins\MailLogger\Log;
 
-// ilCtrlMainMenu Bug
 require_once __DIR__ . "/../../vendor/autoload.php";
 
 use ilMailLoggerPlugin;
-use ilRepositoryGUI;
-use ilUtil;
 use srag\DIC\MailLogger\DICTrait;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 
@@ -25,12 +22,18 @@ class LogGUI
 
     use DICTrait;
     use MailLoggerTrait;
+
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     const CMD_APPLY_FILTER = "applyFilter";
-    const CMD_LOG = "log";
+    const CMD_LIST_LOGS = "listLogs";
     const CMD_RESET_FILTER = "resetFilter";
     const CMD_SHOW_EMAIL = "showEmail";
-    const LANG_MODULE_LOG = "log";
+    const GET_PARAM_LOG_ID = "log_id";
+    const LANG_MODULE = "log";
+    /**
+     * @var Log|null
+     */
+    protected $log = null;
 
 
     /**
@@ -47,20 +50,25 @@ class LogGUI
      */
     public function executeCommand()/*: void*/
     {
+        $this->log = self::mailLogger()->logs()->getLogById(intval(filter_input(INPUT_GET, self::GET_PARAM_LOG_ID)));
+
+        if (!self::mailLogger()->access()->hasLogAccess()) {
+            die();
+        }
+
+        //self::dic()->ctrl()->saveParameter($this, self::GET_PARAM_LOG_ID);
+
+        $this->setTabs();
+
         $next_class = self::dic()->ctrl()->getNextClass($this);
 
         switch (strtolower($next_class)) {
             default:
-                if (!self::access()->hasLogAccess()) {
-                    ilUtil::sendInfo(self::plugin()->translate("no_access", self:: LANG_MODULE_LOG), true);
-                    self::dic()->ctrl()->redirectByClass(ilRepositoryGUI::class);
-                }
-
                 $cmd = self::dic()->ctrl()->getCmd();
 
                 switch ($cmd) {
                     case self::CMD_APPLY_FILTER:
-                    case self::CMD_LOG:
+                    case self::CMD_LIST_LOGS:
                     case self::CMD_RESET_FILTER:
                     case self::CMD_SHOW_EMAIL:
                         $this->{$cmd}();
@@ -75,61 +83,22 @@ class LogGUI
 
 
     /**
-     * @param string $cmd
      *
-     * @return LogTableGUI
      */
-    protected function getLogTable(string $cmd = self::CMD_LOG) : LogTableGUI
+    protected function setTabs()/*:void*/
     {
-        $table = new LogTableGUI($this, $cmd);
 
-        return $table;
     }
 
 
     /**
      *
      */
-    protected function log()/*: void*/
+    protected function listLogs()/*: void*/
     {
-        $table = $this->getLogTable();
+        $table = self::mailLogger()->logs()->factory()->newTableInstance($this);
 
         self::output()->output($table, true);
-    }
-
-
-    /**
-     * @param Log $log
-     *
-     * @return LogDetailsFormGUI
-     */
-    protected function getLogDetailsForm(Log $log) : LogDetailsFormGUI
-    {
-        $form = new LogDetailsFormGUI($this, $log);
-
-        return $form;
-    }
-
-
-    /**
-     *
-     */
-    protected function showEmail()/*: void*/
-    {
-        self::dic()->tabs()->setBackTarget(self::plugin()->translate("back", self::LANG_MODULE_LOG), self::dic()->ctrl()
-            ->getLinkTarget($this, self::CMD_LOG));
-
-        $log_id = filter_input(INPUT_GET, "log_id");
-
-        $log = self::logs()->getLogById($log_id);
-
-        if ($log !== null) {
-            $form = $this->getLogDetailsForm($log);
-
-            self::output()->output($form, true);
-        } else {
-            self::output()->output("", true);
-        }
     }
 
 
@@ -138,14 +107,14 @@ class LogGUI
      */
     protected function applyFilter()/*: void*/
     {
-        $table = $this->getLogTable(self::CMD_APPLY_FILTER);
+        $table = self::mailLogger()->logs()->factory()->newTableInstance($this, self::CMD_APPLY_FILTER);
 
         $table->writeFilterToSession();
 
         $table->resetOffset();
 
-        //self::dic()->ctrl()->redirect($this, self::CMD_LOG);
-        $this->log(); // Fix reset offset
+        //self::dic()->ctrl()->redirect($this, self::CMD_LIST_LOG);
+        $this->listLogs(); // Fix reset offset
     }
 
 
@@ -154,13 +123,31 @@ class LogGUI
      */
     protected function resetFilter()/*: void*/
     {
-        $table = $this->getLogTable(self::CMD_RESET_FILTER);
+        $table = self::mailLogger()->logs()->factory()->newTableInstance($this, self::CMD_RESET_FILTER);
 
         $table->resetFilter();
 
         $table->resetOffset();
 
-        //self::dic()->ctrl()->redirect($this, self::CMD_LOG);
-        $this->log(); // Fix reset offset
+        //self::dic()->ctrl()->redirect($this, self::CMD_LIST_LOG);
+        $this->listLogs(); // Fix reset offset
+    }
+
+
+    /**
+     *
+     */
+    protected function showEmail()/*: void*/
+    {
+        self::dic()->tabs()->setBackTarget(self::plugin()->translate("back", self::LANG_MODULE), self::dic()->ctrl()
+            ->getLinkTarget($this, self::CMD_LIST_LOGS));
+
+        if ($this->log !== null) {
+            $form = self::mailLogger()->logs()->factory()->newFormBuilderInstance($this, $this->log);
+
+            self::output()->output($form, true);
+        } else {
+            self::output()->output("", true);
+        }
     }
 }

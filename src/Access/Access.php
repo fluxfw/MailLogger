@@ -18,10 +18,11 @@ final class Access
 
     use DICTrait;
     use MailLoggerTrait;
+
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     const ADMIN_ROLE_ID = 2;
     /**
-     * @var self
+     * @var self|null
      */
     protected static $instance = null;
 
@@ -53,6 +54,6 @@ final class Access
      */
     public function hasLogAccess() : bool
     {
-        return (self::plugin()->getPluginObject()->isActive() && self::dic()->rbacreview()->isAssigned(self::dic()->user()->getId(), self::ADMIN_ROLE_ID));
+        return (self::plugin()->getPluginObject()->isActive() && self::dic()->rbac()->review()->isAssigned(self::dic()->user()->getId(), self::ADMIN_ROLE_ID));
     }
 }

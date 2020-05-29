@@ -2,11 +2,9 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
+use ILIAS\DI\Container;
 use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
-use srag\DIC\MailLogger\Util\LibraryLanguageInstaller;
-use srag\Plugins\MailLogger\Config\Config;
-use srag\Plugins\MailLogger\Log\Log;
-use srag\Plugins\MailLogger\Menu\Menu;
+use srag\CustomInputGUIs\MailLogger\Loader\CustomInputGUIsLoaderDetector;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\RemovePluginDataConfirm\MailLogger\PluginUninstallTrait;
 
@@ -20,6 +18,7 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
 
     use PluginUninstallTrait;
     use MailLoggerTrait;
+
     const PLUGIN_ID = "maillog";
     const PLUGIN_NAME = "MailLogger";
     const PLUGIN_CLASS_NAME = self::class;
@@ -55,7 +54,7 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
 
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getPluginName() : string
     {
@@ -64,26 +63,20 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
 
 
     /**
-     * @param string $a_component
-     * @param string $a_event
-     * @param array  $a_parameter
+     * @inheritDoc
      */
-    public function handleEvent(/*string*/
-        $a_component, /*string*/
-        $a_event,/*array*/
-        $a_parameter
-    )/*: void*/
+    public function handleEvent(/*string*/ $a_component, /*string*/ $a_event, /*array*/ $a_parameter)/*: void*/
     {
         if ($a_component === self::COMPONENT_MAIL) {
             switch ($a_event) {
                 case self::EVENT_SENT_INTERNAL_MAIL:
                     $mail = $a_parameter;
-                    self::logHandler()->handleSentInternalEmail($mail);
+                    self::mailLogger()->logs()->handler()->handleSentInternalEmail($mail);
                     break;
 
                 case self::EVENT_SENT_EXTERNAL_MAIL:
                     $mail = $a_parameter["mail"];
-                    self::logHandler()->handleSentExternalEmail($mail);
+                    self::mailLogger()->logs()->handler()->handleSentExternalEmail($mail);
                     break;
 
                 default:
@@ -94,32 +87,39 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function promoteGlobalScreenProvider() : AbstractStaticPluginMainMenuProvider
     {
-        return new Menu(self::dic()->dic(), $this);
+        return self::mailLogger()->menu();
     }
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function updateLanguages($a_lang_keys = null)
+    public function updateLanguages(/*?array*/ $a_lang_keys = null)/*:void*/
     {
         parent::updateLanguages($a_lang_keys);
 
-        LibraryLanguageInstaller::getInstance()->withPlugin(self::plugin())->withLibraryLanguageDirectory(__DIR__
-            . "/../vendor/srag/removeplugindataconfirm/lang")->updateLanguages();
+        $this->installRemovePluginDataConfirmLanguages();
     }
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function deleteData()/*: void*/
     {
-        self::dic()->database()->dropTable(Config::TABLE_NAME, false);
-        self::dic()->database()->dropTable(Log::TABLE_NAME, false);
+        self::mailLogger()->dropTables();
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function exchangeUIRendererAfterInitialization(Container $dic) : Closure
+    {
+        return CustomInputGUIsLoaderDetector::exchangeUIRendererAfterInitialization();
     }
 }

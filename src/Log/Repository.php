@@ -1,27 +1,27 @@
 <?php
 
-namespace srag\Plugins\MailLogger\Logs;
+namespace srag\Plugins\MailLogger\Log;
 
 use ilMailLoggerPlugin;
 use srag\DIC\MailLogger\DICTrait;
-use srag\Plugins\MailLogger\Log\Log;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 
 /**
- * Class Logs
+ * Class Repository
  *
- * @package srag\Plugins\MailLogger\Logs
+ * @package srag\Plugins\MailLogger\Log
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-final class Logs
+final class Repository
 {
 
-    use DICTrait;
     use MailLoggerTrait;
+    use DICTrait;
+
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     /**
-     * @var self
+     * @var self|null
      */
     protected static $instance = null;
 
@@ -40,11 +40,29 @@ final class Logs
 
 
     /**
-     * Logs constructor
+     * Repository constructor
      */
     private function __construct()
     {
 
+    }
+
+
+    /**
+     * @internal
+     */
+    public function dropTables()/*:void*/
+    {
+        self::dic()->database()->dropTable(Log::TABLE_NAME, false);
+    }
+
+
+    /**
+     * @return Factory
+     */
+    public function factory() : Factory
+    {
+        return Factory::getInstance();
     }
 
 
@@ -141,5 +159,32 @@ final class Logs
         }
 
         return $logs;
+    }
+
+
+    /**
+     * @return LogHandler
+     */
+    public function handler() : LogHandler
+    {
+        return LogHandler::getInstance();
+    }
+
+
+    /**
+     * @internal
+     */
+    public function installTables()/*:void*/
+    {
+        Log::updateDB();
+    }
+
+
+    /**
+     * @param Log $log
+     */
+    public function storeLog(Log $log)/*:void/*/
+    {
+        $log->store();
     }
 }

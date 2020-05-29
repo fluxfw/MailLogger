@@ -22,12 +22,25 @@ class LogTableGUI extends TableGUI
 {
 
     use MailLoggerTrait;
+
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
-    const LANG_MODULE = LogGUI::LANG_MODULE_LOG;
+    const LANG_MODULE = LogGUI::LANG_MODULE;
 
 
     /**
-     * @inheritdoc
+     * LogTableGUI constructor
+     *
+     * @param LogGUI $parent
+     * @param string $parent_cmd
+     */
+    public function __construct(LogGUI $parent, string $parent_cmd)
+    {
+        parent::__construct($parent, $parent_cmd);
+    }
+
+
+    /**
+     * @inheritDoc
      */
     protected function getColumnValue(/*string*/
         $column, /*array*/
@@ -41,10 +54,11 @@ class LogTableGUI extends TableGUI
                 } else {
                     $column = ilDatePresentation::formatDate(new ilDateTime($row[$column], IL_CAL_UNIX));
                 }
+                $column = htmlspecialchars($column);
                 break;
 
             default:
-                $column = $row[$column];
+                $column = htmlspecialchars($row[$column]);
                 break;
         }
 
@@ -53,7 +67,7 @@ class LogTableGUI extends TableGUI
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function getSelectableColumns2() : array
     {
@@ -92,24 +106,24 @@ class LogTableGUI extends TableGUI
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function initColumns()/*: void*/
     {
         parent::initColumns();
 
         $this->addColumn(self::plugin()->translate("actions", self::LANG_MODULE));
-
-        $this->setDefaultOrderField("timestamp");
-        $this->setDefaultOrderDirection("desc");
     }
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function initData()/*: void*/
     {
+        $this->setDefaultOrderField("timestamp");
+        $this->setDefaultOrderDirection("desc");
+
         $filter = $this->getFilterValues();
 
         $subject = $filter["subject"];
@@ -142,13 +156,13 @@ class LogTableGUI extends TableGUI
             $timestamp_end = null;
         }
 
-        $this->setData(self::logs()
+        $this->setData(self::mailLogger()->logs()
             ->getLogs($subject, $body, $from_email, $from_firstname, $from_lastname, $to_email, $to_firstname, $to_lastname, $context_title, $context_ref_id, $timestamp_start, $timestamp_end));
     }
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function initExport()/*: void*/
     {
@@ -157,7 +171,7 @@ class LogTableGUI extends TableGUI
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function initFilterFields()/*: void*/
     {
@@ -204,7 +218,7 @@ class LogTableGUI extends TableGUI
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function initId()/*: void*/
     {
@@ -213,11 +227,11 @@ class LogTableGUI extends TableGUI
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function initTitle()/*: void*/
     {
-        $this->setTitle(self::plugin()->translate("log", LogGUI::CMD_LOG));
+        $this->setTitle(self::plugin()->translate("log", "log"));
     }
 
 
@@ -228,12 +242,12 @@ class LogTableGUI extends TableGUI
         $row
     )/*: void*/
     {
-        self::dic()->ctrl()->setParameter($this->parent_obj, "log_id", $row["id"]);
+        self::dic()->ctrl()->setParameter($this->parent_obj, LogGUI::GET_PARAM_LOG_ID, $row["id"]);
 
         parent::fillRow($row);
 
         $this->tpl->setVariable("COLUMN", self::output()->getHTML(self::dic()->ui()->factory()->dropdown()->standard([
-            self::dic()->ui()->factory()->button()->shy(self::plugin()->translate("show_email", self::LANG_MODULE), self::dic()->ctrl()
+            self::dic()->ui()->factory()->link()->standard(self::plugin()->translate("show_email", self::LANG_MODULE), self::dic()->ctrl()
                 ->getLinkTarget($this->parent_obj, LogGUI::CMD_SHOW_EMAIL))
         ])->withLabel(self::plugin()->translate("actions", self::LANG_MODULE))));
     }
