@@ -1,5 +1,7 @@
 # MailLogger ILIAS Plugin Description
 
+Logs mails and displays them in a table
+
 Config:
 ![Config](./images/config.png)
 
