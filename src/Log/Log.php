@@ -202,7 +202,7 @@ class Log extends ActiveRecord
                 return (new ilDateTime($field_value, IL_CAL_UNIX))->get(IL_CAL_DATETIME);
 
             default:
-                return null;
+                return parent::sleep($field_name);
         }
     }
 
@@ -226,14 +226,14 @@ class Log extends ActiveRecord
                 if ($field_value !== null) {
                     return intval($field_value);
                 } else {
-                    return null;
+                    return parent::wakeUp($field_name, $field_value);
                 }
 
             case "timestamp":
                 return intval((new ilDateTime($field_value, IL_CAL_DATETIME))->getUnixTime());
 
             default:
-                return null;
+                return parent::wakeUp($field_name, $field_value);
         }
     }
 
