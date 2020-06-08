@@ -42,11 +42,8 @@ class LogTableGUI extends TableGUI
     /**
      * @inheritDoc
      */
-    protected function getColumnValue(/*string*/
-        $column, /*array*/
-        $row, /*int*/
-        $format = self::DEFAULT_FORMAT
-    ) : string {
+    protected function getColumnValue(string $column, /*array*/ $row, int $format = self::DEFAULT_FORMAT) : string
+    {
         switch ($column) {
             case "timestamp":
                 if ($format) {
@@ -238,9 +235,7 @@ class LogTableGUI extends TableGUI
     /**
      * @param array $row
      */
-    protected function fillRow(/*array*/
-        $row
-    )/*: void*/
+    protected function fillRow(/*array*/ $row)/*: void*/
     {
         self::dic()->ctrl()->setParameter($this->parent_obj, LogGUI::GET_PARAM_LOG_ID, $row["id"]);
 
