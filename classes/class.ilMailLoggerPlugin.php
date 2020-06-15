@@ -19,16 +19,25 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
     use PluginUninstallTrait;
     use MailLoggerTrait;
 
+    const COMPONENT_MAIL = "Services/Mail";
+    const EVENT_SENT_EXTERNAL_MAIL = "externalEmailDelegated";
+    const EVENT_SENT_INTERNAL_MAIL = "sentInternalMail";
+    const PLUGIN_CLASS_NAME = self::class;
     const PLUGIN_ID = "maillog";
     const PLUGIN_NAME = "MailLogger";
-    const PLUGIN_CLASS_NAME = self::class;
-    const COMPONENT_MAIL = "Services/Mail";
-    const EVENT_SENT_INTERNAL_MAIL = "sentInternalMail";
-    const EVENT_SENT_EXTERNAL_MAIL = "externalEmailDelegated";
     /**
      * @var self|null
      */
     protected static $instance = null;
+
+
+    /**
+     * ilMailLoggerPlugin constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
 
     /**
@@ -45,11 +54,11 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
 
 
     /**
-     * ilMailLoggerPlugin constructor
+     * @inheritDoc
      */
-    public function __construct()
+    public function exchangeUIRendererAfterInitialization(Container $dic) : Closure
     {
-        parent::__construct();
+        return CustomInputGUIsLoaderDetector::exchangeUIRendererAfterInitialization();
     }
 
 
@@ -98,15 +107,6 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
     /**
      * @inheritDoc
      */
-    protected function shouldUseOneUpdateStepOnly() : bool
-    {
-        return true;
-    }
-
-
-    /**
-     * @inheritDoc
-     */
     public function updateLanguages(/*?array*/ $a_lang_keys = null)/*:void*/
     {
         parent::updateLanguages($a_lang_keys);
@@ -127,8 +127,8 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
     /**
      * @inheritDoc
      */
-    public function exchangeUIRendererAfterInitialization(Container $dic) : Closure
+    protected function shouldUseOneUpdateStepOnly() : bool
     {
-        return CustomInputGUIsLoaderDetector::exchangeUIRendererAfterInitialization();
+        return true;
     }
 }

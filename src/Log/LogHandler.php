@@ -34,19 +34,6 @@ final class LogHandler
 
 
     /**
-     * @return self
-     */
-    public static function getInstance() : self
-    {
-        if (self::$instance === null) {
-            self::$instance = new self();
-        }
-
-        return self::$instance;
-    }
-
-
-    /**
      * LogHandler constructor
      */
     private function __construct()
@@ -56,15 +43,15 @@ final class LogHandler
 
 
     /**
-     * @param array $mail
+     * @return self
      */
-    public function handleSentInternalEmail(array $mail)/*: void*/
+    public static function getInstance() : self
     {
-        $from_user = new ilObjUser($mail["from_usr_id"]);
-        $to_user = new ilObjUser($mail["to_usr_id"]);
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
 
-        $this->log(strval($mail["subject"]), strval($mail["body"]), in_array("system", (array) $mail["type"]), $from_user, $to_user,
-            (!empty($mail["context_ref_id"]) ? intval($mail["context_ref_id"]) : null));
+        return self::$instance;
     }
 
 
@@ -88,6 +75,19 @@ final class LogHandler
             $this->log(strval($mail->getSubject()), strval($mail->getFinalBody()), ($mail->getFrom() instanceof
                 ilMailMimeSenderSystem), $from_user, $to_user, null);
         }
+    }
+
+
+    /**
+     * @param array $mail
+     */
+    public function handleSentInternalEmail(array $mail)/*: void*/
+    {
+        $from_user = new ilObjUser($mail["from_usr_id"]);
+        $to_user = new ilObjUser($mail["to_usr_id"]);
+
+        $this->log(strval($mail["subject"]), strval($mail["body"]), in_array("system", (array) $mail["type"]), $from_user, $to_user,
+            (!empty($mail["context_ref_id"]) ? intval($mail["context_ref_id"]) : null));
     }
 
 

@@ -23,13 +23,13 @@ class LogGUI
     use DICTrait;
     use MailLoggerTrait;
 
-    const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     const CMD_APPLY_FILTER = "applyFilter";
     const CMD_LIST_LOGS = "listLogs";
     const CMD_RESET_FILTER = "resetFilter";
     const CMD_SHOW_EMAIL = "showEmail";
     const GET_PARAM_LOG_ID = "log_id";
     const LANG_MODULE = "log";
+    const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     /**
      * @var Log|null
      */
@@ -85,9 +85,16 @@ class LogGUI
     /**
      *
      */
-    protected function setTabs()/*:void*/
+    protected function applyFilter()/*: void*/
     {
+        $table = self::mailLogger()->logs()->factory()->newTableInstance($this, self::CMD_APPLY_FILTER);
 
+        $table->writeFilterToSession();
+
+        $table->resetOffset();
+
+        //self::dic()->ctrl()->redirect($this, self::CMD_LIST_LOG);
+        $this->listLogs(); // Fix reset offset
     }
 
 
@@ -105,11 +112,11 @@ class LogGUI
     /**
      *
      */
-    protected function applyFilter()/*: void*/
+    protected function resetFilter()/*: void*/
     {
-        $table = self::mailLogger()->logs()->factory()->newTableInstance($this, self::CMD_APPLY_FILTER);
+        $table = self::mailLogger()->logs()->factory()->newTableInstance($this, self::CMD_RESET_FILTER);
 
-        $table->writeFilterToSession();
+        $table->resetFilter();
 
         $table->resetOffset();
 
@@ -121,16 +128,9 @@ class LogGUI
     /**
      *
      */
-    protected function resetFilter()/*: void*/
+    protected function setTabs()/*:void*/
     {
-        $table = self::mailLogger()->logs()->factory()->newTableInstance($this, self::CMD_RESET_FILTER);
 
-        $table->resetFilter();
-
-        $table->resetOffset();
-
-        //self::dic()->ctrl()->redirect($this, self::CMD_LIST_LOG);
-        $this->listLogs(); // Fix reset offset
     }
 
 

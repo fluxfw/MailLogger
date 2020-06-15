@@ -19,12 +19,21 @@ final class Access
     use DICTrait;
     use MailLoggerTrait;
 
-    const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     const ADMIN_ROLE_ID = 2;
+    const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     /**
      * @var self|null
      */
     protected static $instance = null;
+
+
+    /**
+     * Access constructor
+     */
+    private function __construct()
+    {
+
+    }
 
 
     /**
@@ -37,15 +46,6 @@ final class Access
         }
 
         return self::$instance;
-    }
-
-
-    /**
-     * Access constructor
-     */
-    private function __construct()
-    {
-
     }
 
 

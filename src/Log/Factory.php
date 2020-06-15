@@ -28,6 +28,15 @@ final class Factory
 
 
     /**
+     * Factory constructor
+     */
+    private function __construct()
+    {
+
+    }
+
+
+    /**
      * @return self
      */
     public static function getInstance() : self
@@ -41,11 +50,16 @@ final class Factory
 
 
     /**
-     * Factory constructor
+     * @param LogGUI $parent
+     * @param Log    $log
+     *
+     * @return FormBuilder
      */
-    private function __construct()
+    public function newFormBuilderInstance(LogGUI $parent, Log $log) : FormBuilder
     {
+        $form = new FormBuilder($parent, $log);
 
+        return $form;
     }
 
 
@@ -71,19 +85,5 @@ final class Factory
         $table = new LogTableGUI($parent, $cmd);
 
         return $table;
-    }
-
-
-    /**
-     * @param LogGUI $parent
-     * @param Log    $log
-     *
-     * @return FormBuilder
-     */
-    public function newFormBuilderInstance(LogGUI $parent, Log $log) : FormBuilder
-    {
-        $form = new FormBuilder($parent, $log);
-
-        return $form;
     }
 }

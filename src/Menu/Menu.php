@@ -34,22 +34,6 @@ class Menu extends AbstractStaticPluginMainMenuProvider
     /**
      * @inheritDoc
      */
-    public function getStaticTopItems() : array
-    {
-        return [
-            $this->mainmenu->topParentItem($this->if->identifier(ilMailLoggerPlugin::PLUGIN_ID . "_top"))->withTitle(self::plugin()
-                ->translate("log", LogGUI::LANG_MODULE))->withAvailableCallable(function () : bool {
-                return self::plugin()->getPluginObject()->isActive();
-            })->withVisibilityCallable(function () : bool {
-                return self::mailLogger()->access()->hasLogAccess();
-            })
-        ];
-    }
-
-
-    /**
-     * @inheritDoc
-     */
     public function getStaticSubItems() : array
     {
         $parent = $this->getStaticTopItems()[0];
@@ -81,6 +65,22 @@ class Menu extends AbstractStaticPluginMainMenuProvider
                 })->withVisibilityCallable(function () : bool {
                     return self::dic()->rbac()->review()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role
                 })
+        ];
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function getStaticTopItems() : array
+    {
+        return [
+            $this->mainmenu->topParentItem($this->if->identifier(ilMailLoggerPlugin::PLUGIN_ID . "_top"))->withTitle(self::plugin()
+                ->translate("log", LogGUI::LANG_MODULE))->withAvailableCallable(function () : bool {
+                return self::plugin()->getPluginObject()->isActive();
+            })->withVisibilityCallable(function () : bool {
+                return self::mailLogger()->access()->hasLogAccess();
+            })
         ];
     }
 }
