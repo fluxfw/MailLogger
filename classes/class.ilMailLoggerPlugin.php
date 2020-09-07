@@ -76,21 +76,26 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
      */
     public function handleEvent(/*string*/ $a_component, /*string*/ $a_event, /*array*/ $a_parameter)/*: void*/
     {
-        if ($a_component === self::COMPONENT_MAIL) {
-            switch ($a_event) {
-                case self::EVENT_SENT_INTERNAL_MAIL:
-                    $mail = $a_parameter;
-                    self::mailLogger()->logs()->handler()->handleSentInternalEmail($mail);
-                    break;
+        switch ($a_component) {
+            case "Services/Mail":
+                switch ($a_event) {
+                    case self::EVENT_SENT_INTERNAL_MAIL:
+                        $mail = $a_parameter;
+                        self::mailLogger()->logs()->handler()->handleSentInternalEmail($mail);
+                        break;
 
-                case self::EVENT_SENT_EXTERNAL_MAIL:
-                    $mail = $a_parameter["mail"];
-                    self::mailLogger()->logs()->handler()->handleSentExternalEmail($mail);
-                    break;
+                    case self::EVENT_SENT_EXTERNAL_MAIL:
+                        $mail = $a_parameter["mail"];
+                        self::mailLogger()->logs()->handler()->handleSentExternalEmail($mail);
+                        break;
 
-                default:
-                    break;
-            }
+                    default:
+                        break;
+                }
+                break;
+
+            default:
+                break;
         }
     }
 
