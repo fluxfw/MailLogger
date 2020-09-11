@@ -29,6 +29,15 @@ final class Repository extends AbstractRepository
 
 
     /**
+     * Repository constructor
+     */
+    protected function __construct()
+    {
+        parent::__construct();
+    }
+
+
+    /**
      * @return self
      */
     public static function getInstance() : self
@@ -38,15 +47,6 @@ final class Repository extends AbstractRepository
         }
 
         return self::$instance;
-    }
-
-
-    /**
-     * Repository constructor
-     */
-    protected function __construct()
-    {
-        parent::__construct();
     }
 
 
@@ -64,20 +64,20 @@ final class Repository extends AbstractRepository
     /**
      * @inheritDoc
      */
-    protected function getTableName() : string
-    {
-        return ilMailLoggerPlugin::PLUGIN_ID . "_config";
-    }
-
-
-    /**
-     * @inheritDoc
-     */
     protected function getFields() : array
     {
         return [
             FormBuilder::KEY_LOG_EMAIL_OF_USERS => [Config::TYPE_JSON, []],
             FormBuilder::KEY_LOG_SYSTEM_EMAILS  => Config::TYPE_BOOLEAN
         ];
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    protected function getTableName() : string
+    {
+        return ilMailLoggerPlugin::PLUGIN_ID . "_config";
     }
 }

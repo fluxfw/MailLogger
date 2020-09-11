@@ -14,6 +14,14 @@ trait RepositoryObjectPluginUninstallTrait
 
     use BasePluginUninstallTrait;
 
+    /**
+     * @internal
+     */
+    protected final function afterUninstall()/*: void*/
+    {
+
+    }
+
 
     /**
      * @return bool
@@ -40,14 +48,5 @@ trait RepositoryObjectPluginUninstallTrait
         }
 
         RemovePluginDataConfirmCtrl::removeUninstallRemovesData();
-    }
-
-
-    /**
-     * @internal
-     */
-    protected final function afterUninstall()/*: void*/
-    {
-
     }
 }

@@ -22,49 +22,8 @@ class Log extends ActiveRecord
     use DICTrait;
     use MailLoggerTrait;
 
-    const TABLE_NAME = ilMailLoggerPlugin::PLUGIN_ID . "_log";
     const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
-
-
-    /**
-     * @inheritDoc
-     */
-    public function getConnectorContainerName() : string
-    {
-        return self::TABLE_NAME;
-    }
-
-
-    /**
-     * @inheritDoc
-     *
-     * @deprecated
-     */
-    public static function returnDbTableName() : string
-    {
-        return self::TABLE_NAME;
-    }
-
-
-    /**
-     * @var int
-     *
-     * @con_has_field   true
-     * @con_fieldtype   integer
-     * @con_length      8
-     * @con_is_notnull  true
-     * @con_is_primary  true
-     * @con_sequence    true
-     */
-    protected $id;
-    /**
-     * @var string
-     *
-     * @con_has_field   true
-     * @con_fieldtype   text
-     * @con_is_notnull  true
-     */
-    protected $subject = "";
+    const TABLE_NAME = ilMailLoggerPlugin::PLUGIN_ID . "_log";
     /**
      * @var string
      *
@@ -74,14 +33,22 @@ class Log extends ActiveRecord
      */
     protected $body = "";
     /**
-     * @var bool
+     * @var int|null
      *
      * @con_has_field   true
      * @con_fieldtype   integer
-     * @con_length      1
-     * @con_is_notnull  true
+     * @con_length      8
+     * @con_is_notnull  false
      */
-    protected $is_system = false;
+    protected $context_ref_id = null;
+    /**
+     * @var string|null
+     *
+     * @con_has_field   true
+     * @con_fieldtype   text
+     * @con_is_notnull  false
+     */
+    protected $context_title = null;
     /**
      * @var string
      *
@@ -116,6 +83,42 @@ class Log extends ActiveRecord
      */
     protected $from_user_id;
     /**
+     * @var int
+     *
+     * @con_has_field   true
+     * @con_fieldtype   integer
+     * @con_length      8
+     * @con_is_notnull  true
+     * @con_is_primary  true
+     * @con_sequence    true
+     */
+    protected $id;
+    /**
+     * @var bool
+     *
+     * @con_has_field   true
+     * @con_fieldtype   integer
+     * @con_length      1
+     * @con_is_notnull  true
+     */
+    protected $is_system = false;
+    /**
+     * @var string
+     *
+     * @con_has_field   true
+     * @con_fieldtype   text
+     * @con_is_notnull  true
+     */
+    protected $subject = "";
+    /**
+     * @var int
+     *
+     * @con_has_field   true
+     * @con_fieldtype   timestamp
+     * @con_is_notnull  true
+     */
+    protected $timestamp;
+    /**
      * @var string
      *
      * @con_has_field   true
@@ -148,31 +151,6 @@ class Log extends ActiveRecord
      * @con_is_notnull  true
      */
     protected $to_user_id;
-    /**
-     * @var string|null
-     *
-     * @con_has_field   true
-     * @con_fieldtype   text
-     * @con_is_notnull  false
-     */
-    protected $context_title = null;
-    /**
-     * @var int|null
-     *
-     * @con_has_field   true
-     * @con_fieldtype   integer
-     * @con_length      8
-     * @con_is_notnull  false
-     */
-    protected $context_ref_id = null;
-    /**
-     * @var int
-     *
-     * @con_has_field   true
-     * @con_fieldtype   timestamp
-     * @con_is_notnull  true
-     */
-    protected $timestamp;
 
 
     /**
@@ -189,88 +167,12 @@ class Log extends ActiveRecord
 
     /**
      * @inheritDoc
+     *
+     * @deprecated
      */
-    public function sleep(/*string*/ $field_name)
+    public static function returnDbTableName() : string
     {
-        $field_value = $this->{$field_name};
-
-        switch ($field_name) {
-            case "is_system":
-                return ($field_value ? 1 : 0);
-
-            case "timestamp":
-                return (new ilDateTime($field_value, IL_CAL_UNIX))->get(IL_CAL_DATETIME);
-
-            default:
-                return null;
-        }
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    public function wakeUp(/*string*/ $field_name, $field_value)
-    {
-        switch ($field_name) {
-            case "id":
-            case "from_type":
-            case "from_user_id":
-            case "to_user_id":
-                return intval($field_value);
-
-            case "is_system":
-                return boolval($field_value);
-
-            case "context_ref_id":
-                if ($field_value !== null) {
-                    return intval($field_value);
-                } else {
-                    return null;
-                }
-
-            case "timestamp":
-                return intval((new ilDateTime($field_value, IL_CAL_DATETIME))->getUnixTime());
-
-            default:
-                return null;
-        }
-    }
-
-
-    /**
-     * @return int
-     */
-    public function getId() : int
-    {
-        return $this->id;
-    }
-
-
-    /**
-     * @param int $id
-     */
-    public function setId(int $id)/*: void*/
-    {
-        $this->id = $id;
-    }
-
-
-    /**
-     * @return string
-     */
-    public function getSubject() : string
-    {
-        return $this->subject;
-    }
-
-
-    /**
-     * @param string $subject
-     */
-    public function setSubject(string $subject)/*: void*/
-    {
-        $this->subject = $subject;
+        return self::TABLE_NAME;
     }
 
 
@@ -293,20 +195,47 @@ class Log extends ActiveRecord
 
 
     /**
-     * @return bool
+     * @inheritDoc
      */
-    public function isSystem() : bool
+    public function getConnectorContainerName() : string
     {
-        return $this->is_system;
+        return self::TABLE_NAME;
     }
 
 
     /**
-     * @param bool $is_system
+     * @return int|null
      */
-    public function setIsSystem(bool $is_system)/*: void*/
+    public function getContextRefId()/*: ?int*/
     {
-        $this->is_system = $is_system;
+        return $this->context_ref_id;
+    }
+
+
+    /**
+     * @param int|null $context_ref_id
+     */
+    public function setContextRefId(/*?int*/ $context_ref_id)/*: void*/
+    {
+        $this->context_ref_id = $context_ref_id;
+    }
+
+
+    /**
+     * @return string|null
+     */
+    public function getContextTitle()/*?: string*/
+    {
+        return $this->context_title;
+    }
+
+
+    /**
+     * @param string|null $context_title
+     */
+    public function setContextTitle(/*?string*/ $context_title)/*: void*/
+    {
+        $this->context_title = $context_title;
     }
 
 
@@ -383,6 +312,60 @@ class Log extends ActiveRecord
 
 
     /**
+     * @return int
+     */
+    public function getId() : int
+    {
+        return $this->id;
+    }
+
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id)/*: void*/
+    {
+        $this->id = $id;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getSubject() : string
+    {
+        return $this->subject;
+    }
+
+
+    /**
+     * @param string $subject
+     */
+    public function setSubject(string $subject)/*: void*/
+    {
+        $this->subject = $subject;
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getTimestamp() : int
+    {
+        return $this->timestamp;
+    }
+
+
+    /**
+     * @param int $timestamp
+     */
+    public function setTimestamp(int $timestamp)/*: void*/
+    {
+        $this->timestamp = $timestamp;
+    }
+
+
+    /**
      * @return string
      */
     public function getToEmail() : string
@@ -455,55 +438,70 @@ class Log extends ActiveRecord
 
 
     /**
-     * @return string|null
+     * @return bool
      */
-    public function getContextTitle()/*?: string*/
+    public function isSystem() : bool
     {
-        return $this->context_title;
+        return $this->is_system;
     }
 
 
     /**
-     * @param string|null $context_title
+     * @param bool $is_system
      */
-    public function setContextTitle(/*?string*/ $context_title)/*: void*/
+    public function setIsSystem(bool $is_system)/*: void*/
     {
-        $this->context_title = $context_title;
+        $this->is_system = $is_system;
     }
 
 
     /**
-     * @return int|null
+     * @inheritDoc
      */
-    public function getContextRefId()/*: ?int*/
+    public function sleep(/*string*/ $field_name)
     {
-        return $this->context_ref_id;
+        $field_value = $this->{$field_name};
+
+        switch ($field_name) {
+            case "is_system":
+                return ($field_value ? 1 : 0);
+
+            case "timestamp":
+                return (new ilDateTime($field_value, IL_CAL_UNIX))->get(IL_CAL_DATETIME);
+
+            default:
+                return parent::sleep($field_name);
+        }
     }
 
 
     /**
-     * @param int|null $context_ref_id
+     * @inheritDoc
      */
-    public function setContextRefId(/*?int*/ $context_ref_id)/*: void*/
+    public function wakeUp(/*string*/ $field_name, $field_value)
     {
-        $this->context_ref_id = $context_ref_id;
-    }
+        switch ($field_name) {
+            case "id":
+            case "from_type":
+            case "from_user_id":
+            case "to_user_id":
+                return intval($field_value);
 
+            case "is_system":
+                return boolval($field_value);
 
-    /**
-     * @return int
-     */
-    public function getTimestamp() : int
-    {
-        return $this->timestamp;
-    }
+            case "context_ref_id":
+                if ($field_value !== null) {
+                    return intval($field_value);
+                } else {
+                    return parent::wakeUp($field_name, $field_value);
+                }
 
+            case "timestamp":
+                return intval((new ilDateTime($field_value, IL_CAL_DATETIME))->getUnixTime());
 
-    /**
-     * @param int $timestamp
-     */
-    public function setTimestamp(int $timestamp)/*: void*/
-    {
-        $this->timestamp = $timestamp;
+            default:
+                return parent::wakeUp($field_name, $field_value);
+        }
     }
 }

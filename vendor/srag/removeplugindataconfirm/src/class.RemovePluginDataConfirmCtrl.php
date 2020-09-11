@@ -25,6 +25,7 @@ class RemovePluginDataConfirmCtrl
 {
 
     use DICTrait;
+
     const CMD_CANCEL = "cancel";
     const CMD_CONFIRM_REMOVE_DATA = "confirmRemoveData";
     const CMD_DEACTIVATE = "deactivate";
@@ -32,6 +33,33 @@ class RemovePluginDataConfirmCtrl
     const CMD_SET_REMOVE_DATA = "setRemoveData";
     const KEY_UNINSTALL_REMOVES_DATA = "uninstall_removes_data";
     const LANG_MODULE = "removeplugindataconfirm";
+
+
+    /**
+     * RemovePluginDataConfirmCtrl constructor
+     */
+    public function __construct()
+    {
+
+    }
+
+
+    /**
+     * @return bool|null
+     */
+    public static function getUninstallRemovesData()/*: ?bool*/
+    {
+        return json_decode(ilSession::get(self::KEY_UNINSTALL_REMOVES_DATA));
+    }
+
+
+    /**
+     *
+     */
+    public static function removeUninstallRemovesData()/*: void*/
+    {
+        ilSession::clear(self::KEY_UNINSTALL_REMOVES_DATA);
+    }
 
 
     /**
@@ -68,38 +96,11 @@ class RemovePluginDataConfirmCtrl
 
 
     /**
-     * @return bool|null
-     */
-    public static function getUninstallRemovesData()/*: ?bool*/
-    {
-        return json_decode(ilSession::get(self::KEY_UNINSTALL_REMOVES_DATA));
-    }
-
-
-    /**
      * @param bool $uninstall_removes_data
      */
     public static function setUninstallRemovesData(bool $uninstall_removes_data)/*: void*/
     {
         ilSession::set(self::KEY_UNINSTALL_REMOVES_DATA, json_encode($uninstall_removes_data));
-    }
-
-
-    /**
-     *
-     */
-    public static function removeUninstallRemovesData()/*: void*/
-    {
-        ilSession::clear(self::KEY_UNINSTALL_REMOVES_DATA);
-    }
-
-
-    /**
-     * RemovePluginDataConfirmCtrl constructor
-     */
-    public function __construct()
-    {
-
     }
 
 
@@ -141,9 +142,9 @@ class RemovePluginDataConfirmCtrl
     /**
      *
      */
-    protected function setTabs()/*:void*/
+    protected function cancel()/*: void*/
     {
-
+        $this->redirectToPlugins("listPlugins");
     }
 
 
@@ -172,6 +173,15 @@ class RemovePluginDataConfirmCtrl
 
 
     /**
+     *
+     */
+    protected function deactivate()/*: void*/
+    {
+        $this->redirectToPlugins("deactivatePlugin");
+    }
+
+
+    /**
      * @param string $cmd
      */
     protected function redirectToPlugins(string $cmd)/*: void*/
@@ -182,19 +192,6 @@ class RemovePluginDataConfirmCtrl
             ilAdministrationGUI::class,
             ilObjComponentSettingsGUI::class
         ], $cmd);
-    }
-
-
-    /**
-     *
-     */
-    protected function setRemoveData()/*: void*/
-    {
-        self::setUninstallRemovesData(true);
-
-        ilUtil::sendInfo($this->txt("msg_removed_data"), true);
-
-        $this->redirectToPlugins("uninstallPlugin");
     }
 
 
@@ -214,18 +211,22 @@ class RemovePluginDataConfirmCtrl
     /**
      *
      */
-    protected function deactivate()/*: void*/
+    protected function setRemoveData()/*: void*/
     {
-        $this->redirectToPlugins("deactivatePlugin");
+        self::setUninstallRemovesData(true);
+
+        ilUtil::sendInfo($this->txt("msg_removed_data"), true);
+
+        $this->redirectToPlugins("uninstallPlugin");
     }
 
 
     /**
      *
      */
-    protected function cancel()/*: void*/
+    protected function setTabs()/*:void*/
     {
-        $this->redirectToPlugins("listPlugins");
+
     }
 
 

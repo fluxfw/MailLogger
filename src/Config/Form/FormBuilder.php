@@ -21,9 +21,9 @@ class FormBuilder extends AbstractFormBuilder
 
     use MailLoggerTrait;
 
-    const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     const KEY_LOG_EMAIL_OF_USERS = "log_email_of_users";
     const KEY_LOG_SYSTEM_EMAILS = "log_system_emails";
+    const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
 
 
     /**
@@ -75,7 +75,7 @@ class FormBuilder extends AbstractFormBuilder
                 ->translate(self::KEY_LOG_EMAIL_OF_USERS . "_info", ConfigCtrl::LANG_MODULE))->withRequired(true),
             self::KEY_LOG_SYSTEM_EMAILS  => self::dic()->ui()->factory()->input()->field()->checkbox(self::plugin()
                 ->translate(self::KEY_LOG_SYSTEM_EMAILS, ConfigCtrl::LANG_MODULE), self::plugin()
-                ->translate(self::KEY_LOG_SYSTEM_EMAILS . "_info", ConfigCtrl::LANG_MODULE))->withRequired(true),
+                ->translate(self::KEY_LOG_SYSTEM_EMAILS . "_info", ConfigCtrl::LANG_MODULE))->withRequired(true)
         ];
         $fields[self::KEY_LOG_EMAIL_OF_USERS]->getInput()->setOptions(self::mailLogger()->ilias()->users()->getUsers());
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.6.5]
+- `shouldUseOneUpdateStepOnly` also for repository plugins
+
+## [0.6.4]
+- `shouldUseOneUpdateStepOnly`
+
 ## [0.6.3]
 - `installRemovePluginDataConfirmLanguages`
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.26.0]
+- `DevToolsCtrl`
+
+## [0.25.1]
+- Fix
+
 ## [0.25.0]
 - `rendererLoader`
 - `javaScriptBinding`

@@ -14,6 +14,14 @@ trait PluginUninstallTrait
 
     use BasePluginUninstallTrait;
 
+    /**
+     * @internal
+     */
+    protected final function afterUninstall()/*: void*/
+    {
+
+    }
+
 
     /**
      * @return bool
@@ -23,14 +31,5 @@ trait PluginUninstallTrait
     protected final function beforeUninstall() : bool
     {
         return $this->pluginUninstall();
-    }
-
-
-    /**
-     * @internal
-     */
-    protected final function afterUninstall()/*: void*/
-    {
-
     }
 }

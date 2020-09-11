@@ -23,8 +23,8 @@ class LogTableGUI extends TableGUI
 
     use MailLoggerTrait;
 
-    const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
     const LANG_MODULE = LogGUI::LANG_MODULE;
+    const PLUGIN_CLASS_NAME = ilMailLoggerPlugin::class;
 
 
     /**
@@ -36,33 +36,6 @@ class LogTableGUI extends TableGUI
     public function __construct(LogGUI $parent, string $parent_cmd)
     {
         parent::__construct($parent, $parent_cmd);
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    protected function getColumnValue(/*string*/
-        $column, /*array*/
-        $row, /*int*/
-        $format = self::DEFAULT_FORMAT
-    ) : string {
-        switch ($column) {
-            case "timestamp":
-                if ($format) {
-                    $column = $row[$column];
-                } else {
-                    $column = ilDatePresentation::formatDate(new ilDateTime($row[$column], IL_CAL_UNIX));
-                }
-                $column = htmlspecialchars($column);
-                break;
-
-            default:
-                $column = htmlspecialchars($row[$column]);
-                break;
-        }
-
-        return strval($column);
     }
 
 
@@ -102,6 +75,46 @@ class LogTableGUI extends TableGUI
         }, $columns);
 
         return $columns;
+    }
+
+
+    /**
+     * @param array $row
+     */
+    protected function fillRow(/*array*/ $row)/*: void*/
+    {
+        self::dic()->ctrl()->setParameter($this->parent_obj, LogGUI::GET_PARAM_LOG_ID, $row["id"]);
+
+        parent::fillRow($row);
+
+        $this->tpl->setVariable("COLUMN", self::output()->getHTML(self::dic()->ui()->factory()->dropdown()->standard([
+            self::dic()->ui()->factory()->link()->standard(self::plugin()->translate("show_email", self::LANG_MODULE), self::dic()->ctrl()
+                ->getLinkTarget($this->parent_obj, LogGUI::CMD_SHOW_EMAIL))
+        ])->withLabel(self::plugin()->translate("actions", self::LANG_MODULE))));
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    protected function getColumnValue(string $column, /*array*/ $row, int $format = self::DEFAULT_FORMAT) : string
+    {
+        switch ($column) {
+            case "timestamp":
+                if ($format) {
+                    $column = $row[$column];
+                } else {
+                    $column = ilDatePresentation::formatDate(new ilDateTime($row[$column], IL_CAL_UNIX));
+                }
+                $column = htmlspecialchars($column);
+                break;
+
+            default:
+                $column = htmlspecialchars($row[$column]);
+                break;
+        }
+
+        return strval($column);
     }
 
 
@@ -232,23 +245,5 @@ class LogTableGUI extends TableGUI
     protected function initTitle()/*: void*/
     {
         $this->setTitle(self::plugin()->translate("log", "log"));
-    }
-
-
-    /**
-     * @param array $row
-     */
-    protected function fillRow(/*array*/
-        $row
-    )/*: void*/
-    {
-        self::dic()->ctrl()->setParameter($this->parent_obj, LogGUI::GET_PARAM_LOG_ID, $row["id"]);
-
-        parent::fillRow($row);
-
-        $this->tpl->setVariable("COLUMN", self::output()->getHTML(self::dic()->ui()->factory()->dropdown()->standard([
-            self::dic()->ui()->factory()->link()->standard(self::plugin()->translate("show_email", self::LANG_MODULE), self::dic()->ctrl()
-                ->getLinkTarget($this->parent_obj, LogGUI::CMD_SHOW_EMAIL))
-        ])->withLabel(self::plugin()->translate("actions", self::LANG_MODULE))));
     }
 }

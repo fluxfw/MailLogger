@@ -5,6 +5,7 @@ require_once __DIR__ . "/../vendor/autoload.php";
 use ILIAS\DI\Container;
 use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
 use srag\CustomInputGUIs\MailLogger\Loader\CustomInputGUIsLoaderDetector;
+use srag\DIC\MailLogger\DevTools\DevToolsCtrl;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 use srag\RemovePluginDataConfirm\MailLogger\PluginUninstallTrait;
 
@@ -19,16 +20,25 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
     use PluginUninstallTrait;
     use MailLoggerTrait;
 
+    const COMPONENT_MAIL = "Services/Mail";
+    const EVENT_SENT_EXTERNAL_MAIL = "externalEmailDelegated";
+    const EVENT_SENT_INTERNAL_MAIL = "sentInternalMail";
+    const PLUGIN_CLASS_NAME = self::class;
     const PLUGIN_ID = "maillog";
     const PLUGIN_NAME = "MailLogger";
-    const PLUGIN_CLASS_NAME = self::class;
-    const COMPONENT_MAIL = "Services/Mail";
-    const EVENT_SENT_INTERNAL_MAIL = "sentInternalMail";
-    const EVENT_SENT_EXTERNAL_MAIL = "externalEmailDelegated";
     /**
      * @var self|null
      */
     protected static $instance = null;
+
+
+    /**
+     * ilMailLoggerPlugin constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
 
     /**
@@ -45,11 +55,11 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
 
 
     /**
-     * ilMailLoggerPlugin constructor
+     * @inheritDoc
      */
-    public function __construct()
+    public function exchangeUIRendererAfterInitialization(Container $dic) : Closure
     {
-        parent::__construct();
+        return CustomInputGUIsLoaderDetector::exchangeUIRendererAfterInitialization();
     }
 
 
@@ -67,21 +77,26 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
      */
     public function handleEvent(/*string*/ $a_component, /*string*/ $a_event, /*array*/ $a_parameter)/*: void*/
     {
-        if ($a_component === self::COMPONENT_MAIL) {
-            switch ($a_event) {
-                case self::EVENT_SENT_INTERNAL_MAIL:
-                    $mail = $a_parameter;
-                    self::mailLogger()->logs()->handler()->handleSentInternalEmail($mail);
-                    break;
+        switch ($a_component) {
+            case "Services/Mail":
+                switch ($a_event) {
+                    case self::EVENT_SENT_INTERNAL_MAIL:
+                        $mail = $a_parameter;
+                        self::mailLogger()->logs()->handler()->handleSentInternalEmail($mail);
+                        break;
 
-                case self::EVENT_SENT_EXTERNAL_MAIL:
-                    $mail = $a_parameter["mail"];
-                    self::mailLogger()->logs()->handler()->handleSentExternalEmail($mail);
-                    break;
+                    case self::EVENT_SENT_EXTERNAL_MAIL:
+                        $mail = $a_parameter["mail"];
+                        self::mailLogger()->logs()->handler()->handleSentExternalEmail($mail);
+                        break;
 
-                default:
-                    break;
-            }
+                    default:
+                        break;
+                }
+                break;
+
+            default:
+                break;
         }
     }
 
@@ -103,6 +118,8 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
         parent::updateLanguages($a_lang_keys);
 
         $this->installRemovePluginDataConfirmLanguages();
+
+        DevToolsCtrl::installLanguages(self::plugin());
     }
 
 
@@ -118,8 +135,8 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
     /**
      * @inheritDoc
      */
-    public function exchangeUIRendererAfterInitialization(Container $dic) : Closure
+    protected function shouldUseOneUpdateStepOnly() : bool
     {
-        return CustomInputGUIsLoaderDetector::exchangeUIRendererAfterInitialization();
+        return true;
     }
 }
