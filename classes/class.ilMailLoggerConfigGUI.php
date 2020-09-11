@@ -2,6 +2,7 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
+use srag\DIC\MailLogger\DevTools\DevToolsCtrl;
 use srag\DIC\MailLogger\DICTrait;
 use srag\Plugins\MailLogger\Config\ConfigCtrl;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
@@ -9,7 +10,9 @@ use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 /**
  * Class ilMailLoggerConfigGUI
  *
- * @author studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
+ * @author            studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
+ *
+ * @ilCtrl_isCalledBy srag\DIC\MailLogger\DevTools\DevToolsCtrl: ilMailLoggerConfigGUI
  */
 class ilMailLoggerConfigGUI extends ilPluginConfigGUI
 {
@@ -44,6 +47,10 @@ class ilMailLoggerConfigGUI extends ilPluginConfigGUI
                 self::dic()->ctrl()->forwardCommand(new ConfigCtrl());
                 break;
 
+            case strtolower(DevToolsCtrl::class):
+                self::dic()->ctrl()->forwardCommand(new DevToolsCtrl($this, self::plugin()));
+                break;
+
             default:
                 $cmd = self::dic()->ctrl()->getCmd();
 
@@ -75,6 +82,8 @@ class ilMailLoggerConfigGUI extends ilPluginConfigGUI
     protected function setTabs()/*: void*/
     {
         ConfigCtrl::addTabs();
+
+        DevToolsCtrl::addTabs(self::plugin());
 
         self::dic()->locator()->addItem(ilMailLoggerPlugin::PLUGIN_NAME, self::dic()->ctrl()->getLinkTarget($this, self::CMD_CONFIGURE));
     }
