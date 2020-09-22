@@ -3,7 +3,9 @@
 namespace srag\Plugins\MailLogger\Menu;
 
 use ilAdministrationGUI;
+use ILIAS\GlobalScreen\Scope\MainMenu\Factory\AbstractBaseItem;
 use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
+use ILIAS\UI\Component\Symbol\Icon\Standard;
 use ilMailLoggerConfigGUI;
 use ilMailLoggerPlugin;
 use ilObjComponentSettingsGUI;
@@ -45,7 +47,7 @@ class Menu extends AbstractStaticPluginMainMenuProvider
         self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "pname", ilMailLoggerPlugin::PLUGIN_NAME);
 
         return [
-            $this->mainmenu->link($this->if->identifier(ilMailLoggerPlugin::PLUGIN_ID . "_log"))->withParent($parent->getProviderIdentification())
+            $this->symbol($this->mainmenu->link($this->if->identifier(ilMailLoggerPlugin::PLUGIN_ID . "_log"))->withParent($parent->getProviderIdentification())
                 ->withTitle(self::plugin()->translate("log", LogGUI::LANG_MODULE))->withAction(str_replace("\\", "%5C", self::dic()->ctrl()->getLinkTargetByClass([
                     ilUIPluginRouterGUI::class,
                     LogGUI::class
@@ -53,8 +55,8 @@ class Menu extends AbstractStaticPluginMainMenuProvider
                     return self::plugin()->getPluginObject()->isActive();
                 })->withVisibilityCallable(function () : bool {
                     return self::mailLogger()->access()->hasLogAccess();
-                }),
-            $this->mainmenu->link($this->if->identifier(ilMailLoggerPlugin::PLUGIN_ID . "_configuration"))
+                })),
+            $this->symbol($this->mainmenu->link($this->if->identifier(ilMailLoggerPlugin::PLUGIN_ID . "_configuration"))
                 ->withParent($parent->getProviderIdentification())->withTitle(self::plugin()
                     ->translate("configuration", ConfigCtrl::LANG_MODULE))->withAction(self::dic()->ctrl()->getLinkTargetByClass([
                     ilAdministrationGUI::class,
@@ -64,7 +66,7 @@ class Menu extends AbstractStaticPluginMainMenuProvider
                     return self::plugin()->getPluginObject()->isActive();
                 })->withVisibilityCallable(function () : bool {
                     return self::dic()->rbac()->review()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role
-                })
+                }))
         ];
     }
 
@@ -75,12 +77,27 @@ class Menu extends AbstractStaticPluginMainMenuProvider
     public function getStaticTopItems() : array
     {
         return [
-            $this->mainmenu->topParentItem($this->if->identifier(ilMailLoggerPlugin::PLUGIN_ID . "_top"))->withTitle(self::plugin()
+            $this->symbol($this->mainmenu->topParentItem($this->if->identifier(ilMailLoggerPlugin::PLUGIN_ID . "_top"))->withTitle(self::plugin()
                 ->translate("log", LogGUI::LANG_MODULE))->withAvailableCallable(function () : bool {
                 return self::plugin()->getPluginObject()->isActive();
             })->withVisibilityCallable(function () : bool {
                 return self::mailLogger()->access()->hasLogAccess();
-            })
+            }))
         ];
+    }
+
+
+    /**
+     * @param AbstractBaseItem $entry
+     *
+     * @return AbstractBaseItem
+     */
+    protected function symbol(AbstractBaseItem $entry) : AbstractBaseItem
+    {
+        if (self::version()->is6()) {
+            $entry = $entry->withSymbol(self::dic()->ui()->factory()->symbol()->icon()->standard(Standard::MAIL, ilMailLoggerPlugin::PLUGIN_NAME)->withIsOutlined(true));
+        }
+
+        return $entry;
     }
 }
