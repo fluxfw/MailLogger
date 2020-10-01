@@ -65,7 +65,7 @@ return array(
     'srag\\CustomInputGUIs\\MailLogger\\TextInputGUI\\TextInputGUIWithModernAutoComplete' => $vendorDir . '/srag/custominputguis/src/TextInputGUI/TextInputGUIWithModernAutoComplete.php',
     'srag\\CustomInputGUIs\\MailLogger\\UIInputComponentWrapperInputGUI\\UIInputComponentWrapperInputGUI' => $vendorDir . '/srag/custominputguis/src/UIInputComponentWrapperInputGUI/UIInputComponentWrapperInputGUI.php',
     'srag\\CustomInputGUIs\\MailLogger\\UIInputComponentWrapperInputGUI\\UIInputComponentWrapperNameSource' => $vendorDir . '/srag/custominputguis/src/UIInputComponentWrapperInputGUI/UIInputComponentWrapperNameSource.php',
-    'srag\\CustomInputGUIs\\MailLogger\\ViewControlModeUI\\ViewControlModeUI' => $vendorDir . '/srag/custominputguis/src/ViewControlModeGUI/ViewControlModeUI.php',
+    'srag\\CustomInputGUIs\\MailLogger\\ViewControlModeUI\\ViewControlModeUI' => $vendorDir . '/srag/custominputguis/src/ViewControlModeUI/ViewControlModeUI.php',
     'srag\\CustomInputGUIs\\MailLogger\\Waiter\\Waiter' => $vendorDir . '/srag/custominputguis/src/Waiter/Waiter.php',
     'srag\\CustomInputGUIs\\MailLogger\\WeekdayInputGUI\\WeekdayInputGUI' => $vendorDir . '/srag/custominputguis/src/WeekdayInputGUI/WeekdayInputGUI.php',
     'srag\\DIC\\MailLogger\\DICStatic' => $vendorDir . '/srag/dic/src/DICStatic.php',
