@@ -12,7 +12,7 @@ return array(
     'srag\\LibrariesNamespaceChanger\\' => array($vendorDir . '/srag/librariesnamespacechanger/src'),
     'srag\\GeneratePluginInfosHelper\\MailLogger\\' => array($vendorDir . '/srag/generateplugininfoshelper/src'),
     'srag\\DevTools\\MailLogger\\' => array($vendorDir . '/srag/devtools/src'),
-    'srag\\DIC\\' => array($vendorDir . '/srag/dic/src'),
+    'srag\\DIC\\MailLogger\\' => array($vendorDir . '/srag/dic/src'),
     'srag\\CustomInputGUIs\\MailLogger\\' => array($vendorDir . '/srag/custominputguis/src'),
     'srag\\ActiveRecordConfig\\MailLogger\\' => array($vendorDir . '/srag/activerecordconfig/src'),
 );

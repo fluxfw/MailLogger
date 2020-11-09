@@ -20,7 +20,7 @@ class ComposerStaticInit9985e56fc3779e957d3eb8e351bcbdbc
             'srag\\LibrariesNamespaceChanger\\' => 31,
             'srag\\GeneratePluginInfosHelper\\MailLogger\\' => 42,
             'srag\\DevTools\\MailLogger\\' => 25,
-            'srag\\DIC\\' => 9,
+            'srag\\DIC\\MailLogger\\' => 20,
             'srag\\CustomInputGUIs\\MailLogger\\' => 32,
             'srag\\ActiveRecordConfig\\MailLogger\\' => 35,
         ),
@@ -51,7 +51,7 @@ class ComposerStaticInit9985e56fc3779e957d3eb8e351bcbdbc
         array (
             0 => __DIR__ . '/..' . '/srag/devtools/src',
         ),
-        'srag\\DIC\\' => 
+        'srag\\DIC\\MailLogger\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/dic/src',
         ),
