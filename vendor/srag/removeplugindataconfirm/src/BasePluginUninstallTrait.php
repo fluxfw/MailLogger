@@ -4,7 +4,7 @@ namespace srag\RemovePluginDataConfirm\MailLogger;
 
 use ilUIPluginRouterGUI;
 use srag\DIC\MailLogger\DICTrait;
-use srag\DIC\MailLogger\Util\LibraryLanguageInstaller;
+use srag\LibraryLanguageInstaller\MailLogger\LibraryLanguageInstaller;
 
 /**
  * Trait BasePluginUninstallTrait

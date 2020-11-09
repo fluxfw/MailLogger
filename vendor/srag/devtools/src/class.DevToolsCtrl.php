@@ -9,7 +9,7 @@ use ilPluginConfigGUI;
 use ilUtil;
 use srag\DIC\MailLogger\DICTrait;
 use srag\DIC\MailLogger\Plugin\PluginInterface;
-use srag\DIC\MailLogger\Util\LibraryLanguageInstaller;
+use srag\LibraryLanguageInstaller\MailLogger\LibraryLanguageInstaller;
 
 /**
  * Class DevToolsCtrl

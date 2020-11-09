@@ -1,6 +1,6 @@
 <?php
 
-namespace srag\DIC\MailLogger\Util;
+namespace srag\LibraryLanguageInstaller\MailLogger;
 
 use ilDBConstants;
 use ilGlobalCache;
@@ -12,7 +12,7 @@ use srag\DIC\MailLogger\Plugin\PluginInterface;
 /**
  * Class LibraryLanguageInstaller
  *
- * @package srag\DIC\MailLogger\Util
+ * @package srag\LibraryLanguageInstaller\MailLogger
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
