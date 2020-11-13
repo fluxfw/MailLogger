@@ -1,6 +1,6 @@
 <?php
 
-namespace srag\CustomInputGUIs\MailLogger\CheckboxInputGUI;
+namespace srag\CustomInputGUIs\MailLogger\AjaxCheckbox;
 
 use srag\CustomInputGUIs\MailLogger\Template\Template;
 use srag\CustomInputGUIs\MailLogger\Waiter\Waiter;
@@ -9,7 +9,7 @@ use srag\DIC\MailLogger\DICTrait;
 /**
  * Class AjaxCheckbox
  *
- * @package srag\CustomInputGUIs\MailLogger\CheckboxInputGUI
+ * @package srag\CustomInputGUIs\MailLogger\AjaxCheckbox
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */

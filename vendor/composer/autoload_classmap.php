@@ -19,7 +19,7 @@ return array(
     'srag\\ActiveRecordConfig\\MailLogger\\Config\\AbstractRepository' => $vendorDir . '/srag/activerecordconfig/src/Config/AbstractRepository.php',
     'srag\\ActiveRecordConfig\\MailLogger\\Config\\Config' => $vendorDir . '/srag/activerecordconfig/src/Config/Config.php',
     'srag\\ActiveRecordConfig\\MailLogger\\Exception\\ActiveRecordConfigException' => $vendorDir . '/srag/activerecordconfig/src/Exception/ActiveRecordConfigException.php',
-    'srag\\CustomInputGUIs\\MailLogger\\CheckboxInputGUI\\AjaxCheckbox' => $vendorDir . '/srag/custominputguis/src/AjaxCheckbox/AjaxCheckbox.php',
+    'srag\\CustomInputGUIs\\MailLogger\\AjaxCheckbox\\AjaxCheckbox' => $vendorDir . '/srag/custominputguis/src/AjaxCheckbox/AjaxCheckbox.php',
     'srag\\CustomInputGUIs\\MailLogger\\CheckboxInputGUI\\CheckboxInputGUI' => $vendorDir . '/srag/custominputguis/src/CheckboxInputGUI/CheckboxInputGUI.php',
     'srag\\CustomInputGUIs\\MailLogger\\ColorPickerInputGUI\\ColorPickerInputGUI' => $vendorDir . '/srag/custominputguis/src/ColorPickerInputGUI/ColorPickerInputGUI.php',
     'srag\\CustomInputGUIs\\MailLogger\\CustomInputGUIs' => $vendorDir . '/srag/custominputguis/src/CustomInputGUIs.php',
