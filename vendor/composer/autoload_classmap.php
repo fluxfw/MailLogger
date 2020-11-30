@@ -68,6 +68,7 @@ return array(
     'srag\\CustomInputGUIs\\MailLogger\\ViewControlModeUI\\ViewControlModeUI' => $vendorDir . '/srag/custominputguis/src/ViewControlModeUI/ViewControlModeUI.php',
     'srag\\CustomInputGUIs\\MailLogger\\Waiter\\Waiter' => $vendorDir . '/srag/custominputguis/src/Waiter/Waiter.php',
     'srag\\CustomInputGUIs\\MailLogger\\WeekdayInputGUI\\WeekdayInputGUI' => $vendorDir . '/srag/custominputguis/src/WeekdayInputGUI/WeekdayInputGUI.php',
+    'srag\\DIC\\MailLogger\\Cron\\FixUITemplateInCronContext' => $vendorDir . '/srag/dic/src/Cron/FixUITemplateInCronContext.php',
     'srag\\DIC\\MailLogger\\DICStatic' => $vendorDir . '/srag/dic/src/DICStatic.php',
     'srag\\DIC\\MailLogger\\DICStaticInterface' => $vendorDir . '/srag/dic/src/DICStaticInterface.php',
     'srag\\DIC\\MailLogger\\DICTrait' => $vendorDir . '/srag/dic/src/DICTrait.php',
