@@ -20,8 +20,10 @@
   },
   "type": "project",
   "keywords": [
-    "ILIAS",
-    "Plugin"
+    "event",
+    "handling",
+    "ilias",
+    "plugin"
   ],
   "homepage": "https://github.com/studer-raimann/MailLogger",
   "license": "GPL-3.0-only",
