@@ -2,6 +2,8 @@
 
 namespace srag\CustomInputGUIs\MailLogger\MultiSelectSearchNewInputGUI;
 
+require_once __DIR__ . "/../../../../autoload.php";
+
 use ilOrgUnitPathStorage;
 
 /**
