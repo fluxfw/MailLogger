@@ -20,7 +20,7 @@ Start at your ILIAS root directory
 ```bash
 mkdir -p Customizing/global/plugins/Services/EventHandling/EventHook
 cd Customizing/global/plugins/Services/EventHandling/EventHook
-git clone https://github.com/studer-raimann/MailLogger.git MailLogger
+git clone https://github.com/fluxfw/MailLogger.git MailLogger
 ```
 
 Update, activate and config the plugin in the ILIAS Plugin Administration
