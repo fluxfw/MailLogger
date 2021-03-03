@@ -66,7 +66,7 @@ class LogTableGUI extends TableGUI
             "timestamp"
         ];
 
-        $columns = array_map(function (string $key) use (&$default): array {
+        $columns = array_map(function (string $key) use (&$default) : array {
             return [
                 "id"      => $key,
                 "default" => in_array($key, $default),

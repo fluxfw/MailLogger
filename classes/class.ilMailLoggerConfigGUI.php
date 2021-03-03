@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use srag\DIC\MailLogger\DevTools\DevToolsCtrl;
+use srag\DevTools\MailLogger\DevToolsCtrl;
 use srag\DIC\MailLogger\DICTrait;
 use srag\Plugins\MailLogger\Config\ConfigCtrl;
 use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
@@ -12,7 +12,7 @@ use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
  *
  * @author            studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  *
- * @ilCtrl_isCalledBy srag\DIC\MailLogger\DevTools\DevToolsCtrl: ilMailLoggerConfigGUI
+ * @ilCtrl_isCalledBy srag\DevTools\MailLogger\DevToolsCtrl: ilMailLoggerConfigGUI
  */
 class ilMailLoggerConfigGUI extends ilPluginConfigGUI
 {

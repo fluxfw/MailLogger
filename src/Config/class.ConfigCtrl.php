@@ -2,6 +2,8 @@
 
 namespace srag\Plugins\MailLogger\Config;
 
+require_once __DIR__ . "/../../vendor/autoload.php";
+
 use ilMailLoggerPlugin;
 use ilUtil;
 use srag\DIC\MailLogger\DICTrait;

@@ -23,6 +23,7 @@ use ilFavouritesDBRepository;
 use ilGlobalTemplateInterface;
 use ilHelpGUI;
 use ILIAS;
+use ILIAS\Data\Factory as DataFactory;
 use ILIAS\DI\BackgroundTaskServices;
 use ILIAS\DI\Container;
 use ILIAS\DI\HTTPServices;
@@ -190,6 +191,12 @@ interface DICInterface
 
 
     /**
+     * @return DataFactory
+     */
+    public function data() : DataFactory;
+
+
+    /**
      * @return DatabaseInterface
      *
      * @throws DICException DatabaseDetector only supports ilDBPdoInterface!
@@ -342,7 +349,8 @@ interface DICInterface
     /**
      * @return ilMMItemRepository
      */
-    public function mainMenuItem() : ilMMItemRepository;/*: ilGlobalTemplateInterface*/
+    public function mainMenuItem() : ilMMItemRepository;
+
 
     /**
      * @return ilTemplate|ilGlobalTemplateInterface

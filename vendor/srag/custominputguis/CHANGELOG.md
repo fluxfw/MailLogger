@@ -1,5 +1,41 @@
 # Changelog
 
+## [0.42.1]
+- Fix Waiter on ILIAS 6
+- Update project url
+
+## [0.42.0]
+- Add `Waiter.setBytes`
+- Add possibility to pass own tpl to `Waiter.init`
+
+## [0.41.4]
+- Add require compose in ctrl entry classes
+
+## [0.41.3]
+- Load `form` lang module
+
+## [0.41.2]
+- Fix composer 2
+- Move doc/DESCRIPTION.md to src/LONG_DESCRIPTION.md
+
+## [0.41.1]
+- Generate readme
+
+## [0.41.0]
+- Generate readme
+
+## [0.40.0]
+- Custom hooks for `CustomInputGUIsLoaderDetector::getRendererFor`
+
+## [0.39.3]
+- Fix not required `ilDateTimeInputGUI` in `InputGUIWrapperUIInputComponent`
+
+## [0.39.2]
+- Use `DataFactory` from dic
+
+## [0.39.1]
+- Make `cleanValues` static in `MultiSelectSearchNewInputGUI`
+
 ## [0.39.0]
 - Support `MultiLineNewInputGUI` in `TableGUI`
 

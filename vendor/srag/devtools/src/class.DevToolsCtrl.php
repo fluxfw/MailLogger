@@ -1,20 +1,24 @@
 <?php
 
-namespace srag\DIC\MailLogger\DevTools;
+namespace srag\DevTools\MailLogger;
 
+require_once __DIR__ . "/../../../autoload.php";
+
+use Closure;
 use ilAdministrationGUI;
 use ilDBConstants;
 use ilObjComponentSettingsGUI;
+use ilPlugin;
 use ilPluginConfigGUI;
 use ilUtil;
 use srag\DIC\MailLogger\DICTrait;
 use srag\DIC\MailLogger\Plugin\PluginInterface;
-use srag\DIC\MailLogger\Util\LibraryLanguageInstaller;
+use srag\LibraryLanguageInstaller\MailLogger\LibraryLanguageInstaller;
 
 /**
  * Class DevToolsCtrl
  *
- * @package srag\DIC\MailLogger\DevTools
+ * @package srag\DevTools\MailLogger
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
@@ -69,7 +73,7 @@ class DevToolsCtrl
      */
     public static function installLanguages(PluginInterface $plugin)/*:void*/
     {
-        LibraryLanguageInstaller::getInstance()->withPlugin($plugin)->withLibraryLanguageDirectory(__DIR__ . "/lang")->updateLanguages();
+        LibraryLanguageInstaller::getInstance()->withPlugin($plugin)->withLibraryLanguageDirectory(__DIR__ . "/../lang")->updateLanguages();
     }
 
 
@@ -154,7 +158,12 @@ class DevToolsCtrl
         ilUtil::sendSuccess($this->plugin->translate("reloaded_ctrl_structure", self::LANG_MODULE), true);
 
         //self::dic()->ctrl()->redirect($this);
-        self::dic()->ctrl()->redirectToURL(self::dic()->ctrl()->getTargetScript() . "?ref_id=" . (31) . "&admin_mode=settings&ctype=" . $this->plugin->getPluginObject()->getComponentType()
+        self::dic()->ctrl()->redirectToURL(self::dic()->ctrl()->getTargetScript() . "?ref_id=" . self::dic()
+                                                                                                     ->database()
+                                                                                                     ->queryF('SELECT ref_id FROM object_data INNER JOIN object_reference ON object_data.obj_id=object_reference.obj_id WHERE type=%s',
+                                                                                                         [ilDBConstants::T_TEXT], ["cmps"])
+                                                                                                     ->fetchAssoc()["ref_id"] . "&admin_mode=settings&ctype=" . $this->plugin->getPluginObject()
+                ->getComponentType()
             . "&cname=" . $this->plugin->getPluginObject()->getComponentName()
             . "&slot_id=" . $this->plugin->getPluginObject()->getSlotId() . "&pname=" . $this->plugin->getPluginObject()->getPluginName() . "&cmdClass="
             . static::class . "&cmdNode=" . implode(":", array_map([$this, "reloadCtrlStructureGetNewNodeId"], [
@@ -173,7 +182,9 @@ class DevToolsCtrl
     {
         $this->plugin->reloadDatabase();
 
-        ilUtil::sendSuccess($this->plugin->translate("reloaded_database", self::LANG_MODULE) . "<br><br>" . $this->plugin->getPluginObject()->message, true);
+        ilUtil::sendSuccess($this->plugin->translate("reloaded_database", self::LANG_MODULE) . "<br><br>" . Closure::bind(function () : string {
+                return $this->message;
+            }, $this->plugin->getPluginObject(), ilPlugin::class)(), true);
 
         self::dic()->ctrl()->redirect($this);
     }

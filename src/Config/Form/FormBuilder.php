@@ -97,7 +97,7 @@ class FormBuilder extends AbstractFormBuilder
      */
     protected function storeData(array $data)/* : void*/
     {
-        self::mailLogger()->config()->setValue(self::KEY_LOG_EMAIL_OF_USERS, (array) $data[self::KEY_LOG_EMAIL_OF_USERS]);
+        self::mailLogger()->config()->setValue(self::KEY_LOG_EMAIL_OF_USERS, MultiSelectSearchNewInputGUI::cleanValues((array) $data[self::KEY_LOG_EMAIL_OF_USERS]));
         self::mailLogger()->config()->setValue(self::KEY_LOG_SYSTEM_EMAILS, boolval($data[self::KEY_LOG_SYSTEM_EMAILS]));
     }
 }

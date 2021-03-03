@@ -22,6 +22,7 @@ use ilExerciseFactory;
 use ilFavouritesDBRepository;
 use ilHelpGUI;
 use ILIAS;
+use ILIAS\Data\Factory as DataFactory;
 use ILIAS\DI\BackgroundTaskServices;
 use ILIAS\DI\Container;
 use ILIAS\DI\HTTPServices;
@@ -77,6 +78,12 @@ use srag\DIC\MailLogger\Exception\DICException;
  */
 final class ILIAS54DIC extends AbstractDIC
 {
+
+    /**
+     * @var ilMMItemRepository|null
+     */
+    protected $main_menu_item = null;
+
 
     /**
      * @inheritDoc
@@ -210,6 +217,15 @@ final class ILIAS54DIC extends AbstractDIC
     public function ctrlStructureReader() : ilCtrlStructureReader
     {
         return $this->dic["ilCtrlStructureReader"];
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function data() : DataFactory
+    {
+        return new DataFactory();
     }
 
 
@@ -416,7 +432,11 @@ final class ILIAS54DIC extends AbstractDIC
      */
     public function mainMenuItem() : ilMMItemRepository
     {
-        return new ilMMItemRepository();
+        if ($this->main_menu_item === null) {
+            $this->main_menu_item = new ilMMItemRepository();
+        }
+
+        return $this->main_menu_item;
     }
 
 

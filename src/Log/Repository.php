@@ -152,7 +152,7 @@ final class Repository
         $logs = $where->getArray();
 
         if (!empty($body)) {
-            $logs = array_filter($logs, function (array $log) use ($body): bool {
+            $logs = array_filter($logs, function (array $log) use ($body) : bool {
                 // Remove possible html before filter by body
                 return (stripos(strip_tags($log["body"]), $body) !== false);
             });

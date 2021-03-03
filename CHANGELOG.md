@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.3.4]
+- Update project url
+
 ## [1.3.3]
 - Main menu icon
 

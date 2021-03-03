@@ -3,6 +3,7 @@
 namespace srag\Plugins\MailLogger\Menu;
 
 use ilAdministrationGUI;
+use ilDBConstants;
 use ILIAS\GlobalScreen\Scope\MainMenu\Factory\AbstractBaseItem;
 use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
 use ILIAS\UI\Component\Symbol\Icon\Standard;
@@ -40,7 +41,13 @@ class Menu extends AbstractStaticPluginMainMenuProvider
     {
         $parent = $this->getStaticTopItems()[0];
 
-        self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "ref_id", 31);
+        self::dic()
+            ->ctrl()
+            ->setParameterByClass(ilMailLoggerConfigGUI::class, "ref_id", self::dic()
+                                                                              ->database()
+                                                                              ->queryF('SELECT ref_id FROM object_data INNER JOIN object_reference ON object_data.obj_id=object_reference.obj_id WHERE type=%s',
+                                                                                  [ilDBConstants::T_TEXT], ["cmps"])
+                                                                              ->fetchAssoc()["ref_id"]);
         self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "ctype", IL_COMP_SERVICE);
         self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "cname", "EventHandling");
         self::dic()->ctrl()->setParameterByClass(ilMailLoggerConfigGUI::class, "slot_id", "evhk");
@@ -65,7 +72,7 @@ class Menu extends AbstractStaticPluginMainMenuProvider
                 ], ilMailLoggerConfigGUI::CMD_CONFIGURE))->withAvailableCallable(function () : bool {
                     return self::plugin()->getPluginObject()->isActive();
                 })->withVisibilityCallable(function () : bool {
-                    return self::dic()->rbac()->review()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role
+                    return self::dic()->rbac()->review()->isAssigned(self::dic()->user()->getId(), SYSTEM_ROLE_ID);
                 }))
         ];
     }

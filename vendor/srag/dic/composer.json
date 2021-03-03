@@ -1,14 +1,23 @@
 {
   "name": "srag/dic",
   "description": "Use all ILIAS globals in your class",
+  "version": "0.31.5",
+  "extra": {
+    "ilias_plugin": {
+      "ilias_min_version": "5.4.0",
+      "ilias_max_version": "6.999"
+    },
+    "generate_plugin_readme_template": "SRAG_ILIAS_LIBRARY",
+    "long_description_template": "src/LONG_DESCRIPTION.md"
+  },
   "type": "library",
   "keywords": [
-    "ILIAS",
-    "DIC",
-    "Trait",
-    "globals"
+    "dic",
+    "globals",
+    "ilias",
+    "trait"
   ],
-  "homepage": "https://github.com/studer-raimann/DIC",
+  "homepage": "https://github.com/fluxfw/DIC",
   "license": "GPL-3.0-only",
   "authors": [
     {
@@ -24,6 +33,9 @@
   "require": {
     "php": ">=7.0"
   },
+  "require-dev": {
+    "srag/generateplugininfoshelper": ">=0.1.0"
+  },
   "autoload": {
     "psr-4": {
       "srag\\DIC\\MailLogger\\": "src/"
@@ -33,5 +45,10 @@
     "classmap-authoritative": true,
     "optimize-autoloader": true,
     "sort-packages": true
+  },
+  "scripts": {
+    "generate-plugin-readme": [
+      "srag\\GeneratePluginInfosHelper\\MailLogger\\GeneratePluginReadme::generatePluginReadme"
+    ]
   }
 }

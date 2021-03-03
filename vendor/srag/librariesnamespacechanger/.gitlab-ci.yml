@@ -1,5 +1,2 @@
 include:
-  - /auto_version_tag_ci/auto_version_tag_ci.yml
-
-variables:
-  AUTO_VERSION_TAG_BASE_PATH: ""
+  - https://auto-version-tag-ci.fluxlabs.ch/auto_version_tag_ci.yml
