@@ -95,7 +95,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "srag\\CustomInputGUIs\\": "src/"
+                    "srag\\CustomInputGUIs\\MailLogger\\": "src/"
                 },
                 "classmap": [
                     "src/MultiSelectSearchNewInputGUI/class.ObjectChildrenAjaxAutoCompleteCtrl.php",
@@ -219,7 +219,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "srag\\DIC\\": "src/"
+                    "srag\\DIC\\MailLogger\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
