@@ -10,8 +10,6 @@ use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
  * Class Ilias
  *
  * @package srag\Plugins\MailLogger\Access
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 final class Ilias
 {

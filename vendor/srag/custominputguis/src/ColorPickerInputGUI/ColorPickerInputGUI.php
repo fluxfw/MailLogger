@@ -10,8 +10,6 @@ use srag\DIC\MailLogger\DICTrait;
  * Class ColorPickerInputGUI
  *
  * @package srag\CustomInputGUIs\MailLogger\ColorPickerInputGUI
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 class ColorPickerInputGUI extends ilColorPickerInputGUI
 {

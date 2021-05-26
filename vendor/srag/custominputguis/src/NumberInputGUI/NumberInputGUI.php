@@ -11,8 +11,6 @@ use srag\DIC\MailLogger\DICTrait;
  * Class NumberInputGUI
  *
  * @package srag\CustomInputGUIs\MailLogger\NumberInputGUI
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 class NumberInputGUI extends ilNumberInputGUI implements ilTableFilterItem, ilToolbarItem
 {
