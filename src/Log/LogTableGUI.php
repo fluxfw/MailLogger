@@ -15,8 +15,6 @@ use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
  * Class LogTableGUI
  *
  * @package srag\Plugins\MailLogger\Log
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 class LogTableGUI extends TableGUI
 {

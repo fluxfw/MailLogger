@@ -4,8 +4,6 @@
 
 Log and view sended mails in ILIAS
 
-This is an OpenSource project by studer + raimann ag, CH-Burgdorf (https://studer-raimann.ch)
-
 This project is licensed under the GPL-3.0-only license
 
 ## Requirements
@@ -20,7 +18,7 @@ Start at your ILIAS root directory
 ```bash
 mkdir -p Customizing/global/plugins/Services/EventHandling/EventHook
 cd Customizing/global/plugins/Services/EventHandling/EventHook
-git clone https://github.com/fluxfw/MailLogger.git MailLogger
+git clone https://github.com/fluxapps/MailLogger.git MailLogger
 ```
 
 Update, activate and config the plugin in the ILIAS Plugin Administration

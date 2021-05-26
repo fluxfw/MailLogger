@@ -10,8 +10,6 @@ use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
 /**
  * Class ilMailLoggerConfigGUI
  *
- * @author            studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
- *
  * @ilCtrl_isCalledBy srag\DevTools\MailLogger\DevToolsCtrl: ilMailLoggerConfigGUI
  */
 class ilMailLoggerConfigGUI extends ilPluginConfigGUI

@@ -1,7 +1,7 @@
 {
   "name": "srag/maillogger",
   "description": "Log and view sended mails in ILIAS",
-  "version": "1.3.6",
+  "version": "1.3.7",
   "extra": {
     "ilias_plugin": {
       "id": "maillog",
@@ -27,13 +27,13 @@
     "ilias",
     "plugin"
   ],
-  "homepage": "https://github.com/fluxfw/MailLogger",
+  "homepage": "https://github.com/fluxapps/MailLogger",
   "license": "GPL-3.0-only",
   "authors": [
     {
-      "name": "studer + raimann ag - Team Custom 1",
-      "email": "support-custom1@studer-raimann.ch",
-      "homepage": "https://studer-raimann.ch",
+      "name": "fluxlabs",
+      "email": "support@fluxlabs.ch",
+      "homepage": "https://fluxlabs.ch",
       "role": "Developer"
     }
   ],

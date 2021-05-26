@@ -12,8 +12,6 @@ use srag\DIC\MailLogger\DICTrait;
  * Class StaticHTMLPresentationInputGUI
  *
  * @package srag\CustomInputGUIs\MailLogger\StaticHTMLPresentationInputGUI
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 class StaticHTMLPresentationInputGUI extends ilFormPropertyGUI
 {

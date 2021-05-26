@@ -22,8 +22,6 @@ use srag\DIC\MailLogger\DICTrait;
  *
  * @package    srag\CustomInputGUIs\MailLogger\PropertyFormGUI
  *
- * @author     studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
- *
  * @deprecated Please use `AbstractFormBuilder`
  */
 abstract class PropertyFormGUI extends ilPropertyFormGUI

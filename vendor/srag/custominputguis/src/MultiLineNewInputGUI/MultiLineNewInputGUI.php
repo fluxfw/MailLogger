@@ -17,8 +17,6 @@ use srag\DIC\MailLogger\Version\PluginVersionParameter;
  * Class MultiLineNewInputGUI
  *
  * @package srag\CustomInputGUIs\MailLogger\MultiLineNewInputGUI
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 class MultiLineNewInputGUI extends ilFormPropertyGUI implements ilTableFilterItem, ilToolbarItem
 {

@@ -73,8 +73,6 @@ use srag\DIC\MailLogger\Exception\DICException;
  * Class ILIAS54DIC
  *
  * @package srag\DIC\MailLogger\DIC\Implementation
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 final class ILIAS54DIC extends AbstractDIC
 {
