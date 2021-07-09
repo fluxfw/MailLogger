@@ -72,7 +72,7 @@ final class Repository
     /**
      *
      */
-    public function dropTables()/*: void*/
+    public function dropTables() : void
     {
         $this->config()->dropTables();
         $this->logs()->dropTables();
@@ -91,7 +91,7 @@ final class Repository
     /**
      *
      */
-    public function installTables()/*: void*/
+    public function installTables() : void
     {
         $this->config()->installTables();
         $this->logs()->installTables();

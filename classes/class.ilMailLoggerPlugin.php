@@ -73,7 +73,7 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
     /**
      * @inheritDoc
      */
-    public function handleEvent(/*string*/ $a_component, /*string*/ $a_event, /*array*/ $a_parameter)/*: void*/
+    public function handleEvent(/*string*/ $a_component, /*string*/ $a_event, /*array*/ $a_parameter) : void
     {
         switch ($a_component) {
             case "Services/Mail":
@@ -111,7 +111,7 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
     /**
      * @inheritDoc
      */
-    public function updateLanguages(/*?array*/ $a_lang_keys = null)/*:void*/
+    public function updateLanguages(/*?array*/ $a_lang_keys = null) : void
     {
         parent::updateLanguages($a_lang_keys);
 
@@ -124,7 +124,7 @@ class ilMailLoggerPlugin extends ilEventHookPlugin
     /**
      * @inheritDoc
      */
-    protected function deleteData()/*: void*/
+    protected function deleteData() : void
     {
         self::mailLogger()->dropTables();
     }

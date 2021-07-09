@@ -46,7 +46,7 @@ class LogGUI
     /**
      *
      */
-    public function executeCommand()/*: void*/
+    public function executeCommand() : void
     {
         $this->log = self::mailLogger()->logs()->getLogById(intval(filter_input(INPUT_GET, self::GET_PARAM_LOG_ID)));
 
@@ -83,7 +83,7 @@ class LogGUI
     /**
      *
      */
-    protected function applyFilter()/*: void*/
+    protected function applyFilter() : void
     {
         $table = self::mailLogger()->logs()->factory()->newTableInstance($this, self::CMD_APPLY_FILTER);
 
@@ -99,7 +99,7 @@ class LogGUI
     /**
      *
      */
-    protected function listLogs()/*: void*/
+    protected function listLogs() : void
     {
         $table = self::mailLogger()->logs()->factory()->newTableInstance($this);
 
@@ -110,7 +110,7 @@ class LogGUI
     /**
      *
      */
-    protected function resetFilter()/*: void*/
+    protected function resetFilter() : void
     {
         $table = self::mailLogger()->logs()->factory()->newTableInstance($this, self::CMD_RESET_FILTER);
 
@@ -126,7 +126,7 @@ class LogGUI
     /**
      *
      */
-    protected function setTabs()/*:void*/
+    protected function setTabs() : void
     {
 
     }
@@ -135,7 +135,7 @@ class LogGUI
     /**
      *
      */
-    protected function showEmail()/*: void*/
+    protected function showEmail() : void
     {
         self::dic()->tabs()->setBackTarget(self::plugin()->translate("back", self::LANG_MODULE), self::dic()->ctrl()
             ->getLinkTarget($this, self::CMD_LIST_LOGS));
