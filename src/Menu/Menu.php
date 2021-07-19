@@ -5,7 +5,7 @@ namespace srag\Plugins\MailLogger\Menu;
 use ilAdministrationGUI;
 use ilDBConstants;
 use ILIAS\GlobalScreen\Scope\MainMenu\Factory\AbstractBaseItem;
-use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
+use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticMainMenuPluginProvider;
 use ILIAS\UI\Component\Symbol\Icon\Standard;
 use ilMailLoggerConfigGUI;
 use ilMailLoggerPlugin;
@@ -21,7 +21,7 @@ use srag\Plugins\MailLogger\Utils\MailLoggerTrait;
  *
  * @package srag\Plugins\MailLogger\Menu
  */
-class Menu extends AbstractStaticPluginMainMenuProvider
+class Menu extends AbstractStaticMainMenuPluginProvider
 {
 
     use DICTrait;
