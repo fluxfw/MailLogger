@@ -49,7 +49,7 @@ final class Repository
     /**
      * @internal
      */
-    public function dropTables()/*:void*/
+    public function dropTables() : void
     {
         self::dic()->database()->dropTable(Log::TABLE_NAME, false);
     }
@@ -69,7 +69,7 @@ final class Repository
      *
      * @return Log|null
      */
-    public function getLogById(int $log_id)/*: ?Log*/
+    public function getLogById(int $log_id) : ?Log
     {
         /**
          * @var Log|null $log
@@ -172,7 +172,7 @@ final class Repository
     /**
      * @internal
      */
-    public function installTables()/*:void*/
+    public function installTables() : void
     {
         Log::updateDB();
     }
@@ -181,7 +181,7 @@ final class Repository
     /**
      * @param Log $log
      */
-    public function storeLog(Log $log)/*:void/*/
+    public function storeLog(Log $log) : void
     {
         $log->store();
     }

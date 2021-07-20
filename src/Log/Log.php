@@ -186,7 +186,7 @@ class Log extends ActiveRecord
     /**
      * @param string $body
      */
-    public function setBody(string $body)/*: void*/
+    public function setBody(string $body) : void
     {
         $this->body = $body;
     }
@@ -204,7 +204,7 @@ class Log extends ActiveRecord
     /**
      * @return int|null
      */
-    public function getContextRefId()/*: ?int*/
+    public function getContextRefId() : ?int
     {
         return $this->context_ref_id;
     }
@@ -213,7 +213,7 @@ class Log extends ActiveRecord
     /**
      * @param int|null $context_ref_id
      */
-    public function setContextRefId(/*?int*/ $context_ref_id)/*: void*/
+    public function setContextRefId(/*?int*/ $context_ref_id) : void
     {
         $this->context_ref_id = $context_ref_id;
     }
@@ -231,7 +231,7 @@ class Log extends ActiveRecord
     /**
      * @param string|null $context_title
      */
-    public function setContextTitle(/*?string*/ $context_title)/*: void*/
+    public function setContextTitle(/*?string*/ $context_title) : void
     {
         $this->context_title = $context_title;
     }
@@ -249,7 +249,7 @@ class Log extends ActiveRecord
     /**
      * @param string $from_email
      */
-    public function setFromEmail(string $from_email)/*: void*/
+    public function setFromEmail(string $from_email) : void
     {
         $this->from_email = $from_email;
     }
@@ -267,7 +267,7 @@ class Log extends ActiveRecord
     /**
      * @param string $from_firstname
      */
-    public function setFromFirstname(string $from_firstname)/*: void*/
+    public function setFromFirstname(string $from_firstname) : void
     {
         $this->from_firstname = $from_firstname;
     }
@@ -285,7 +285,7 @@ class Log extends ActiveRecord
     /**
      * @param string $from_lastname
      */
-    public function setFromLastname(string $from_lastname)/*: void*/
+    public function setFromLastname(string $from_lastname) : void
     {
         $this->from_lastname = $from_lastname;
     }
@@ -303,7 +303,7 @@ class Log extends ActiveRecord
     /**
      * @param int $from_user_id
      */
-    public function setFromUserId(int $from_user_id)/*: void*/
+    public function setFromUserId(int $from_user_id) : void
     {
         $this->from_user_id = $from_user_id;
     }
@@ -321,7 +321,7 @@ class Log extends ActiveRecord
     /**
      * @param int $id
      */
-    public function setId(int $id)/*: void*/
+    public function setId(int $id) : void
     {
         $this->id = $id;
     }
@@ -339,7 +339,7 @@ class Log extends ActiveRecord
     /**
      * @param string $subject
      */
-    public function setSubject(string $subject)/*: void*/
+    public function setSubject(string $subject) : void
     {
         $this->subject = $subject;
     }
@@ -357,7 +357,7 @@ class Log extends ActiveRecord
     /**
      * @param int $timestamp
      */
-    public function setTimestamp(int $timestamp)/*: void*/
+    public function setTimestamp(int $timestamp) : void
     {
         $this->timestamp = $timestamp;
     }
@@ -375,7 +375,7 @@ class Log extends ActiveRecord
     /**
      * @param string $to_email
      */
-    public function setToEmail(string $to_email)/*: void*/
+    public function setToEmail(string $to_email) : void
     {
         $this->to_email = $to_email;
     }
@@ -393,7 +393,7 @@ class Log extends ActiveRecord
     /**
      * @param string $to_firstname
      */
-    public function setToFirstname(string $to_firstname)/*: void*/
+    public function setToFirstname(string $to_firstname) : void
     {
         $this->to_firstname = $to_firstname;
     }
@@ -411,7 +411,7 @@ class Log extends ActiveRecord
     /**
      * @param string $to_lastname
      */
-    public function setToLastname(string $to_lastname)/*: void*/
+    public function setToLastname(string $to_lastname) : void
     {
         $this->to_lastname = $to_lastname;
     }
@@ -429,7 +429,7 @@ class Log extends ActiveRecord
     /**
      * @param int $to_user_id
      */
-    public function setToUserId(int $to_user_id)/*: void*/
+    public function setToUserId(int $to_user_id) : void
     {
         $this->to_user_id = $to_user_id;
     }
@@ -447,7 +447,7 @@ class Log extends ActiveRecord
     /**
      * @param bool $is_system
      */
-    public function setIsSystem(bool $is_system)/*: void*/
+    public function setIsSystem(bool $is_system) : void
     {
         $this->is_system = $is_system;
     }

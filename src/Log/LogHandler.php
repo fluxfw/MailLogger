@@ -56,7 +56,7 @@ final class LogHandler
     /**
      * @param ilMimeMail $mail
      */
-    public function handleSentExternalEmail(ilMimeMail $mail)/*: void*/
+    public function handleSentExternalEmail(ilMimeMail $mail) : void
     {
         $from_user = new ilObjUser(ilObjUser::_lookupId(current(ilObjUser::getUserLoginsByEmail($mail->getFrom()->getReplyToAddress()))));
 
@@ -79,7 +79,7 @@ final class LogHandler
     /**
      * @param array $mail
      */
-    public function handleSentInternalEmail(array $mail)/*: void*/
+    public function handleSentInternalEmail(array $mail) : void
     {
         $from_user = new ilObjUser($mail["from_usr_id"]);
         $to_user = new ilObjUser($mail["to_usr_id"]);
@@ -104,8 +104,7 @@ final class LogHandler
         ilObjUser $from,
         ilObjUser $to, /*?int*/
         $context_ref_id
-    )/*: void*/
-    {
+    ) : void {
         if ($this->shouldLog($is_system, $from)) {
             $log = self::mailLogger()->logs()->factory()->newInstance();
 

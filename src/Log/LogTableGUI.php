@@ -79,7 +79,7 @@ class LogTableGUI extends TableGUI
     /**
      * @param array $row
      */
-    protected function fillRow(/*array*/ $row)/*: void*/
+    protected function fillRow(/*array*/ $row) : void
     {
         self::dic()->ctrl()->setParameter($this->parent_obj, LogGUI::GET_PARAM_LOG_ID, $row["id"]);
 
@@ -119,7 +119,7 @@ class LogTableGUI extends TableGUI
     /**
      * @inheritDoc
      */
-    protected function initColumns()/*: void*/
+    protected function initColumns() : void
     {
         parent::initColumns();
 
@@ -130,7 +130,7 @@ class LogTableGUI extends TableGUI
     /**
      * @inheritDoc
      */
-    protected function initData()/*: void*/
+    protected function initData() : void
     {
         $this->setDefaultOrderField("timestamp");
         $this->setDefaultOrderDirection("desc");
@@ -175,7 +175,7 @@ class LogTableGUI extends TableGUI
     /**
      * @inheritDoc
      */
-    protected function initExport()/*: void*/
+    protected function initExport() : void
     {
         $this->setExportFormats([self::EXPORT_CSV, self::EXPORT_EXCEL]);
     }
@@ -184,7 +184,7 @@ class LogTableGUI extends TableGUI
     /**
      * @inheritDoc
      */
-    protected function initFilterFields()/*: void*/
+    protected function initFilterFields() : void
     {
         self::dic()->language()->loadLanguageModule("form");
 
@@ -231,7 +231,7 @@ class LogTableGUI extends TableGUI
     /**
      * @inheritDoc
      */
-    protected function initId()/*: void*/
+    protected function initId() : void
     {
         $this->setId("maillogger_log");
     }
@@ -240,7 +240,7 @@ class LogTableGUI extends TableGUI
     /**
      * @inheritDoc
      */
-    protected function initTitle()/*: void*/
+    protected function initTitle() : void
     {
         $this->setTitle(self::plugin()->translate("log", "log"));
     }
