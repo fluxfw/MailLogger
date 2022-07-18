@@ -17,7 +17,6 @@ class ComposerStaticInit9985e56fc3779e957d3eb8e351bcbdbc
             'srag\\Plugins\\MailLogger\\' => 24,
             'srag\\LibraryLanguageInstaller\\MailLogger\\' => 41,
             'srag\\LibrariesNamespaceChanger\\' => 31,
-            'srag\\GeneratePluginInfosHelper\\MailLogger\\' => 42,
             'srag\\DevTools\\MailLogger\\' => 25,
             'srag\\DIC\\MailLogger\\' => 20,
             'srag\\CustomInputGUIs\\MailLogger\\' => 32,
@@ -41,10 +40,6 @@ class ComposerStaticInit9985e56fc3779e957d3eb8e351bcbdbc
         'srag\\LibrariesNamespaceChanger\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src',
-        ),
-        'srag\\GeneratePluginInfosHelper\\MailLogger\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/srag/generateplugininfoshelper/src',
         ),
         'srag\\DevTools\\MailLogger\\' => 
         array (
@@ -137,9 +132,6 @@ class ComposerStaticInit9985e56fc3779e957d3eb8e351bcbdbc
         'srag\\DIC\\MailLogger\\Version\\Version' => __DIR__ . '/..' . '/srag/dic/src/Version/Version.php',
         'srag\\DIC\\MailLogger\\Version\\VersionInterface' => __DIR__ . '/..' . '/srag/dic/src/Version/VersionInterface.php',
         'srag\\DevTools\\MailLogger\\DevToolsCtrl' => __DIR__ . '/..' . '/srag/devtools/src/class.DevToolsCtrl.php',
-        'srag\\GeneratePluginInfosHelper\\MailLogger\\GeneratePluginPhpAndXml' => __DIR__ . '/..' . '/srag/generateplugininfoshelper/src/GeneratePluginPhpAndXml.php',
-        'srag\\GeneratePluginInfosHelper\\MailLogger\\GeneratePluginReadme' => __DIR__ . '/..' . '/srag/generateplugininfoshelper/src/GeneratePluginReadme.php',
-        'srag\\GeneratePluginInfosHelper\\MailLogger\\UpdateVersion' => __DIR__ . '/..' . '/srag/generateplugininfoshelper/src/UpdateVersion.php',
         'srag\\LibrariesNamespaceChanger\\LibrariesNamespaceChanger' => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src/LibrariesNamespaceChanger.php',
         'srag\\LibraryLanguageInstaller\\MailLogger\\LibraryLanguageInstaller' => __DIR__ . '/..' . '/srag/librarylanguageinstaller/src/LibraryLanguageInstaller.php',
         'srag\\Plugins\\MailLogger\\Access\\Access' => __DIR__ . '/../..' . '/src/Access/Access.php',
